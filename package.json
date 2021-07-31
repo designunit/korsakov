@@ -1,0 +1,32 @@
+{
+    "name": "korsakov",
+    "version": "0.1.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "next",
+        "build": "next build",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/designunit/korsakov.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/designunit/korsakov/issues"
+    },
+    "homepage": "https://github.com/designunit/korsakov#readme",
+    "dependencies": {
+        "mapbox-gl": "^2.4.0",
+        "next": "^11.0.1",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2"
+    },
+    "devDependencies": {
+        "@types/react": "^17.0.15",
+        "typescript": "^4.3.5"
+    }
+}
