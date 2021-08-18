@@ -1,17 +1,19 @@
 import { NextPage } from "next"
 import { useEffect, useRef } from "react"
-import mapboxgl from "mapbox-gl"
+import mapboxgl, { LngLatLike } from "mapbox-gl"
 
 const key = 'pk.eyJ1IjoidG1zaHYiLCJhIjoiZjYzYmViZjllN2MxNGU1OTAxZThkMWM5MTRlZGM4YTYifQ.uvMlwjz7hyyY7c54Hs47SQ'
 
 function app(container: any) {
     mapboxgl.accessToken = key
-    const center = [
+    const center: LngLatLike = [
         142.7800814144154,
         46.63292266085091,
     ]
     var map = new mapboxgl.Map({
-        style: 'mapbox://styles/mapbox/light-v10',
+        // style: 'mapbox://styles/mapbox/light-v10',
+        style: 'mapbox://styles/mapbox/satellite-v9', // style URL
+        // style: 'mapbox://styles/grigorybbb/8sy4fqrv',
         center,
         zoom: 15.5,
         pitch: 45,
@@ -27,9 +29,15 @@ function app(container: any) {
             // Use a URL for the value for the `data` property.
             data: '/static/osm_buildings_export_3.geojson'
         });
+        map.addSource('korsakov-buildings2', {
+            type: 'geojson',
+            // Use a URL for the value for the `data` property.
+            data: '/static/test.geojson',
+        });
 
-        map.setLayoutProperty('building', 'visibility', 'none');
-        map.setLayoutProperty('building-outline', 'visibility', 'none');
+        // for vector mapbox style
+        // map.setLayoutProperty('building', 'visibility', 'none');
+        // map.setLayoutProperty('building-outline', 'visibility', 'none');
 
         // Add terrain source, with slight exaggeration
         map.addSource('mapbox-dem', {
@@ -40,23 +48,30 @@ function app(container: any) {
         });
         map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.5 });
 
+        // map.addSource('korsakov-tiles', {
+        //     url: "mapbox://grigorybbb.8sy4fqrv",
+        //     type: "raster",
+        //     tileSize: 256,
+        // });
+        // map.addLayer({
+        //     "id": "kt",
+        //     "type": "raster",
+        //     "paint": {},
+        //     "layout": {},
+        //     "source": "korsakov-tiles",
+        // })
+
         // map.setPaintProperty( 'building', 'minzoom', 10);
 
         // Insert the layer beneath any symbol layer.
-        var layers = map.getStyle().layers;
+        var layers = map.getStyle().layers!;
         var labelLayerId;
-        for (var i = 0; i < layers.length; i++) {
-            if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
-                labelLayerId = layers[i].id;
-                break;
-            }
-        }
-
-        for (const l of layers) {
-            if (l.id === 'building') {
-                console.log(l)
-            }
-        }
+        // for (var i = 0; i < layers.length; i++) {
+        //     if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+        //         labelLayerId = layers[i].id;
+        //         break;
+        //     }
+        // }
 
         // The 'building' layer in the Mapbox Streets
         // vector tileset contains building height data
@@ -71,7 +86,8 @@ function app(container: any) {
                 'type': 'fill-extrusion',
                 'minzoom': 10,
                 'paint': {
-                    'fill-extrusion-color': '#f0f',
+                    // 'fill-extrusion-color': '#f0f',
+                    'fill-extrusion-color': '#fffff0',
                     'fill-extrusion-height': ['*',
                         3,
                         ['get', 'building_height'],
@@ -105,6 +121,25 @@ function app(container: any) {
 
             labelLayerId
         )
+
+        map.addLayer(
+            {
+                'id': 'add-3d-buildings2',
+                'source': 'korsakov-buildings2',
+                'type': 'fill-extrusion',
+                'minzoom': 10,
+                'paint': {
+                    'fill-extrusion-color': '#f0f',
+                    'fill-extrusion-height': ['*',
+                        0.2,
+                        ['get', 'height'],
+                    ],
+                    // 'fill-extrusion-base': ['get', 'offset'],
+                }
+            },
+
+            labelLayerId
+        )
         // map.addLayer({
         //     'id': 'buildings-i1',
         //     'type': 'line',
@@ -126,14 +161,12 @@ const Page: NextPage = () => {
 
     useEffect(() => {
         app(ref.current)
-    }, [ref.current])
+    }, [])
 
     return (
-        <div ref={ref} style={{
-            width: 1200,
-            height: 800,
-            // width: '100%',
-            // height: '100%',
+        <div ref={ref as any} style={{
+            width: '100%',
+            height: '100%',
         }}></div>
     )
 }
