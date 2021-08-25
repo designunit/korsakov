@@ -34,6 +34,10 @@ function app(container: any) {
             // Use a URL for the value for the `data` property.
             data: '/static/test.geojson',
         });
+        map.addSource('korsakov-green', {
+            type: 'geojson',
+            data: '/static/test-green.geojson',
+        });
 
         // for vector mapbox style
         // map.setLayoutProperty('building', 'visibility', 'none');
@@ -134,6 +138,21 @@ function app(container: any) {
                         0.2,
                         ['get', 'height'],
                     ],
+                    // 'fill-extrusion-base': ['get', 'offset'],
+                }
+            },
+
+            labelLayerId
+        )
+
+        map.addLayer(
+            {
+                'id': 'korsakov-green',
+                'source': 'korsakov-green',
+                'type': 'fill',
+                'minzoom': 10,
+                'paint': {
+                    'fill-color': '#27831e',
                     // 'fill-extrusion-base': ['get', 'offset'],
                 }
             },
