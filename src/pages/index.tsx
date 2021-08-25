@@ -144,10 +144,10 @@ function app(container: any) {
                 'paint': {
                     'fill-extrusion-color': '#f0f',
                     'fill-extrusion-height': ['*',
-                        0.2,
+                        0.75,
                         ['get', 'height'],
                     ],
-                    // 'fill-extrusion-base': ['get', 'offset'],
+                    'fill-extrusion-base': ['get', 'offset'],
                 }
             },
 
@@ -162,7 +162,7 @@ function app(container: any) {
                 'minzoom': 10,
                 'paint': {
                     'fill-color': '#27831e',
-                    // 'fill-extrusion-base': ['get', 'offset'],
+                    'fill-opacity': 0.8,
                 }
             },
 
