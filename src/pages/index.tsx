@@ -23,6 +23,15 @@ function app(container: any) {
         antialias: true,
     });
 
+    map.on('moveend', event => {
+        console.log({
+            center: map.getCenter(),
+            zoom: map.getZoom(),
+            pitch: map.getPitch(),
+            bearing: map.getBearing(),
+        })
+    })
+
     map.on('load', function () {
         map.addSource('korsakov-buildings', {
             type: 'geojson',
