@@ -1,23 +1,23 @@
 import { NextPage } from "next"
 import { useEffect, useRef } from "react"
-import mapboxgl, { LngLatLike } from "mapbox-gl"
+import mapboxgl, { LngLatLike, maxParallelImageRequests } from "mapbox-gl"
 
 const key = 'pk.eyJ1IjoidG1zaHYiLCJhIjoiZjYzYmViZjllN2MxNGU1OTAxZThkMWM5MTRlZGM4YTYifQ.uvMlwjz7hyyY7c54Hs47SQ'
 
 function app(container: any) {
     mapboxgl.accessToken = key
     const center: LngLatLike = [
-        142.7800814144154,
-        46.63292266085091,
+        142.79405865469897,
+        46.6188040383542,
     ]
     var map = new mapboxgl.Map({
         // style: 'mapbox://styles/mapbox/light-v10',
         style: 'mapbox://styles/mapbox/satellite-v9', // style URL
         // style: 'mapbox://styles/grigorybbb/8sy4fqrv',
         center,
-        zoom: 15.5,
-        pitch: 45,
-        bearing: -17.6,
+        zoom: 14.11258863317506,
+        pitch: 57.99999999999994,
+        bearing: -8.799999999999962,
         container,
         // container: 'map',
         antialias: true,
