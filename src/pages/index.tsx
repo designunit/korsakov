@@ -1,7 +1,8 @@
 import { NextPage } from "next"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { PhaseSelect } from "@/components/PhaseSelect"
-import { initMap } from "@/map"
+import { initMap, switchPhase } from "@/map"
+import mapboxgl from "mapbox-gl"
 
 const phases = [
     'phase1',
@@ -13,14 +14,21 @@ const phases = [
 const Page: NextPage = () => {
     const [currentPhase, setCurrentPhase] = useState(phases[0])
     const ref = useRef()
+    const mapRef = useRef<mapboxgl.Map>()
 
     useEffect(() => {
-        initMap(ref.current)
+        mapRef.current = initMap(ref.current)
     }, [])
+
+    useEffect(() => {
+        if (!mapRef.current) {
+            return
+        }
+        switchPhase(mapRef.current, currentPhase)
+    }, [currentPhase])
 
     const onChangePhase = useCallback(newPhase => {
         setCurrentPhase(newPhase)
-
     }, [])
 
     return (
@@ -35,7 +43,7 @@ const Page: NextPage = () => {
                 top: 0,
                 left: 0,
             }}>
-                <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center bg-white">
+                <main className="flex flex-col flex-1 text-center bg-white">
                     <PhaseSelect
                         phases={phases}
                         current={currentPhase}

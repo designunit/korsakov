@@ -16,9 +16,9 @@ export const PhaseSelect: React.FC<PhaseSelectProps> = ({onChange, ...props}) =>
     return (
         <>
             {props.phases.map(x => {
-                let className = "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                let className = "bg-gray-400 hover:bg-blue-700 text-white font-bold py-2 px-4"
                 if (x === props.current) {
-                    className = "bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
+                    className = "bg-yellow-400 hover:bg-yellow-700 text-white font-bold py-2 px-4"
                 }
 
                 return (

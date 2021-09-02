@@ -180,4 +180,10 @@ export function initMap(container: any) {
         //     }
         // });
     })
+
+    return map
+}
+
+export function switchPhase(map: mapboxgl.Map, phase: string) {
+    console.log('do something with', phase)
 }
