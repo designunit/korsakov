@@ -1,13 +1,26 @@
 import { NextPage } from "next"
-import { useEffect, useRef } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { PhaseSelect } from "@/components/PhaseSelect"
 import { initMap } from "@/map"
 
+const phases = [
+    'phase1',
+    'phase2',
+    'phase3',
+    'phase4',
+]
+
 const Page: NextPage = () => {
+    const [currentPhase, setCurrentPhase] = useState(phases[0])
     const ref = useRef()
 
     useEffect(() => {
         initMap(ref.current)
+    }, [])
+
+    const onChangePhase = useCallback(newPhase => {
+        setCurrentPhase(newPhase)
+
     }, [])
 
     return (
@@ -23,7 +36,11 @@ const Page: NextPage = () => {
                 left: 0,
             }}>
                 <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center bg-white">
-                    <PhaseSelect></PhaseSelect>
+                    <PhaseSelect
+                        phases={phases}
+                        current={currentPhase}
+                        onChange={onChangePhase}
+                    />
                 </main>
             </div>
         </>

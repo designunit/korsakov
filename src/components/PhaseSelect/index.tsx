@@ -1,11 +1,37 @@
-export type PhaseSelectProps = {
+import { useCallback } from "react"
 
+export type OnChangePhase = (newPhase: string) => void
+
+export type PhaseSelectProps = {
+    phases: string[]
+    current: string
+    onChange: OnChangePhase
 }
 
-export const PhaseSelect: React.FC<PhaseSelectProps> = props => {
+export const PhaseSelect: React.FC<PhaseSelectProps> = ({onChange, ...props}) => {
+    const onClick = useCallback((e) => {
+        onChange(e.target.name)
+    }, [onChange])
+
     return (
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Button
-        </button>
+        <>
+            {props.phases.map(x => {
+                let className = "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                if (x === props.current) {
+                    className = "bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
+                }
+
+                return (
+                    <button
+                        key={x}
+                        className={className}
+                        onClick={onClick}
+                        name={x}
+                    >
+                        {x}
+                    </button>
+                )
+            })}
+        </>
     )
 }
