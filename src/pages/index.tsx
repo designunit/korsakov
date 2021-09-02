@@ -17,7 +17,7 @@ const Page: NextPage = () => {
     const mapRef = useRef<mapboxgl.Map>()
 
     useEffect(() => {
-        mapRef.current = initMap(ref.current)
+        mapRef.current = initMap(ref.current, phases[0])
     }, [])
 
     useEffect(() => {

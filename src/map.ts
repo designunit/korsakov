@@ -2,7 +2,7 @@ import mapboxgl, { LngLatLike } from "mapbox-gl"
 
 const key = 'pk.eyJ1IjoidG1zaHYiLCJhIjoiZjYzYmViZjllN2MxNGU1OTAxZThkMWM5MTRlZGM4YTYifQ.uvMlwjz7hyyY7c54Hs47SQ'
 
-export function initMap(container: any) {
+export function initMap(container: any, initPhase: string) {
     mapboxgl.accessToken = key
     const center: LngLatLike = [
         142.79405865469897,
@@ -31,19 +31,17 @@ export function initMap(container: any) {
     })
 
     map.on('load', function () {
+        map.addSource('korsakov-osm', {
+            type: 'geojson',
+            data: '/static/korsakov-osm.geojson'
+        });
         map.addSource('korsakov-buildings', {
             type: 'geojson',
-            // Use a URL for the value for the `data` property.
-            data: '/static/osm_buildings_export_3.geojson'
+            data: '/static/korsakov-buildings.geojson',
         });
-        map.addSource('korsakov-buildings2', {
+        map.addSource('korsakov-zones', {
             type: 'geojson',
-            // Use a URL for the value for the `data` property.
-            data: '/static/test.geojson',
-        });
-        map.addSource('korsakov-green', {
-            type: 'geojson',
-            data: '/static/test-green.geojson',
+            data: '/static/korsakov-zones.geojson',
         });
 
         // for vector mapbox style
@@ -89,8 +87,8 @@ export function initMap(container: any) {
         // from OpenStreetMap.
         map.addLayer(
             {
-                'id': 'add-3d-buildings',
-                'source': 'korsakov-buildings',
+                'id': 'korsakov-osm-3d',
+                'source': 'korsakov-osm',
                 // 'source': 'composite',
                 // 'source-layer': 'building',
                 // 'filter': ['==', 'extrude', 'true'],
@@ -135,8 +133,8 @@ export function initMap(container: any) {
 
         map.addLayer(
             {
-                'id': 'add-3d-buildings2',
-                'source': 'korsakov-buildings2',
+                'id': 'korsakov-buildings-3d',
+                'source': 'korsakov-buildings',
                 'type': 'fill-extrusion',
                 'minzoom': 10,
                 'paint': {
@@ -146,7 +144,8 @@ export function initMap(container: any) {
                         ['get', 'height'],
                     ],
                     'fill-extrusion-base': ['get', 'offset'],
-                }
+                },
+                filter: ['==', initPhase, true],
             },
 
             labelLayerId
@@ -154,14 +153,23 @@ export function initMap(container: any) {
 
         map.addLayer(
             {
-                'id': 'korsakov-green',
-                'source': 'korsakov-green',
+                'id': 'korsakov-zones',
+                'source': 'korsakov-zones',
                 'type': 'fill',
                 'minzoom': 10,
                 'paint': {
-                    'fill-color': '#27831e',
+                    // 'fill-color': '#27831e',
+                    'fill-color': ['match',
+                        ['get', 'type'],
+                        'shth_lab', '#0000ff',
+                        'oez', '#00ffff',
+                        'apart', '#ffff00',
+
+                        '#27831e'
+                    ],
                     'fill-opacity': 0.8,
-                }
+                },
+                filter: ['==', initPhase, true],
             },
 
             labelLayerId
@@ -185,5 +193,10 @@ export function initMap(container: any) {
 }
 
 export function switchPhase(map: mapboxgl.Map, phase: string) {
-    console.log('do something with', phase)
+    if (!map.loaded()) {
+        return
+    }
+
+    map.setFilter('korsakov-zones', ['==', phase, true])
+    map.setFilter('korsakov-buildings-3d', ['==', phase, true])
 }

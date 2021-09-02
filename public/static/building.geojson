@@ -1,8 +1,0 @@
-{
-"type": "FeatureCollection",
-"name": "building",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-"features": [
-{ "type": "Feature", "properties": { "height": 12.0, "offset": 0.0, "type": "building" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 142.779732365955056, 46.605884908907235 ], [ 142.780096434221207, 46.606673158849652 ], [ 142.780524556113079, 46.606579831919781 ], [ 142.780160487846928, 46.605791580625493 ], [ 142.779732365955056, 46.605884908907235 ] ] ] } }
-]
-}
