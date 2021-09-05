@@ -1,6 +1,45 @@
-import mapboxgl, { LngLatLike } from "mapbox-gl"
+import mapboxgl, { Expression, LngLatLike } from "mapbox-gl"
 
 const key = 'pk.eyJ1IjoidG1zaHYiLCJhIjoiZjYzYmViZjllN2MxNGU1OTAxZThkMWM5MTRlZGM4YTYifQ.uvMlwjz7hyyY7c54Hs47SQ'
+
+const ZONE_FILTER = [
+    'category',
+    'regeneration',
+]
+const ZONE_BORDER_FILTER = [
+    'category',
+    'regeneration',
+    'waiting',
+]
+const BUILDING_FILTER = [
+    'category',
+    'blank',
+    'regeneration',
+]
+
+function createFill(phase: string): Expression {
+    return ['match',
+        ['case',
+            ['==', ['get', phase], 'regeneration'], 'regeneration',
+            ['==', ['get', phase], 'blank'], 'blank',
+            ['get', 'category'],
+        ],
+        'shth', '#0000ff',
+        'oez', '#00ffff',
+        'apart', '#ffff00',
+        'blank', '#fffff0',
+        'regeneration', '#ff0000',
+
+        '#27831e'
+    ]
+}
+
+function createFilter(phase: string, values: string[]) {
+    return ['in',
+        ['get', phase],
+        ['literal', values],
+    ]
+}
 
 export function initMap(container: any, initPhase: string) {
     mapboxgl.accessToken = key
@@ -138,14 +177,14 @@ export function initMap(container: any, initPhase: string) {
                 'type': 'fill-extrusion',
                 'minzoom': 10,
                 'paint': {
-                    'fill-extrusion-color': '#f0f',
+                    'fill-extrusion-color': createFill(initPhase),
                     'fill-extrusion-height': ['*',
                         0.75,
                         ['get', 'height'],
                     ],
                     'fill-extrusion-base': ['get', 'offset'],
                 },
-                filter: ['==', initPhase, true],
+                filter: createFilter(initPhase, BUILDING_FILTER),
             },
 
             labelLayerId
@@ -158,18 +197,26 @@ export function initMap(container: any, initPhase: string) {
                 'type': 'fill',
                 'minzoom': 10,
                 'paint': {
-                    // 'fill-color': '#27831e',
-                    'fill-color': ['match',
-                        ['get', 'type'],
-                        'shth_lab', '#0000ff',
-                        'oez', '#00ffff',
-                        'apart', '#ffff00',
-
-                        '#27831e'
-                    ],
-                    'fill-opacity': 0.8,
+                    'fill-color': createFill(initPhase),
+                    'fill-opacity': 0.4,
                 },
-                filter: ['==', initPhase, true],
+                filter: createFilter(initPhase, ZONE_FILTER),
+            },
+
+            labelLayerId
+        )
+
+        map.addLayer(
+            {
+                'id': 'korsakov-zones-border',
+                'source': 'korsakov-zones',
+                'type': 'line',
+                'minzoom': 10,
+                'paint': {
+                    'line-color': createFill(initPhase),
+                    'line-width': 2,
+                },
+                filter: createFilter(initPhase, ZONE_BORDER_FILTER),
             },
 
             labelLayerId
@@ -197,6 +244,11 @@ export function switchPhase(map: mapboxgl.Map, phase: string) {
         return
     }
 
-    map.setFilter('korsakov-zones', ['==', phase, true])
-    map.setFilter('korsakov-buildings-3d', ['==', phase, true])
+    map.setFilter('korsakov-zones', createFilter(phase, ZONE_FILTER))
+    map.setFilter('korsakov-zones-border', createFilter(phase, ZONE_BORDER_FILTER))
+    map.setFilter('korsakov-buildings-3d', createFilter(phase, BUILDING_FILTER))
+
+    map.setPaintProperty('korsakov-buildings-3d', 'fill-extrusion-color', createFill(phase))
+    map.setPaintProperty('korsakov-zones', 'fill-color', createFill(phase))
+    map.setPaintProperty('korsakov-zones-border', 'line-color', createFill(phase))
 }
