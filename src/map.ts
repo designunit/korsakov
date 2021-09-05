@@ -35,7 +35,7 @@ function createFill(phase: string): Expression {
         'apart', '#ffff00',
         'blank', '#fffff0',
         'regeneration', '#ff0000',
-        'green_nature', '#3e6328',
+        'green_nature', '#4d7c32',
         'green_urban', '#8bde5a',
 
         '#000000'
