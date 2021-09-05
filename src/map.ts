@@ -16,6 +16,12 @@ const BUILDING_FILTER = [
     'blank',
     'regeneration',
 ]
+const GREEN_FILTER = [
+    'grown',
+]
+const GREEN_LINE_FILTER = [
+    'planted',
+]
 
 function createFill(phase: string): Expression {
     return ['match',
@@ -29,8 +35,10 @@ function createFill(phase: string): Expression {
         'apart', '#ffff00',
         'blank', '#fffff0',
         'regeneration', '#ff0000',
+        'green_nature', '#3e6328',
+        'green_urban', '#8bde5a',
 
-        '#27831e'
+        '#000000'
     ]
 }
 
@@ -81,6 +89,10 @@ export function initMap(container: any, initPhase: string) {
         map.addSource('korsakov-zones', {
             type: 'geojson',
             data: '/static/korsakov-zones.geojson',
+        });
+        map.addSource('korsakov-green', {
+            type: 'geojson',
+            data: '/static/korsakov-green.geojson',
         });
 
         // for vector mapbox style
@@ -221,6 +233,40 @@ export function initMap(container: any, initPhase: string) {
 
             labelLayerId
         )
+
+        map.addLayer(
+            {
+                'id': 'korsakov-green',
+                'source': 'korsakov-green',
+                'type': 'fill',
+                'minzoom': 10,
+                'paint': {
+                    'fill-color': createFill(initPhase),
+                    'fill-opacity': 0.6,
+                },
+                filter: createFilter(initPhase, GREEN_FILTER),
+            },
+
+            labelLayerId
+        )
+
+        map.addLayer(
+            {
+                'id': 'korsakov-green-border',
+                'source': 'korsakov-green',
+                'type': 'line',
+                'minzoom': 10,
+                'paint': {
+                    'line-color': createFill(initPhase),
+                    'line-width': 2,
+                    'line-dasharray': [3, 2],
+                },
+                filter: createFilter(initPhase, GREEN_LINE_FILTER),
+            },
+
+            labelLayerId
+        )
+
         // map.addLayer({
         //     'id': 'buildings-i1',
         //     'type': 'line',
@@ -246,6 +292,8 @@ export function switchPhase(map: mapboxgl.Map, phase: string) {
 
     map.setFilter('korsakov-zones', createFilter(phase, ZONE_FILTER))
     map.setFilter('korsakov-zones-border', createFilter(phase, ZONE_BORDER_FILTER))
+    map.setFilter('korsakov-green', createFilter(phase, GREEN_FILTER))
+    map.setFilter('korsakov-green-border', createFilter(phase, GREEN_LINE_FILTER))
     map.setFilter('korsakov-buildings-3d', createFilter(phase, BUILDING_FILTER))
 
     map.setPaintProperty('korsakov-buildings-3d', 'fill-extrusion-color', createFill(phase))
