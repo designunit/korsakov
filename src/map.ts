@@ -10,6 +10,7 @@ const ZONE_BORDER_FILTER = [
     'category',
     'regeneration',
     'waiting',
+    'blank',
 ]
 const BUILDING_FILTER = [
     'category',
