@@ -44,6 +44,7 @@ function createFill(phase: string): Expression {
         'city_square', '#ffffff',
         'apart', '#FF9F4F',
         'port', '#ffffff',
+        'emb', '#ffffff',
         'blank', '#ffffff',
         'regeneration', '#FF7EC7',
         'green_nature', '#006A00',
