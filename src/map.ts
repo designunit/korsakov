@@ -72,6 +72,9 @@ class ThreeLayer implements CustomLayerInterface {
 
     constructor(public id: string) {
         this.map = null as any
+        this.renderer = null as any
+        this.camera = new THREE.Camera();
+        this.scene = new THREE.Scene();
 
         const modelOrigin = [142.790999165027614, 46.604746813273003] as any
         const modelAltitude = 10;
@@ -99,9 +102,6 @@ class ThreeLayer implements CustomLayerInterface {
 
     // onAdd(map, gl) {
     onAdd(map: mapboxgl.Map, gl: WebGLRenderingContext) {
-        this.camera = new THREE.Camera();
-        this.scene = new THREE.Scene();
-
         // create two three.js lights to illuminate the model
         const directionalLight = new THREE.DirectionalLight(0xffffff);
         directionalLight.position.set(0, -70, 100).normalize();
