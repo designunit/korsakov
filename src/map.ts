@@ -1,4 +1,6 @@
-import mapboxgl, { Expression, LngLatLike } from "mapbox-gl"
+import mapboxgl, { CustomLayerInterface, Expression, LngLatLike } from "mapbox-gl"
+import * as THREE from "three"
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 
 const key = 'pk.eyJ1IjoidG1zaHYiLCJhIjoiZjYzYmViZjllN2MxNGU1OTAxZThkMWM5MTRlZGM4YTYifQ.uvMlwjz7hyyY7c54Hs47SQ'
 
@@ -67,6 +69,142 @@ function createFilter(phase: string, values: string[]) {
         ['get', phase],
         ['literal', values],
     ]
+}
+
+class ThreeLayer implements CustomLayerInterface {
+    public type: 'custom' = 'custom'
+
+    private camera: THREE.Camera
+    private scene: THREE.Scene
+    private renderer: THREE.WebGLRenderer
+    private map: mapboxgl.Map
+    private modelTransform: any
+
+    constructor(public id: string) {
+        this.map = null as any
+        this.renderer = null as any
+        this.camera = new THREE.Camera();
+        this.scene = new THREE.Scene();
+
+        const modelOrigin = [142.790999165027614, 46.604746813273003] as any
+        const modelAltitude = 10;
+        const modelRotate = [Math.PI / 2, 0, 0];
+
+        const modelAsMercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(
+            modelOrigin,
+            modelAltitude
+        );
+
+        // transformation parameters to position, rotate and scale the 3D model onto the map
+        this.modelTransform = {
+            translateX: modelAsMercatorCoordinate.x,
+            translateY: modelAsMercatorCoordinate.y,
+            translateZ: modelAsMercatorCoordinate.z,
+            rotateX: modelRotate[0],
+            rotateY: modelRotate[1],
+            rotateZ: modelRotate[2],
+            /* Since the 3D model is in real world meters, a scale transform needs to be
+            * applied since the CustomLayerInterface expects units in MercatorCoordinates.
+            */
+            scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits()
+        };
+    }
+
+    // onAdd(map, gl) {
+    onAdd(map: mapboxgl.Map, gl: WebGLRenderingContext) {
+        // create two three.js lights to illuminate the model
+        const directionalLight = new THREE.DirectionalLight(0xffffff);
+        directionalLight.position.set(0, -70, 100).normalize();
+        this.scene.add(directionalLight);
+
+        const directionalLight2 = new THREE.DirectionalLight(0xffffff);
+        directionalLight2.position.set(0, 70, 100).normalize();
+        this.scene.add(directionalLight2);
+
+        // use the three.js GLTF loader to add the 3D model to the three.js scene
+        // const loader = new THREE.GLTFLoader();
+        const loader = new GLTFLoader()
+        loader.load('/static/museum.glb', (gltf) => {
+            this.scene.add(gltf.scene);
+        })
+        this.map = map;
+
+        // use the Mapbox GL JS map canvas for three.js
+        this.renderer = new THREE.WebGLRenderer({
+            canvas: map.getCanvas(),
+            context: gl,
+            antialias: true
+        });
+
+        this.renderer.autoClear = false;
+    }
+
+    render(gl: WebGLRenderingContext, matrix: number[]) {
+        const rotationX = new THREE.Matrix4().makeRotationAxis(
+            new THREE.Vector3(1, 0, 0),
+            this.modelTransform.rotateX
+        );
+        const rotationY = new THREE.Matrix4().makeRotationAxis(
+            new THREE.Vector3(0, 1, 0),
+            this.modelTransform.rotateY
+        );
+        const rotationZ = new THREE.Matrix4().makeRotationAxis(
+            new THREE.Vector3(0, 0, 1),
+            this.modelTransform.rotateZ
+        );
+
+        const m = new THREE.Matrix4().fromArray(matrix);
+        const l = new THREE.Matrix4()
+            .makeTranslation(
+                this.modelTransform.translateX,
+                this.modelTransform.translateY,
+                this.modelTransform.translateZ
+            )
+            .scale(
+                new THREE.Vector3(
+                    this.modelTransform.scale,
+                    -this.modelTransform.scale,
+                    this.modelTransform.scale
+                )
+            )
+            .multiply(rotationX)
+            .multiply(rotationY)
+            .multiply(rotationZ);
+
+        this.camera.projectionMatrix = m.multiply(l);
+        this.renderer.resetState();
+        this.renderer.render(this.scene, this.camera);
+        this.map.triggerRepaint();
+    }
+}
+
+function initMuseum(map: mapboxgl.Map) {
+    // parameters to ensure the model is georeferenced correctly on the map
+    // const modelOrigin = [148.9819, -35.39847] as any
+    const modelOrigin = [142.790999165027614, 46.604746813273003] as any
+    const modelAltitude = 10;
+    const modelRotate = [Math.PI / 2, 0, 0];
+
+    const modelAsMercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(
+        modelOrigin,
+        modelAltitude
+    );
+
+    // transformation parameters to position, rotate and scale the 3D model onto the map
+    const modelTransform = {
+        translateX: modelAsMercatorCoordinate.x,
+        translateY: modelAsMercatorCoordinate.y,
+        translateZ: modelAsMercatorCoordinate.z,
+        rotateX: modelRotate[0],
+        rotateY: modelRotate[1],
+        rotateZ: modelRotate[2],
+        /* Since the 3D model is in real world meters, a scale transform needs to be
+        * applied since the CustomLayerInterface expects units in MercatorCoordinates.
+        */
+        scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits()
+    };
+
+    map.addLayer(new ThreeLayer('museum-3d'))
 }
 
 export function initMap(container: any, initPhase: string) {
@@ -301,6 +439,10 @@ export function initMap(container: any, initPhase: string) {
         //     }
         // });
     })
+
+    map.on('style.load', () => {
+        initMuseum(map)
+    });
 
     return map
 }
