@@ -45,7 +45,7 @@ function createFill(phase: string): Expression {
         'sachtech lab', '#1A9272',
         'sachtech office', '#36C89F',
         'sahtech prom', '#21726E',
-        'sahtech ungrnd', '#295637',
+        'sachtech ungrnd', '#295637',
         'services', '#8000B7',
         'campus', '#FF4FB3',
         'media', '#FF4FB3',
