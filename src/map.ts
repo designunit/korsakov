@@ -349,7 +349,7 @@ export function initMap(container: any, initPhase: string) {
                 'paint': {
                     'fill-extrusion-color': createFill(initPhase),
                     'fill-extrusion-height': ['*',
-                        1.2,
+                        0.75,
                         ['get', 'height'],
                     ],
                     'fill-extrusion-base': ['get', 'offset'],
