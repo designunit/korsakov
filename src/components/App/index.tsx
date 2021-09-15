@@ -1,7 +1,76 @@
-import { useCallback, useEffect, useRef, useState } from "react"
+import { Fragment, useCallback, useEffect, useRef, useState } from "react"
 import { PhaseSelect } from "@/components/PhaseSelect"
 import { initMap, switchPhase } from "@/map"
 import mapboxgl from "mapbox-gl"
+
+import { Menu, Transition } from '@headlessui/react'
+import { Layout } from "../Layout"
+import { Sidebar } from "../Sidebar"
+import { Collapse, CollapseItem, Radio } from "../Collapse"
+
+type LegendProps = {
+    values: { label: string, color: string }[]
+}
+const Legend: React.FC<LegendProps> = props => (
+    <ul className="px-4">
+        {props.values.map((x, i) => (
+            <li key={i} className="flex">
+                <i className={`inline-block w-4 h-4 mr-2 ${x.color}`} />
+                {x.label}
+            </li>
+        ))}
+    </ul>
+)
+
+function MyDropdown() {
+    return (
+        <Menu as="div" className="relative inline-block text-left">
+            <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-60 hover:bg-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                More
+                {/* <ChevronDownIcon
+                    className="w-5 h-5 ml-2 -mr-1 text-violet-200 hover:text-violet-100"
+                    aria-hidden="true"
+                /> */}
+            </Menu.Button>
+            <Transition
+                as={Fragment}
+                enter="transition duration-100 ease-out"
+                enterFrom="transform scale-95 opacity-0"
+                enterTo="transform scale-100 opacity-100"
+                leave="transition duration-75 ease-out"
+                leaveFrom="transform scale-100 opacity-100"
+                leaveTo="transform scale-95 opacity-0"
+            >
+                <Menu.Items className="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Item>
+                        {({ active }) => (
+                            <a
+                                className={`${active ? 'bg-blue-500 text-white' : 'bg-white text-black'
+                                    }`}
+                                href="/account-settings"
+                            >
+                                Account settings
+                            </a>
+                        )}
+                    </Menu.Item>
+                    <Menu.Item>
+                        {({ active }) => (
+                            <a
+                                className={`${active && 'bg-blue-500'}`}
+                                href="/account-settings"
+                            >
+                                Documentation
+                            </a>
+                        )}
+                    </Menu.Item>
+                    <Menu.Item disabled>
+                        <span className="opacity-75">Invite a friend (coming soon!)</span>
+                    </Menu.Item>
+                </Menu.Items>
+            </Transition>
+        </Menu>
+    )
+}
 
 const phases = [
     'phase1',
@@ -14,7 +83,7 @@ export type AppProps = {
 
 }
 
-export const App: React.FC<AppProps>  = () => {
+export const App: React.FC<AppProps> = () => {
     const [currentPhase, setCurrentPhase] = useState(phases[0])
     const ref = useRef()
     const mapRef = useRef<mapboxgl.Map>()
@@ -35,25 +104,93 @@ export const App: React.FC<AppProps>  = () => {
     }, [])
 
     return (
-        <>
-            <div ref={ref as any} style={{
-                width: '100%',
-                height: '100%',
-            }}></div>
+        <Layout>
+            <Sidebar>
+                <div className="sticky top-0 w-full">
+                    <h1 className="font-bold text-xl px-8 py-4">
+                        Экополис
+                    </h1>
+                    <hr />
+                </div>
 
-            <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-            }}>
-                <main className="flex flex-col flex-1 text-center bg-white">
-                    <PhaseSelect
-                        phases={phases}
-                        current={currentPhase}
-                        onChange={onChangePhase}
-                    />
-                </main>
-            </div>
-        </>
+                <Collapse>
+                    <CollapseItem label={'Фазы возведения мечты'}>
+                        <Radio
+                            onChange={onChangePhase}
+                            values={[
+                                {
+                                    id: 'p1',
+                                    label: 'Накопление',
+                                    value: 'phase1',
+                                },
+                                {
+                                    id: 'p2',
+                                    label: 'Возвеличивание',
+                                    value: 'phase2',
+                                },
+                                {
+                                    id: 'p3',
+                                    label: 'Эндшпиль',
+                                    value: 'phase3',
+                                },
+                                {
+                                    id: 'p4',
+                                    label: 'Насладиться будущим',
+                                    value: 'phase4',
+                                },
+                            ]}
+                        />
+                    </CollapseItem>
+                    {/* <CollapseItem label={'Предустановленное'}>
+                        If you're unhappy with your purchase for any reason, email us
+                        within 90 days and we'll refund you in full, no questions asked.
+                    </CollapseItem> */}
+                    <CollapseItem label={'Слои карты'}>
+                        <Radio
+                            // onChange={onChangePhase}
+                            values={[
+                                {
+                                    id: 'p1',
+                                    label: 'Парки и озеленение',
+                                    value: 'phase1',
+                                },
+                                {
+                                    id: 'p2',
+                                    label: 'Дома и строения',
+                                    value: 'phase2',
+                                },
+                            ]}
+                        />
+                    </CollapseItem>
+                    <CollapseItem label={'Легенда'}>
+                        <Legend
+                            values={[
+                                {
+                                    label: 'Административные здания',
+                                    color: 'bg-red-100',
+                                },
+                                {
+                                    label: 'Зеленка',
+                                    color: 'bg-green-700',
+                                },
+                            ]}
+                        />
+                    </CollapseItem>
+                    <CollapseItem label={'Описание'}>
+                        <p className="px-4">
+                            If you're unhappy with your purchase for any reason, email us
+                            within 90 days and we'll refund you in full, no questions asked.
+                        </p>
+                    </CollapseItem>
+                </Collapse>
+            </Sidebar>
+
+            <main role="main" className="w-full h-full">
+                <div ref={ref as any} style={{
+                    width: '100%',
+                    height: '100%',
+                }}></div>
+            </main>
+        </Layout>
     )
 }
