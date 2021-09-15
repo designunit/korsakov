@@ -73,7 +73,7 @@ const Btn: React.FC<BtnProps> = props => (
     <Disclosure.Button className="flex w-full px-2 py-2 text-sm font-medium text-left hover:bg-green-300 focus:outline-none focus-visible:ring focus-visible:ring-green-500 focus-visible:ring-opacity-75">
         {/* <TemplateIcon className="w-5 h-5" /> */}
         {/* <span className="flex-1 pl-2"> */}
-        <span className="flex-1">
+        <span className="flex-1 text-lg">
             {props.children}
         </span>
         <ChevronUpIcon
