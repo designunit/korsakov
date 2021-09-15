@@ -178,8 +178,8 @@ export const App: React.FC<AppProps> = () => {
                     </CollapseItem>
                     <CollapseItem label={'Описание'}>
                         <p className="px-4">
-                            If you're unhappy with your purchase for any reason, email us
-                            within 90 days and we'll refund you in full, no questions asked.
+                            If you are unhappy with your purchase for any reason, email us
+                            within 90 days and we will refund you in full, no questions asked.
                         </p>
                     </CollapseItem>
                 </Collapse>
