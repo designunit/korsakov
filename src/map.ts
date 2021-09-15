@@ -465,3 +465,9 @@ export function switchPhase(map: mapboxgl.Map, phase: string) {
     map.setPaintProperty('korsakov-zones', 'fill-color', createFill(phase))
     map.setPaintProperty('korsakov-zones-border', 'line-color', createFill(phase))
 }
+
+export function setLayerVisibility(map: mapboxgl.Map, layer: string, visible: boolean) {
+    const value = visible ? 'visible' : 'none'
+
+    map.setLayoutProperty(layer, 'visibility', value)
+}

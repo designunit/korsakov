@@ -1,6 +1,6 @@
 import { Fragment, useCallback, useEffect, useRef, useState } from "react"
 import { PhaseSelect } from "@/components/PhaseSelect"
-import { initMap, switchPhase } from "@/map"
+import { initMap, switchPhase, setLayerVisibility } from "@/map"
 import mapboxgl from "mapbox-gl"
 
 import { Menu, Switch, Transition } from '@headlessui/react'
@@ -16,25 +16,27 @@ type SwitchGroupProps = {
 }
 
 const SwitchGroup: React.FC<SwitchGroupProps> = props => {
-    const [enableds, setEnabled] = useState(props.values.map(x => x.checked))
-
     return (
         <Switch.Group>
             {props.values.map((item, i) => {
-                const enabled = enableds[i]
                 return (
                     <div
                         key={i}
                         className="flex items-center px-4 py-2"
                     >
                         <Switch.Label className="mr-4 flex-1">{item.label}</Switch.Label>
-                        <Switch checked={enabled}
-                            onChange={(checked) => setEnabled(enableds.map((x, ii) => ii === i ? checked : x))}
-                            className={`${enabled ? 'bg-green-500' : 'bg-gray-500'
+                        <Switch checked={item.checked}
+                            // onChange={(checked) => setEnabled(enableds.map((x, ii) => ii === i ? checked : x))}
+                            onChange={(checked) => {
+                                if (typeof props.onChange === 'function') {
+                                    props.onChange(checked, i)
+                                }
+                            }}
+                            className={`${item.checked ? 'bg-green-500' : 'bg-gray-500'
                                 } relative inline-flex items-center w-8 h-5 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500`}
                         >
                             <span
-                                className={`${enabled ? 'translate-x-4' : 'translate-x-1'
+                                className={`${item.checked ? 'translate-x-4' : 'translate-x-1'
                                     } inline-block w-3 h-3 transform bg-white rounded-full transition-transform`}
                             />
                         </Switch>
@@ -125,6 +127,49 @@ export const App: React.FC<AppProps> = () => {
     const ref = useRef()
     const mapRef = useRef<mapboxgl.Map>()
 
+    const [showLayers, setShowLayers] = useState([
+        {
+            label: 'Парки и озеленение',
+            layers: [
+                'korsakov-green',
+                'korsakov-green-border',
+            ],
+            checked: true,
+        },
+        {
+            label: 'Дома и строения',
+            checked: true,
+            layers: [
+                'korsakov-buildings-3d',
+                'korsakov-osm-3d',
+            ],
+        },
+        {
+            label: 'Функциональные зоны',
+            checked: true,
+            layers: [
+                'korsakov-zones',
+                'korsakov-zones-border',
+            ],
+        },
+    ])
+    const onChangeShowLayer = useCallback((checked, i) => {
+        setShowLayers(xs => xs.map((x, ii) => i !== ii ? x : {
+            ...x,
+            checked,
+        }))
+    }, [])
+    useEffect(() => {
+        if (!mapRef.current) {
+            return
+        }
+        for (let item of showLayers) {
+            for (let layer of item.layers) {
+                setLayerVisibility(mapRef.current, layer, item.checked)
+            }
+        }
+    }, [showLayers])
+
     useEffect(() => {
         mapRef.current = initMap(ref.current, phases[0])
     }, [])
@@ -184,18 +229,8 @@ export const App: React.FC<AppProps> = () => {
                     </CollapseItem> */}
                     <CollapseItem label={'Слои карты'}>
                         <SwitchGroup
-                            values={[
-                                {
-                                    // id: 'p1',
-                                    label: 'Парки и озеленение',
-                                    checked: true,
-                                },
-                                {
-                                    // id: 'p2',
-                                    label: 'Дома и строения',
-                                    checked: true,
-                                },
-                            ]}
+                            values={showLayers}
+                            onChange={onChangeShowLayer}
                         />
                     </CollapseItem>
                     <CollapseItem label={'Легенда'}>
