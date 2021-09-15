@@ -7,6 +7,9 @@ import { Menu, Switch, Transition } from '@headlessui/react'
 import { Layout } from "../Layout"
 import { Sidebar } from "../Sidebar"
 import { Collapse, CollapseItem, Radio } from "../Collapse"
+import { useTranslations } from "use-intl"
+import { LangButton } from "../LangButton"
+
 type SwitchGroupProps = {
     values: Array<{
         label: string,
@@ -123,6 +126,8 @@ export type AppProps = {
 }
 
 export const App: React.FC<AppProps> = () => {
+    const t = useTranslations('app')
+
     const [currentPhase, setCurrentPhase] = useState(phases[0])
     const ref = useRef()
     const mapRef = useRef<mapboxgl.Map>()
@@ -189,9 +194,12 @@ export const App: React.FC<AppProps> = () => {
         <Layout>
             <Sidebar>
                 <div className="sticky top-0 w-full">
-                    <h1 className="font-bold text-xl px-8 py-4">
-                        Экополис
-                    </h1>
+                    <div className="flex">
+                        <h1 className="flex-1 font-bold text-xl px-8 py-4">
+                            {t('title')}
+                        </h1>
+                        <LangButton />
+                    </div>
                     <hr />
                 </div>
 

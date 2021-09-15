@@ -4,6 +4,7 @@ import '@/style.css'
 
 import { AppProps } from 'next/app'
 import Head from 'next/head'
+import { NextIntlProvider } from 'next-intl'
 
 export default function MyApp(props: AppProps) {
     const { Component, pageProps } = props
@@ -18,7 +19,9 @@ export default function MyApp(props: AppProps) {
                 <title>korsakov</title>
             </Head>
 
-            <Component {...pageProps} />
+            <NextIntlProvider messages={pageProps.messages}>
+                <Component {...pageProps} />
+            </NextIntlProvider>
         </>
     )
 }
