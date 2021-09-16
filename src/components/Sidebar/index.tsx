@@ -1,7 +1,10 @@
+import s from './sidebar.module.css'
+
 import { ArrowRightIcon } from "@heroicons/react/solid"
 import { useCallback } from "react"
 
 export type SidebarProps = {
+    head?: React.ReactElement
     open: boolean
     onChange: (open: boolean) => void
 }
@@ -13,7 +16,13 @@ export const Sidebar: React.FC<SidebarProps> = props => {
 
     return (
         <aside className={`absolute top-0 left-0 sm:w-1/3 md:w-1/4 ease-in-out transition-all duration-300 z-10 ${props.open ? '' : 'transform -translate-x-full'}`}>
-            <div className="max-h-screen overflow-auto m-3 bg-gray-200 dark:bg-gray-800">
+            <div className={`${s.container} overflow-auto m-3 bg-gray-200 dark:bg-gray-800`}>
+                {!props.head ? null : (
+                    <div className="sticky top-0 w-full bg-gray-200 z-10">
+                        {props.head}
+                        <hr className="bg-gray-300" />
+                    </div>
+                )}
                 {props.children}
             </div>
 

@@ -212,17 +212,15 @@ export const App: React.FC<AppProps> = () => {
             <Sidebar
                 open={sidebarOpen}
                 onChange={setSidebarOpen}
-            >
-                <div className="sticky top-0 w-full bg-gray-200 z-10">
+                head={(
                     <div className="flex">
                         <h1 className="flex-1 font-bold text-xl px-2 lg:px-8 py-4">
                             {t('title')}
                         </h1>
                         <LangButton />
                     </div>
-                    <hr className="bg-gray-300"/>
-                </div>
-
+                )}
+            >
                 <Collapse>
                     <CollapseItem label={t('phases')}>
                         <Radio
