@@ -1,5 +1,15 @@
 {
     "app": {
-        "title": "Ecopolis"
+        "title": "Ecopolis",
+        "phases": "Phases",
+        "phase1": "Launch",
+        "phase2": "Expansion",
+        "phase3": "Recyclicity",
+        "phase4": "Oldness",
+        "legend": "Legend",
+        "layer_green": "Green",
+        "layer_buildings": "Buildings",
+        "layer_zones": "Zones",
+        "layers": "Layers"
     }
 }

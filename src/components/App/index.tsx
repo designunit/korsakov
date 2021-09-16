@@ -2,6 +2,7 @@ import { Fragment, useCallback, useEffect, useRef, useState } from "react"
 import { PhaseSelect } from "@/components/PhaseSelect"
 import { initMap, switchPhase, setLayerVisibility } from "@/map"
 import mapboxgl from "mapbox-gl"
+import { useRouter } from 'next/router'
 
 import { Menu, Switch, Transition } from '@headlessui/react'
 import { Layout } from "../Layout"
@@ -127,6 +128,7 @@ export type AppProps = {
 
 export const App: React.FC<AppProps> = () => {
     const t = useTranslations('app')
+    const router = useRouter()
 
     const [currentPhase, setCurrentPhase] = useState(phases[0])
     const ref = useRef()
@@ -134,7 +136,8 @@ export const App: React.FC<AppProps> = () => {
 
     const [showLayers, setShowLayers] = useState([
         {
-            label: 'Парки и озеленение',
+            label: t('layer_green'),
+            value: 'layer_green',
             layers: [
                 'korsakov-green',
                 'korsakov-green-border',
@@ -142,7 +145,8 @@ export const App: React.FC<AppProps> = () => {
             checked: true,
         },
         {
-            label: 'Дома и строения',
+            label: t('layer_buildings'),
+            value: 'layer_buildings',
             checked: true,
             layers: [
                 'korsakov-buildings-3d',
@@ -150,7 +154,8 @@ export const App: React.FC<AppProps> = () => {
             ],
         },
         {
-            label: 'Функциональные зоны',
+            label: t('layer_zones'),
+            value: 'layer_zones',
             checked: true,
             layers: [
                 'korsakov-zones',
@@ -170,10 +175,20 @@ export const App: React.FC<AppProps> = () => {
         }
         for (let item of showLayers) {
             for (let layer of item.layers) {
-                setLayerVisibility(mapRef.current, layer, item.checked)
+                try {
+                    setLayerVisibility(mapRef.current, layer, item.checked)
+                } catch {
+
+                }
             }
         }
     }, [showLayers])
+    useEffect(() => {
+        setShowLayers(xs => xs.map(x => ({
+            ...x,
+            label: t(x.value),
+        })))
+    }, [t, router.locale])
 
     useEffect(() => {
         mapRef.current = initMap(ref.current, phases[0])
@@ -204,28 +219,28 @@ export const App: React.FC<AppProps> = () => {
                 </div>
 
                 <Collapse>
-                    <CollapseItem label={'Фазы возведения мечты'}>
+                    <CollapseItem label={t('phases')}>
                         <Radio
                             onChange={onChangePhase}
                             values={[
                                 {
                                     id: 'p1',
-                                    label: 'Накопление',
+                                    label: t('phase1'),
                                     value: 'phase1',
                                 },
                                 {
                                     id: 'p2',
-                                    label: 'Возвеличивание',
+                                    label: t('phase2'),
                                     value: 'phase2',
                                 },
                                 {
                                     id: 'p3',
-                                    label: 'Эндшпиль',
+                                    label: t('phase3'),
                                     value: 'phase3',
                                 },
                                 {
                                     id: 'p4',
-                                    label: 'Насладиться будущим',
+                                    label: t('phase4'),
                                     value: 'phase4',
                                 },
                             ]}
@@ -235,13 +250,13 @@ export const App: React.FC<AppProps> = () => {
                         If you're unhappy with your purchase for any reason, email us
                         within 90 days and we'll refund you in full, no questions asked.
                     </CollapseItem> */}
-                    <CollapseItem label={'Слои карты'}>
+                    <CollapseItem label={t('layers')}>
                         <SwitchGroup
                             values={showLayers}
                             onChange={onChangeShowLayer}
                         />
                     </CollapseItem>
-                    <CollapseItem label={'Легенда'}>
+                    <CollapseItem label={t('legend')}>
                         <Legend
                             values={[
                                 {
@@ -255,12 +270,12 @@ export const App: React.FC<AppProps> = () => {
                             ]}
                         />
                     </CollapseItem>
-                    <CollapseItem label={'Описание'}>
+                    {/* <CollapseItem label={'Описание'}>
                         <p className="px-4">
                             If you are unhappy with your purchase for any reason, email us
                             within 90 days and we will refund you in full, no questions asked.
                         </p>
-                    </CollapseItem>
+                    </CollapseItem> */}
                 </Collapse>
             </Sidebar>
 
