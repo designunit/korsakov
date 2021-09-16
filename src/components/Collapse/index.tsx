@@ -108,7 +108,7 @@ export type CollapseProps = {
 
 export const Collapse: React.FC<CollapseProps> = props => {
     return (
-        <div className="w-full max-w-md p-2 px-8 mx-auto">
+        <div className="w-full max-w-md py-2 px-2 lg:px-8 mx-auto">
             {props.children}
         </div>
     )
