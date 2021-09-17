@@ -64,7 +64,7 @@ function createFill(phase: string): Expression {
         'kinders', '#DA67A7',
         'maison', '#275069',
         'mediateque', '#F37763',
-        'med', '#00A997',
+        'medical', '#00A997',
         'sachtech lab', '#B1BE73',
         'sachtech office', '#EEF2D8',
         'sachtech prom', '#6B946C',
