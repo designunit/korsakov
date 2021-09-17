@@ -1,0 +1,141 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "id": "614496d052a4df0009f96605",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    142.76695404252632,
+                    46.617345845752965
+                ]
+            },
+            "properties": {
+                "src": "/images/emb_01.jpg",
+                "dateCreated": "2021-09-17T13:23:27.441Z",
+                "lastModified": "2021-09-17T13:23:27.441Z",
+                "id": "614496d052a4df0009f96605"
+            }
+        },
+        {
+            "id": "614496d352a4df0009f96606",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    142.76689812769496,
+                    46.614350088500544
+                ]
+            },
+            "properties": {
+                "src": "/images/emb_02.jpg",
+                "dateCreated": "2021-09-17T13:23:30.862Z",
+                "lastModified": "2021-09-17T13:23:30.862Z",
+                "id": "614496d352a4df0009f96606"
+            }
+        },
+        {
+            "id": "614496d452a4df0009f96607",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    142.76991752863887,
+                    46.61131575517314
+                ]
+            },
+            "properties": {
+                "src": "/images/emb_03.jpg",
+                "dateCreated": "2021-09-17T13:23:32.322Z",
+                "lastModified": "2021-09-17T13:23:32.322Z",
+                "id": "614496d452a4df0009f96607"
+            }
+        },
+        {
+            "id": "614496d552a4df0009f96608",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    142.7705885066266,
+                    46.60805077628362
+                ]
+            },
+            "properties": {
+                "src": "/images/emb_04.jpg",
+                "dateCreated": "2021-09-17T13:23:33.246Z",
+                "lastModified": "2021-09-17T13:23:33.246Z",
+                "id": "614496d552a4df0009f96608"
+            }
+        },
+        {
+            "id": "614496d652a4df0009f96609",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    142.77584450086647,
+                    46.606898383803696
+                ]
+            },
+            "properties": {
+                "src": "/images/emb_05.jpg",
+                "dateCreated": "2021-09-17T13:23:34.656Z",
+                "lastModified": "2021-09-17T13:23:34.656Z",
+                "id": "614496d652a4df0009f96609"
+            }
+        },
+        {
+            "id": "614496d952a4df0009f9660a",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    142.7680164243405,
+                    46.62003420474801
+                ]
+            },
+            "properties": {
+                "src": "/images/emb_06.jpg",
+                "dateCreated": "2021-09-17T13:23:37.152Z",
+                "lastModified": "2021-09-17T13:23:37.152Z",
+                "id": "614496d952a4df0009f9660a"
+            }
+        },
+        {
+            "id": "614496da52a4df0009f9660b",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    142.76712178702508,
+                    46.62759929866627
+                ]
+            },
+            "properties": {
+                "src": "/images/emb_07.jpg",
+                "dateCreated": "2021-09-17T13:23:37.923Z",
+                "lastModified": "2021-09-17T13:23:37.923Z",
+                "id": "614496da52a4df0009f9660b"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    142.76695404252632,
+                    46.61123893440109
+                ]
+            },
+            "properties": {
+                "src": "/images/emb_08.jpg",
+                "dateCreated": "2021-09-17T13:23:45.023Z",
+                "lastModified": "2021-09-17T13:23:45.023Z",
+                "id": "614496e152a4df0009f9660c"
+            }
+        }
+    ]
+}
