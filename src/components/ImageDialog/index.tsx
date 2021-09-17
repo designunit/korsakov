@@ -49,7 +49,7 @@ export const ImageDialog: React.FC<ImageDialogProps> = props => {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <div className="inline-block w-full my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl">
+                            <div className="inline-block w-full max-w-6xl my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl">
                                 {/* <Dialog.Title
                                     as="h3"
                                     className="text-lg font-medium leading-6 text-gray-900"
