@@ -10,6 +10,7 @@ import { Sidebar } from "../Sidebar"
 import { Collapse, CollapseItem, Radio } from "../Collapse"
 import { useTranslations } from "use-intl"
 import { LangButton } from "../LangButton"
+import { ImageDialog } from "../ImageDialog"
 
 type SwitchGroupProps = {
     values: Array<{
@@ -135,6 +136,7 @@ export const App: React.FC<AppProps> = () => {
     const mapRef = useRef<mapboxgl.Map>()
 
     const [sidebarOpen, setSidebarOpen] = useState(true)
+    const [imgSrc, setImgSrc] = useState('')
 
     const [showLayers, setShowLayers] = useState([
         {
@@ -193,7 +195,15 @@ export const App: React.FC<AppProps> = () => {
     }, [t, router.locale])
 
     useEffect(() => {
-        mapRef.current = initMap(ref.current, phases[0])
+        mapRef.current = initMap(ref.current, phases[0], f => {
+            const props = f.properties as any
+            const src = props.src
+
+            console.log('click on ', src)
+
+            setImgSrc(src)
+            setDialogIsOpen(true)
+        })
     }, [])
 
     useEffect(() => {
@@ -205,6 +215,11 @@ export const App: React.FC<AppProps> = () => {
 
     const onChangePhase = useCallback(newPhase => {
         setCurrentPhase(newPhase)
+    }, [])
+
+    let [isDialogOpen, setDialogIsOpen] = useState(false)
+    const onCloseDialog = useCallback(() => {
+        setDialogIsOpen(false)
     }, [])
 
     return (
@@ -288,6 +303,14 @@ export const App: React.FC<AppProps> = () => {
                     height: '100%',
                 }}></div>
             </main>
+
+            <ImageDialog
+                open={isDialogOpen}
+                onClose={onCloseDialog}
+                src={imgSrc}
+                width={100}
+                height={60}
+            />
         </Layout>
     )
 }

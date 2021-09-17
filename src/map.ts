@@ -210,7 +210,7 @@ function initMuseum(map: mapboxgl.Map) {
     map.addLayer(new ThreeLayer('museum-3d'))
 }
 
-export function initMap(container: any, initPhase: string) {
+export function initMap(container: any, initPhase: string, onClickMarker: (feature: any) => void) {
     mapboxgl.accessToken = key
     const center: LngLatLike = [
         142.79405865469897,
@@ -427,6 +427,52 @@ export function initMap(container: any, initPhase: string) {
 
             labelLayerId
         )
+
+        map.loadImage('/icons/attraction.png', (error, image) => {
+            if (error) {
+                throw error
+            }
+            if (!image) {
+                return
+            }
+
+            // Add the image to the map style.
+            map.addImage('photo', image)
+
+            map.addSource('korsakov-photos', {
+                type: 'geojson',
+                data: '/static/korsakov-photos.geojson',
+            })
+
+            map.addLayer({
+                'id': 'korsakov-photos-icon',
+                'source': 'korsakov-photos',
+                'type': 'symbol',
+                'minzoom': 10,
+                'layout': {
+                    'icon-size': 0.5,
+                    'icon-image': 'photo',
+                },
+            })
+
+            map.on('click', (event) => {
+                const size = 8
+                const point = event.point
+                const bbox: [mapboxgl.PointLike, mapboxgl.PointLike] = [
+                    [point.x - size / 2, point.y - size / 2],
+                    [point.x + size / 2, point.y + size / 2],
+                ]
+                const features = map.queryRenderedFeatures(bbox, {
+                    layers: ['korsakov-photos-icon'],
+                })
+                if (features.length === 0) {
+                    return
+                }
+
+                const selected = features[0]
+                onClickMarker(selected)
+            })
+        })
 
         // map.addLayer({
         //     'id': 'buildings-i1',
