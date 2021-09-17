@@ -62,6 +62,7 @@ function createFill(phase: string): Expression {
         'regeneration', '#FF7EC7',
         'green_nature', '#006A00',
         'green_urban', '#00FF00',
+        'app family', '#00FF00',
 
         '#000000'
     ]
