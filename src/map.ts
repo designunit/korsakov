@@ -415,7 +415,7 @@ export function initMap(container: any, initPhase: string, onClickMarker: (featu
                 'minzoom': 10,
                 'paint': {
                     'fill-color': createFill(initPhase),
-                    'fill-opacity': 0.6,
+                    'fill-opacity': 0.3,
                 },
                 filter: createFilter(initPhase, GREEN_FILTER),
             },
