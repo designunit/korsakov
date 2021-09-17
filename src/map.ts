@@ -70,7 +70,7 @@ function createFill(phase: string): Expression {
         'sachtech prom', '#6B946C',
         'sachtech ungrng', '#367036',
         'school', '#BDD630',
-        'services', '#C785B9',
+        'service', '#C785B9',
         'sport', '#9AC639',
         'townhouse', '#00564D',
         'univer', '#B168AA',
