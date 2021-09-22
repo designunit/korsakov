@@ -154,6 +154,7 @@ export const App: React.FC<AppProps> = () => {
             checked: true,
             layers: [
                 'korsakov-buildings-3d',
+                'museum-3d',
             ],
         },
         {
