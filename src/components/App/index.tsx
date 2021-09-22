@@ -175,6 +175,14 @@ export const App: React.FC<AppProps> = () => {
             ],
         },
         {
+            label: t('layer_roads'),
+            value: 'layer_roads',
+            checked: true,
+            layers: [
+                'korsakov-roads',
+            ],
+        },
+        {
             label: t('layer_photos'),
             value: 'layer_photos',
             checked: true,

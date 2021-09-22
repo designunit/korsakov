@@ -12,6 +12,7 @@
         "layer_buildings_osm": "Существующие дома и строения",
         "layer_zones": "Zones",
         "layer_photos": "Renders",
+        "layer_roads": "Roads",
         "layers": "Layers"
     }
 }

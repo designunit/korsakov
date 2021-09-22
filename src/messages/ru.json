@@ -12,6 +12,7 @@
         "layer_buildings_osm": "Существующие дома и строения",
         "layer_zones": "Функциональные зоны",
         "layer_photos": "Рендеры",
+        "layer_roads": "Дороги",
         "layers": "Слои карты"
     }
 }
