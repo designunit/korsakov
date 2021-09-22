@@ -174,6 +174,14 @@ export const App: React.FC<AppProps> = () => {
                 'korsakov-zones-border',
             ],
         },
+        {
+            label: t('layer_photos'),
+            value: 'layer_photos',
+            checked: true,
+            layers: [
+                'korsakov-photos-icon',
+            ],
+        },
     ])
     const onChangeShowLayer = useCallback((checked, i) => {
         setShowLayers(xs => xs.map((x, ii) => i !== ii ? x : {
