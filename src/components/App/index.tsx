@@ -268,7 +268,7 @@ export const App: React.FC<AppProps> = () => {
                         If you're unhappy with your purchase for any reason, email us
                         within 90 days and we'll refund you in full, no questions asked.
                     </CollapseItem> */}
-                    <CollapseItem label={t('layers')}>
+                    <CollapseItem label={t('layers')} defaultOpen={false}>
                         <SwitchGroup
                             values={showLayers}
                             onChange={onChangeShowLayer}

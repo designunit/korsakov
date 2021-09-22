@@ -85,10 +85,11 @@ const Btn: React.FC<BtnProps> = props => (
 
 export type CollapseItemProps = {
     label: string
+    defaultOpen?: boolean
 }
 
-export const CollapseItem: React.FC<CollapseItemProps> = props => (
-    <Disclosure defaultOpen>
+export const CollapseItem: React.FC<CollapseItemProps> = ({ defaultOpen = true, ...props }) => (
+    <Disclosure defaultOpen={defaultOpen}>
         {({ open }) => (
             <>
                 <Btn open={open}>
