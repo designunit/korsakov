@@ -154,6 +154,13 @@ export const App: React.FC<AppProps> = () => {
             checked: true,
             layers: [
                 'korsakov-buildings-3d',
+            ],
+        },
+        {
+            label: t('layer_buildings_osm'),
+            value: 'layer_buildings_osm',
+            checked: true,
+            layers: [
                 'korsakov-osm-3d',
             ],
         },

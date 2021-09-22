@@ -9,6 +9,7 @@
         "legend": "Legend",
         "layer_green": "Green",
         "layer_buildings": "Buildings",
+        "layer_buildings_osm": "Существующие дома и строения",
         "layer_zones": "Zones",
         "layers": "Layers"
     }
