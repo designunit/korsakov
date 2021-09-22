@@ -183,6 +183,14 @@ export const App: React.FC<AppProps> = () => {
             ],
         },
         {
+            label: t('layer_water'),
+            value: 'layer_water',
+            checked: true,
+            layers: [
+                'korsakov-water',
+            ],
+        },
+        {
             label: t('layer_photos'),
             value: 'layer_photos',
             checked: true,

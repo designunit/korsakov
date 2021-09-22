@@ -271,6 +271,10 @@ export function initMap(container: any, initPhase: string, onClickMarker: (featu
             type: 'geojson',
             data: '/static/korsakov-roads.geojson',
         });
+        map.addSource('korsakov-water', {
+            type: 'geojson',
+            data: '/static/korsakov-water.geojson',
+        });
 
         // for vector mapbox style
         // map.setLayoutProperty('building', 'visibility', 'none');
@@ -446,6 +450,21 @@ export function initMap(container: any, initPhase: string, onClickMarker: (featu
 
         map.addLayer(
             {
+                'id': 'korsakov-water',
+                'source': 'korsakov-water',
+                'type': 'fill',
+                'minzoom': 10,
+                'paint': {
+                    'fill-color': '#256cb5',
+                    'fill-opacity': 0.9,
+                },
+            },
+
+            labelLayerId
+        )
+
+        map.addLayer(
+            {
                 'id': 'korsakov-roads',
                 'source': 'korsakov-roads',
                 'type': 'fill',
@@ -454,11 +473,11 @@ export function initMap(container: any, initPhase: string, onClickMarker: (featu
                     'fill-color': '#86837E',
                     'fill-opacity': 1,
                 },
-                // filter: createFilter(initPhase, GREEN_FILTER),
             },
 
             labelLayerId
         )
+
         map.loadImage('/icons/attraction.png', (error, image) => {
             if (error) {
                 throw error

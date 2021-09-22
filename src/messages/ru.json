@@ -13,6 +13,7 @@
         "layer_zones": "Функциональные зоны",
         "layer_photos": "Рендеры",
         "layer_roads": "Дороги",
+        "layer_water": "Реки",
         "layers": "Слои карты"
     }
 }

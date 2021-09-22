@@ -13,6 +13,7 @@
         "layer_zones": "Zones",
         "layer_photos": "Renders",
         "layer_roads": "Roads",
+        "layer_water": "Water",
         "layers": "Layers"
     }
 }
