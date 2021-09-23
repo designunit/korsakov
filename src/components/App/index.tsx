@@ -2,7 +2,6 @@ import { useCallback, useEffect, useMemo, useState } from "react"
 import { PhaseSelect } from "@/components/PhaseSelect"
 import { useRouter } from 'next/router'
 
-import { Layout } from "../Layout"
 import { Sidebar } from "../Sidebar"
 import { Collapse, CollapseItem, Radio } from "../Collapse"
 import { useTranslations } from "use-intl"
@@ -146,7 +145,7 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
     }, [])
 
     return (
-        <Layout>
+        <>
             <Sidebar
                 open={sidebarOpen}
                 onChange={setSidebarOpen}
@@ -187,10 +186,6 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                             ]}
                         />
                     </CollapseItem>
-                    {/* <CollapseItem label={'Предустановленное'}>
-                        If you're unhappy with your purchase for any reason, email us
-                        within 90 days and we'll refund you in full, no questions asked.
-                    </CollapseItem> */}
                     <CollapseItem label={t('legend')}>
                         {props.legend}
                     </CollapseItem>
@@ -233,6 +228,6 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                 width={100}
                 height={60}
             />
-        </Layout>
+        </>
     )
 }
