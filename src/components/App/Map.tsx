@@ -122,8 +122,8 @@ export const Map: React.FC<MapProps> = memo(({ phase }) => {
         'paint': {
             'fill-extrusion-color': '#fffff0',
             'fill-extrusion-height': ['*',
-                3,
-                ['get', 'building_height'],
+                0.75,
+                ['get', 'height'],
             ],
         }
     })
