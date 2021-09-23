@@ -60,16 +60,36 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                     color: '#FFD002',
                 },
                 {
-                    label: 'legend_hotel',
-                    color: '#FFD002',
-                },
-                {
                     label: 'legend_hub',
                     color: '#B6529F',
                 },
                 {
                     label: 'legend_kinders',
                     color: '#DA67A7',
+                },
+                {
+                    label: 'legend_maison',
+                    color: '#275069',
+                },
+                {
+                    label: 'legend_mediatheque',
+                    color: '#F37763',
+                },
+                {
+                    label: 'legend_hospital',
+                    color: '#00A997',
+                },
+                {
+                    label: 'legend_lab',
+                    color: '#B1BE73',
+                },
+                {
+                    label: 'legend_office',
+                    color: '#EEF2D8',
+                },
+                {
+                    label: 'legend_prom',
+                    color: '#6B946C',
                 },
             ]
         }
