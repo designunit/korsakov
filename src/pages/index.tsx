@@ -32,16 +32,44 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
             legend: [
                 {
-                    label: 'legend_adm',
-                    color: '#ff0000',
-                },
-                {
                     label: 'legend_green',
                     color: '#00ff00',
                 },
                 {
                     label: 'legend_app family',
-                    color: '#596EB5',
+                    color: '#596EB5','#596EB5'
+                },
+                {
+                    label: 'legend_artschool',
+                    color: '#E43594',
+                },
+                {
+                    label: 'legend_concerthall',
+                    color: '#F8951D',
+                },
+                {
+                    label: 'legend_dorm',
+                    color: '#FEBF10',
+                },
+                {
+                    label: 'legend_flats',
+                    color: '#00B5DC',
+                },
+                {
+                    label: 'legend_hotel',
+                    color: '#FFD002',
+                },
+                {
+                    label: 'legend_hotel',
+                    color: '#FFD002',
+                },
+                {
+                    label: 'legend_hub',
+                    color: '#B6529F',
+                },
+                {
+                    label: 'legend_kinders',
+                    color: '#DA67A7',
                 },
             ]
         }
