@@ -1,7 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { PhaseSelect } from "@/components/PhaseSelect"
-import { initMap, switchPhase, setLayerVisibility } from "@/map"
-import mapboxgl from "mapbox-gl"
 import { useRouter } from 'next/router'
 
 import { Layout } from "../Layout"
@@ -11,6 +9,11 @@ import { useTranslations } from "use-intl"
 import { LangButton } from "../LangButton"
 import { ImageDialog } from "../ImageDialog"
 import { SwitchGroup } from "../SwitchGroup"
+import { AppMap } from "../AppMap"
+import { Map } from "./Map"
+import { MapboxTerrain } from "../AppMap/MapboxTerrain"
+import { MapController, OnFeatureClick } from "./MapController"
+import { MapDebug } from "./MapDebug"
 
 type LegendProps = {
     values: { label: string, color: string }[]
@@ -34,16 +37,14 @@ const phases = [
 ]
 
 export type AppProps = {
-
+    initialPhase?: string
 }
 
-export const App: React.FC<AppProps> = () => {
+export const App: React.FC<AppProps> = ({ initialPhase = phases[0] }) => {
     const t = useTranslations('app')
     const router = useRouter()
 
-    const [currentPhase, setCurrentPhase] = useState(phases[0])
-    const ref = useRef()
-    const mapRef = useRef<mapboxgl.Map>()
+    const [currentPhase, setCurrentPhase] = useState(initialPhase)
 
     const [sidebarOpen, setSidebarOpen] = useState(true)
     const [imgSrc, setImgSrc] = useState('')
@@ -118,6 +119,12 @@ export const App: React.FC<AppProps> = () => {
             ],
         },
     ])
+    const layerVisibility = useMemo(() => {
+        return showLayers.flatMap(item => item.layers.map(layer => ({
+            layer,
+            visible: item.checked,
+        })))
+    }, [showLayers])
     const onChangeShowLayer = useCallback((checked, i) => {
         setShowLayers(xs => xs.map((x, ii) => i !== ii ? x : {
             ...x,
@@ -125,44 +132,11 @@ export const App: React.FC<AppProps> = () => {
         }))
     }, [])
     useEffect(() => {
-        if (!mapRef.current) {
-            return
-        }
-        for (let item of showLayers) {
-            for (let layer of item.layers) {
-                try {
-                    setLayerVisibility(mapRef.current, layer, item.checked)
-                } catch {
-
-                }
-            }
-        }
-    }, [showLayers])
-    useEffect(() => {
         setShowLayers(xs => xs.map(x => ({
             ...x,
             label: t(x.value),
         })))
     }, [t, router.locale])
-
-    useEffect(() => {
-        mapRef.current = initMap(ref.current, phases[0], f => {
-            const props = f.properties as any
-            const src = props.src
-
-            console.log('click on ', src)
-
-            setImgSrc(src)
-            setDialogIsOpen(true)
-        })
-    }, [])
-
-    useEffect(() => {
-        if (!mapRef.current) {
-            return
-        }
-        switchPhase(mapRef.current, currentPhase)
-    }, [currentPhase])
 
     const onChangePhase = useCallback(newPhase => {
         setCurrentPhase(newPhase)
@@ -171,6 +145,16 @@ export const App: React.FC<AppProps> = () => {
     let [isDialogOpen, setDialogIsOpen] = useState(false)
     const onCloseDialog = useCallback(() => {
         setDialogIsOpen(false)
+    }, [])
+
+    const onFeatureClick = useCallback<OnFeatureClick>(f => {
+        const props = f.properties as any
+        const src = props.src
+
+        console.log('click on ', src)
+
+        setImgSrc(src)
+        setDialogIsOpen(true)
     }, [])
 
     return (
@@ -249,10 +233,20 @@ export const App: React.FC<AppProps> = () => {
             </Sidebar>
 
             <main role="main" className="w-full h-full">
-                <div ref={ref as any} style={{
-                    width: '100%',
-                    height: '100%',
-                }}></div>
+                <AppMap>
+                    <MapboxTerrain
+                        exaggeration={1.5}
+                    />
+                    <Map
+                        phase={initialPhase}
+                    />
+                    <MapController
+                        phase={currentPhase}
+                        onClick={onFeatureClick}
+                        visibility={layerVisibility}
+                    />
+                    <MapDebug />
+                </AppMap>
             </main>
 
             <ImageDialog
