@@ -259,6 +259,14 @@ export function initMap(container: any, initPhase: string, onClickMarker: (featu
             type: 'geojson',
             data: '/static/korsakov-buildings.geojson',
         });
+        map.addSource('korsakov-port-zones', {
+            type: 'geojson',
+            data: '/static/korsakov-port_zones.geojson',
+        });
+        map.addSource('korsakov-port-buildings', {
+            type: 'geojson',
+            data: '/static/korsakov-port_buildings.geojson',
+        });
         map.addSource('korsakov-zones', {
             type: 'geojson',
             data: '/static/korsakov-zones.geojson',
@@ -410,6 +418,43 @@ export function initMap(container: any, initPhase: string, onClickMarker: (featu
                     'line-width': 2,
                 },
                 filter: createFilter(initPhase, ZONE_BORDER_FILTER),
+            },
+
+            labelLayerId
+        )
+
+        map.addLayer(
+            {
+                'id': 'korsakov-port-3d',
+                'source': 'korsakov-port-buildings',
+                'type': 'fill-extrusion',
+                'minzoom': 10,
+                'paint': {
+                    'fill-extrusion-color': createFill(initPhase),
+                    'fill-extrusion-height': ['*',
+                        0.75,
+                        ['get', 'height'],
+                    ],
+                    'fill-extrusion-base': ['get', 'offset'],
+                },
+                // filter: createFilter(initPhase, BUILDING_FILTER),
+            },
+
+            labelLayerId
+        )
+
+        map.addLayer(
+            {
+                'id': 'korsakov-port-zones',
+                'source': 'korsakov-port-zones',
+                'type': 'fill',
+                'minzoom': 10,
+                'paint': {
+                    // 'fill-color': createFill(initPhase),
+                    'fill-color': '#fffff0',
+                    'fill-opacity': 1,
+                },
+                // filter: createFilter(initPhase, ZONE_FILTER),
             },
 
             labelLayerId

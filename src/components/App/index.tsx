@@ -175,6 +175,15 @@ export const App: React.FC<AppProps> = () => {
             ],
         },
         {
+            label: t('layer_port'),
+            value: 'layer_port',
+            checked: true,
+            layers: [
+                'korsakov-port-3d',
+                'korsakov-port-zones',
+            ],
+        },
+        {
             label: t('layer_roads'),
             value: 'layer_roads',
             checked: true,
