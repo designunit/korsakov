@@ -37,7 +37,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 },
                 {
                     label: 'legend_app family',
-                    color: '#596EB5','#596EB5'
+                    color: '#596EB5',
                 },
                 {
                     label: 'legend_artschool',
