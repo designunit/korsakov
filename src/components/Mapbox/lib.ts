@@ -33,10 +33,12 @@ export function useMapboxSource(id: string, source: AnySourceData) {
         map.addSource(id, source)
 
         return () => {
-            setTimeout(() => {
-                console.log('removing source', id)
-                map.removeSource(id)
-            }, 0)
+            setTimeout((map) => {
+                const s = map.getSource(id)
+                if (s) {
+                    map.removeSource(id)
+                }
+            }, 0, map)
         }
     }, [id, source])
 
