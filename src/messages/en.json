@@ -7,6 +7,8 @@
         "phase3": "Recyclicity",
         "phase4": "Maturity",
         "legend": "Legend",
+        "legend_adm": "adm",
+        "legend_green": "green",
         "layer_green": "Green",
         "layer_buildings": "Buildings",
         "layer_buildings_osm": "Существующие дома и строения",

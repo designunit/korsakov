@@ -15,20 +15,6 @@ import { MapboxTerrain } from "../AppMap/MapboxTerrain"
 import { MapController, OnFeatureClick } from "./MapController"
 import { MapDebug } from "./MapDebug"
 
-type LegendProps = {
-    values: { label: string, color: string }[]
-}
-const Legend: React.FC<LegendProps> = props => (
-    <ul className="px-4">
-        {props.values.map((x, i) => (
-            <li key={i} className="flex">
-                <i className={`inline-block w-4 h-4 mr-2 ${x.color}`} />
-                {x.label}
-            </li>
-        ))}
-    </ul>
-)
-
 const phases = [
     'phase1',
     'phase2',
@@ -38,9 +24,11 @@ const phases = [
 
 export type AppProps = {
     initialPhase?: string
+
+    legend: React.ReactNode
 }
 
-export const App: React.FC<AppProps> = ({ initialPhase = phases[0] }) => {
+export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) => {
     const t = useTranslations('app')
     const router = useRouter()
 
@@ -204,18 +192,7 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0] }) => {
                         within 90 days and we'll refund you in full, no questions asked.
                     </CollapseItem> */}
                     <CollapseItem label={t('legend')}>
-                        <Legend
-                            values={[
-                                {
-                                    label: 'Административные здания',
-                                    color: 'bg-red-100',
-                                },
-                                {
-                                    label: 'Зеленка',
-                                    color: 'bg-green-700',
-                                },
-                            ]}
-                        />
+                        {props.legend}
                     </CollapseItem>
                     <CollapseItem label={t('layers')} defaultOpen={false}>
                         <SwitchGroup

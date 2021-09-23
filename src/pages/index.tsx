@@ -1,13 +1,29 @@
 import { GetStaticProps, NextPage } from "next"
 import dynamic from 'next/dynamic'
 import { AppProps } from "@/components/App"
+import { Legend } from "@/components/Legend"
 
 const App = dynamic<AppProps>(() => import('@/components/App').then(m => m.App), {
     ssr: false,
 })
 
 const Page: NextPage = () => (
-    <App />
+    <App
+        legend={(
+            <Legend
+                values={[
+                    {
+                        label: 'legend_adm',
+                        color: '#ff0000',
+                    },
+                    {
+                        label: 'legend_green',
+                        color: '#00ff00',
+                    },
+                ]}
+            />
+        )}
+    />
 )
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
