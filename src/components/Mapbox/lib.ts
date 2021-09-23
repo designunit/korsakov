@@ -55,3 +55,26 @@ export function useMapboxLayer(layer: AnyLayer) {
 
     useMapboxEffect(effect)
 }
+
+export function useMapboxImage(id: string, src: string) {
+    const effect = useCallback<MapboxEffect>(map => {
+        map.loadImage(src, (error, image) => {
+            if (error) {
+                throw error
+            }
+            if (!image) {
+                return
+            }
+
+            map.addImage(id, image)
+        })
+
+        return () => {
+            if (map.hasImage(id)) {
+                map.removeImage(id)
+            }
+        }
+    }, [id, src])
+
+    useMapboxEffect(effect)
+}
