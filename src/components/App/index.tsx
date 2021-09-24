@@ -14,6 +14,7 @@ import { MapboxTerrain } from "../AppMap/MapboxTerrain"
 import { MapController, OnFeatureClick } from "./MapController"
 import { MapDebug } from "./MapDebug"
 import { MapboxSky } from "../AppMap/MapboxSky"
+import { MapboxFog } from "../AppMap/MapboxFog"
 
 const phases = [
     'phase1',
@@ -211,6 +212,12 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                         exaggeration={1.5}
                     />
                     <MapboxSky />
+                    <MapboxFog
+                        rangeMin={0}
+                        rangeMax={20}
+                        color={'white'}
+                        horizonBlend={0.1}
+                    />
                     <Map
                         phase={initialPhase}
                     />
