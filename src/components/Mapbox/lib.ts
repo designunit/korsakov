@@ -30,12 +30,13 @@ export function useMapboxEvent<T extends keyof MapEventType>(event: T, callback:
 
 export function useMapboxSource(id: string, source: AnySourceData) {
     const effect = useCallback<MapboxEffect>(map => {
-        map.addSource(id, source)
+        if (!map.getSource(id)) {
+            map.addSource(id, source)
+        }
 
         return () => {
             setTimeout((map) => {
-                const s = map.getSource(id)
-                if (s) {
+                if (map.getSource(id)) {
                     map.removeSource(id)
                 }
             }, 0, map)
