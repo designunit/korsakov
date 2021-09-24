@@ -221,10 +221,6 @@ export function createMuseumLayer(layerId: string) {
 }
 
 export function switchPhase(map: mapboxgl.Map, phase: string) {
-    if (!map.loaded()) {
-        return
-    }
-
     map.setFilter('korsakov-zones', createFilter(phase, ZONE_FILTER))
     map.setFilter('korsakov-zones-border', createFilter(phase, ZONE_BORDER_FILTER))
     map.setFilter('korsakov-green', createFilter(phase, GREEN_FILTER))
