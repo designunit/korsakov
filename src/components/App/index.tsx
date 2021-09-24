@@ -13,6 +13,7 @@ import { Map } from "./Map"
 import { MapboxTerrain } from "../AppMap/MapboxTerrain"
 import { MapController, OnFeatureClick } from "./MapController"
 import { MapDebug } from "./MapDebug"
+import { MapboxSky } from "../AppMap/MapboxSky"
 
 const phases = [
     'phase1',
@@ -209,6 +210,7 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                     <MapboxTerrain
                         exaggeration={1.5}
                     />
+                    <MapboxSky />
                     <Map
                         phase={initialPhase}
                     />
