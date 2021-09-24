@@ -167,6 +167,16 @@ export const Map: React.FC<MapProps> = memo(({ phase }) => {
         },
     })
 
+    const effect = useCallback<MapboxEffect>(map => {
+        const layer = createMuseumLayer('museum-3d')
+        map.addLayer(layer)
+
+        return () => {
+            map.removeLayer('museum-3d')
+        }
+    }, [])
+    useMapboxEffect(effect)
+
     useMapboxSource('korsakov-photos', {
         type: 'geojson',
         data: '/static/korsakov-photos.geojson',
@@ -181,17 +191,6 @@ export const Map: React.FC<MapProps> = memo(({ phase }) => {
             'icon-image': 'photo',
         },
     })
-
-    const effect = useCallback<MapboxEffect>(map => {
-        const layer = createMuseumLayer('museum-3d')
-        map.addLayer(layer)
-
-        return () => {
-            map.removeLayer('museum-3d')
-        }
-    }, [])
-
-    useMapboxEffect(effect)
 
     return null
 })
