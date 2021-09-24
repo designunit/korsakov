@@ -1,4 +1,4 @@
-import { setLayerVisibility, switchPhase } from "@/map"
+import { queryFeatureInPoint, setLayerVisibility, switchPhase } from "@/map"
 import { MapboxGeoJSONFeature } from "mapbox-gl"
 import { memo, useCallback } from "react"
 import { MapboxEffect, useMapboxEffect, useMapboxEvent } from "../Mapbox/lib"
@@ -24,22 +24,21 @@ export const MapController: React.FC<MapControllerProps> = memo(({ phase, visibi
 
     // SHOW IMAGE ON ICON CLICK
     useMapboxEvent('click', event => {
-        const map = event.target
-        const size = 8
-        const point = event.point
-        const bbox: [mapboxgl.PointLike, mapboxgl.PointLike] = [
-            [point.x - size / 2, point.y - size / 2],
-            [point.x + size / 2, point.y + size / 2],
-        ]
-        const features = map.queryRenderedFeatures(bbox, {
-            layers: ['korsakov-photos-icon'],
-        })
-        if (features.length === 0) {
-            return
+        const f = queryFeatureInPoint(event.target, event.point, ['korsakov-photos-icon'])
+        if (f) {
+            props.onClick(f)
         }
+    })
 
-        const selected = features[0]
-        props.onClick(selected)
+    // HOVER ICONS
+    useMapboxEvent('mousemove', event => {
+        const map = event.target
+        const f = queryFeatureInPoint(map, event.point, ['korsakov-photos-icon'])
+        const cursor = f
+            ? 'pointer'
+            : 'default'
+
+        map.getCanvas().style.cursor = cursor
     })
 
     // SHOW/HIDE LAYERS

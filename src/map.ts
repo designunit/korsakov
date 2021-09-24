@@ -1,4 +1,4 @@
-import mapboxgl, { CustomLayerInterface, Expression } from "mapbox-gl"
+import mapboxgl, { CustomLayerInterface, Expression, Point } from "mapbox-gl"
 import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 
@@ -240,4 +240,21 @@ export function setLayerVisibility(map: mapboxgl.Map, layer: string, visible: bo
     const value = visible ? 'visible' : 'none'
 
     map.setLayoutProperty(layer, 'visibility', value)
+}
+
+export function queryFeatureInPoint(map: mapboxgl.Map, point: Point, layers: string[]) {
+    const size = 8
+    const bbox: [mapboxgl.PointLike, mapboxgl.PointLike] = [
+        [point.x - size / 2, point.y - size / 2],
+        [point.x + size / 2, point.y + size / 2],
+    ]
+    const features = map.queryRenderedFeatures(bbox, {
+        layers,
+    })
+
+    if (features.length === 0) {
+        return
+    }
+
+    return features[0]
 }
