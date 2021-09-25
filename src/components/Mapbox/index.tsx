@@ -11,7 +11,8 @@ export const Mapbox: React.FC<MapboxProps> = props => {
     const [map, setMap] = useState<mapboxgl.Map>()
 
     useEffect(() => {
-        if (!ref.current) {
+        // skip on server side rendering
+        if (!ref.current || typeof window === 'undefined') {
             return
         }
 
@@ -32,7 +33,7 @@ export const Mapbox: React.FC<MapboxProps> = props => {
             setMap(map)
         }
 
-        map.on('load', onLoad)
+        map.once('load', onLoad)
 
         return () => {
             map.off('load', onLoad)
