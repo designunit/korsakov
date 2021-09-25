@@ -35,14 +35,27 @@ export function useMapboxSource(id: string, source: AnySourceData) {
         }
 
         return () => {
-            setTimeout((map) => {
-                if (map.getSource(id)) {
-                    map.removeSource(id)
+            // map.removeSource(id)
+
+            if (map.getSource(id)) {
+                const { layers } = map.getStyle()
+                if (layers) {
+                    layers.forEach((layer: any) => {
+                        if (layer.source === id) {
+                            map.removeLayer(layer.id)
+                        }
+                    })
                 }
-            }, 0, map)
+
+                map.removeSource(id)
+            }
+            // setTimeout((map) => {
+            //     if (map.getSource(id)) {
+            //         map.removeSource(id)
+            //     }
+            // }, 0, map)
         }
     }, [id, source])
-
     useMapboxEffect(effect)
 }
 
@@ -52,7 +65,9 @@ export function useMapboxLayer(layer: AnyLayer) {
         map.addLayer(layer)
 
         return () => {
-            map.removeLayer(layer.id)
+            if (map.getLayer(layer.id)) {
+                map.removeLayer(layer.id)
+            }
         }
     }, [layer])
 
