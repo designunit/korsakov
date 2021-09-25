@@ -1,5 +1,4 @@
 import 'tailwindcss/tailwind.css'
-import 'mapbox-gl/dist/mapbox-gl.css'
 import '@/style.css'
 
 import { AppProps } from 'next/app'
