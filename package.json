@@ -32,6 +32,7 @@
     "devDependencies": {
         "@types/mapbox-gl": "^2.3.3",
         "@types/react": "^17.0.24",
+        "@types/react-dom": "^17.0.9",
         "@types/three": "^0.131.0",
         "autoprefixer": "^10.3.3",
         "eslint": "^7.32.0",

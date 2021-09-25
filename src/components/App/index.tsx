@@ -15,6 +15,7 @@ import { MapController, OnFeatureClick } from "./MapController"
 import { MapDebug } from "./MapDebug"
 import { MapboxSky } from "../AppMap/MapboxSky"
 import { MapboxFog } from "../AppMap/MapboxFog"
+import { MapMarkers } from "./MapMarkers"
 
 const phases = [
     'phase1',
@@ -100,6 +101,12 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
             ],
         },
         {
+            label: t('layer_tags'),
+            value: 'layer_tags',
+            checked: true,
+            layers: [],
+        },
+        {
             label: t('layer_photos'),
             value: 'layer_photos',
             checked: true,
@@ -113,6 +120,10 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
             layer,
             visible: item.checked,
         })))
+    }, [showLayers])
+    const showTags = useMemo(() => {
+        const x = showLayers.find(item => item.value === 'layer_tags')
+        return x?.checked ?? true
     }, [showLayers])
     const onChangeShowLayer = useCallback((checked, i) => {
         setShowLayers(xs => xs.map((x, ii) => i !== ii ? x : {
@@ -221,6 +232,11 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                     <Map
                         phase={initialPhase}
                     />
+                    {!showTags ? null : (
+                        <MapMarkers
+                            url={'/static/korsakov-tags.geojson'}
+                        />
+                    )}
                     <MapController
                         phase={currentPhase}
                         onClick={onFeatureClick}

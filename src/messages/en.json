@@ -30,6 +30,7 @@
         "layer_roads": "Roads",
         "layer_water": "Water",
         "layer_port": "Port",
+        "layer_tags": "Tags",
         "layers": "Layers"
     }
 }

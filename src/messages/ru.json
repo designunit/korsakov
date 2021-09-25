@@ -30,6 +30,7 @@
         "layer_roads": "Дороги",
         "layer_water": "Реки",
         "layer_port": "Порт",
+        "layer_tags": "Обозначения",
         "layers": "Слои карты"
     }
 }
