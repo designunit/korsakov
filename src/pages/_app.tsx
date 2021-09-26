@@ -4,9 +4,12 @@ import '@/style.css'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { NextIntlProvider } from 'next-intl'
+import { DefaultSeo } from 'next-seo'
+import { useRouter } from 'next/router'
 
 export default function MyApp(props: AppProps) {
     const { Component, pageProps } = props
+    const router = useRouter()
 
     return (
         <>
@@ -19,6 +22,24 @@ export default function MyApp(props: AppProps) {
             </Head>
 
             <NextIntlProvider messages={pageProps.messages}>
+                <DefaultSeo
+                    title={'Korsakov'}
+                    description={'Korsakov web 3d'}
+                    openGraph={{
+                        type: 'website',
+                        locale: router.locale,
+                        url: 'https://korsakov.unit4.io/',
+                        site_name: 'SiteName',
+                        images: [
+                            {
+                                url: '/images/emb_08.jpg',
+                                width: 3500,
+                                height: 1969,
+                                alt: 'Korsakov',
+                            }
+                        ],
+                    }}
+                />
                 <Component {...pageProps} />
             </NextIntlProvider>
         </>
