@@ -15,8 +15,8 @@ export const Sidebar: React.FC<SidebarProps> = props => {
     }, [props])
 
     return (
-        <aside className={`absolute top-0 left-0 sm:w-1/3 md:w-1/4 ease-in-out transition-all duration-300 z-10 ${props.open ? '' : 'transform -translate-x-full'}`}>
-            <div className={`${s.container} overflow-auto m-3 bg-gray-200 dark:bg-gray-800`}>
+        <aside className={`fixed top-0 left-0 sm:w-1/3 md:w-1/3 p-3 ease-in-out transition-all duration-300 z-10 ${props.open ? '' : 'transform -translate-x-full'}`}>
+            <div className={`${s.container} overflow-auto bg-gray-200 dark:bg-gray-800`}>
                 {!props.head ? null : (
                     <div className="sticky top-0 w-full bg-gray-200 z-10">
                         {props.head}
