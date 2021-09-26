@@ -29,12 +29,12 @@ export default function MyApp(props: AppProps) {
                         type: 'website',
                         locale: router.locale,
                         url: 'https://korsakov.unit4.io/',
-                        site_name: 'SiteName',
+                        site_name: 'Korsakov',
                         images: [
                             {
-                                url: '/images/emb_08.jpg',
-                                width: 3500,
-                                height: 1969,
+                                url: '/static/korsakov.jpg',
+                                width: 1200,
+                                height: 628,
                                 alt: 'Korsakov',
                             }
                         ],
