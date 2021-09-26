@@ -32,7 +32,7 @@ export default function MyApp(props: AppProps) {
                         site_name: 'Korsakov',
                         images: [
                             {
-                                url: '/static/korsakov.jpg',
+                                url: 'https://korsakov.unit4.io/static/korsakov.jpg',
                                 width: 1200,
                                 height: 628,
                                 alt: 'Korsakov',
