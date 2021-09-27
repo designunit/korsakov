@@ -32,8 +32,20 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
             legend: [
                 {
+                    label: 'legend_office',
+                    color: '#EEF2D8',
+                },
+                {
+                    label: 'legend_lab',
+                    color: '#B1BE73',
+                },
+                {
+                    label: 'legend_prom',
+                    color: '#6B946C',
+                },
+                {
                     label: 'legend_green',
-                    color: '#00ff00',
+                    color: '#61984c',
                 },
                 {
                     label: 'legend_app family',
@@ -78,18 +90,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 {
                     label: 'legend_hospital',
                     color: '#00A997',
-                },
-                {
-                    label: 'legend_lab',
-                    color: '#B1BE73',
-                },
-                {
-                    label: 'legend_office',
-                    color: '#EEF2D8',
-                },
-                {
-                    label: 'legend_prom',
-                    color: '#6B946C',
                 },
                 {
                     label: 'legend_school',
