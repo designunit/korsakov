@@ -119,6 +119,11 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                     label: 'legend_roads',
                     color: '#999999',
                 },
+                {
+                    label: 'legend_boundary',
+                    color: '#ff0000',
+                    display: 'dash',
+                },
             ]
         }
     };

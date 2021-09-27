@@ -29,6 +29,7 @@
         "legend_green": "Greenery",
         "legend_water": "Water objects",
         "legend_roads": "Roads",
+        "legend_boundary": "Boundary",
         "layer_green": "Greenery",
         "layer_buildings": "Buildings",
         "layer_buildings_osm": "Существующие дома и строения",
