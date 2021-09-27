@@ -91,6 +91,26 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                     label: 'legend_prom',
                     color: '#6B946C',
                 },
+                {
+                    label: 'legend_school',
+                    color: '#BDD630',
+                },
+                {
+                    label: 'legend_service',
+                    color: '#C785B9',
+                },
+                {
+                    label: 'legend_sport',
+                    color: '#9AC639',
+                },
+                {
+                    label: 'legend_townhouse',
+                    color: '#00564D',
+                },
+                {
+                    label: 'legend_univer',
+                    color: '#B168AA',
+                },
             ]
         }
     };
