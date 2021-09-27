@@ -46,7 +46,7 @@ export const Radio: React.FC<RadioProps<any>> = props => {
                             }
                         >
                             {({ active, checked }) => (
-                                <div className={`w-full flex`}>
+                                <div className={`w-full flex items-center`}>
                                     <span className={`flex-1`}>
                                         {x.label}
                                     </span>
