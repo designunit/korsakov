@@ -38,7 +38,6 @@ export const Tag: React.FC<TagProps> = props => {
             }}>
                 <div
                     style={{
-                        minWidth: 100,
                         maxWidth: 250,
                         overflow: 'hidden',
                         whiteSpace: 'nowrap',
