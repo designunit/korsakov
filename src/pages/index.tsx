@@ -44,12 +44,20 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                     color: '#6B946C',
                 },
                 {
-                    label: 'legend_green',
-                    color: '#61984c',
+                    label: 'legend_flats',
+                    color: '#00B5DC',
                 },
                 {
                     label: 'legend_app family',
                     color: '#596EB5',
+                },
+                {
+                    label: 'legend_townhouse',
+                    color: '#00564D',
+                },
+                {
+                    label: 'legend_maison',
+                    color: '#275069',
                 },
                 {
                     label: 'legend_artschool',
@@ -64,10 +72,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                     color: '#FEBF10',
                 },
                 {
-                    label: 'legend_flats',
-                    color: '#00B5DC',
-                },
-                {
                     label: 'legend_hotel',
                     color: '#FFD002',
                 },
@@ -78,10 +82,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 {
                     label: 'legend_kinders',
                     color: '#DA67A7',
-                },
-                {
-                    label: 'legend_maison',
-                    color: '#275069',
                 },
                 {
                     label: 'legend_mediatheque',
@@ -104,12 +104,20 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                     color: '#9AC639',
                 },
                 {
-                    label: 'legend_townhouse',
-                    color: '#00564D',
-                },
-                {
                     label: 'legend_univer',
                     color: '#B168AA',
+                },
+                {
+                    label: 'legend_green',
+                    color: '#61984c',
+                },
+                {
+                    label: 'legend_water',
+                    color: '#61984c',
+                },
+                {
+                    label: 'legend_roads',
+                    color: '#61984c',
                 },
             ]
         }
