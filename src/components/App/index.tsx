@@ -3,7 +3,7 @@ import { PhaseSelect } from "@/components/PhaseSelect"
 import { useRouter } from 'next/router'
 
 import { Sidebar } from "../Sidebar"
-import { Collapse, CollapseItem, Radio } from "../Collapse"
+import { Collapse, CollapseItem } from "../Collapse"
 import { useTranslations } from "use-intl"
 import { LangButton } from "../LangButton"
 import { ImageDialog } from "../ImageDialog"
@@ -16,6 +16,7 @@ import { MapDebug } from "./MapDebug"
 import { MapboxSky } from "../AppMap/MapboxSky"
 import { MapboxFog } from "../AppMap/MapboxFog"
 import { MapMarkers } from "./MapMarkers"
+import { Radio } from "../Radio"
 
 const phases = [
     'phase1',
