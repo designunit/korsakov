@@ -6,6 +6,7 @@ import { Tag } from "./Tag"
 
 export type MapMarkersProps = {
     url: string
+    phase: string
 }
 
 export const MapMarkers: React.FC<MapMarkersProps> = memo(props => {
@@ -15,17 +16,19 @@ export const MapMarkers: React.FC<MapMarkersProps> = memo(props => {
 
     return (
         <>
-            {items.map((f: any, i) => (
-                <Marker
-                    key={f.properties.id}
-                    // key={i}
-                    center={f.geometry.coordinates}
-                >
-                    <Tag>
-                        {f.properties[field]}
-                    </Tag>
-                </Marker>
-            ))}
+            {items
+                .filter((f: any) => f.properties[props.phase] === true)
+                .map((f: any, i) => (
+                    <Marker
+                        key={f.properties.id}
+                        // key={i}
+                        center={f.geometry.coordinates}
+                    >
+                        <Tag>
+                            {f.properties[field]}
+                        </Tag>
+                    </Marker>
+                ))}
         </>
     )
 })

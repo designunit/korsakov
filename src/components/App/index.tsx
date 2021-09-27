@@ -235,6 +235,7 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                     {!showTags ? null : (
                         <MapMarkers
                             url={'/static/korsakov-tags.geojson'}
+                            phase={currentPhase}
                         />
                     )}
                     <MapController
