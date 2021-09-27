@@ -168,7 +168,9 @@ export const Map: React.FC<MapProps> = memo(({ phase }) => {
         },
     })
 
-    useThreeLayer('museum-3d', '/static/museum.glb')
+    useThreeLayer('museum-3d', '/static/museum.glb', [
+        142.790999165027614, 46.604746813273003
+    ])
 
     useMapboxSource('korsakov-photos', {
         type: 'geojson',

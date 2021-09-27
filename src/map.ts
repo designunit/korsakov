@@ -1,4 +1,4 @@
-import mapboxgl, { CustomLayerInterface, Expression, Point } from "mapbox-gl"
+import mapboxgl, { CustomLayerInterface, Expression, LngLatLike, Point } from "mapbox-gl"
 import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 
@@ -93,13 +93,16 @@ export class ThreeLayer implements CustomLayerInterface {
     private map: mapboxgl.Map
     private modelTransform: any
 
-    constructor(public id: string, private url: string) {
+    constructor(
+        public id: string,
+        private url: string,
+        modelOrigin: LngLatLike,
+    ) {
         this.map = null as any
         this.renderer = null as any
         this.camera = new THREE.Camera();
         this.scene = new THREE.Scene();
 
-        const modelOrigin = [142.790999165027614, 46.604746813273003] as any
         const modelAltitude = 10;
         const modelRotate = [Math.PI / 2, 0, 0];
 
