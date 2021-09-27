@@ -16,7 +16,7 @@
 { "type": "Feature", "properties": { "id": "11",  "name_ru": "ТПУ", "name_en": "Transfer hub" }, "geometry": { "type": "Point", "coordinates": [ 142.811169475805798, 46.626733083508732 ] } },
 { "type": "Feature", "properties": { "id": "12", "name_ru": "Гостиница", "name_en": "Hotel" }, "geometry": { "type": "Point", "coordinates": [ 142.812511209566907, 46.62631341907489 ] } },
 { "type": "Feature", "properties": { "id": "13", "name_ru": "Студенческий кампус", "name_en": "Student campus" }, "geometry": { "type": "Point", "coordinates": [ 142.807217339232182, 46.624867376487146 ] } },
-{ "type": "Feature", "properties": { "id": "14", "name_ru": "Водный Сазалин Tech", "name_en": "Aquatic Sakhalin Tech" }, "geometry": { "type": "Point", "coordinates": [ 142.778420261382706, 46.60448355224068 ] } },
+{ "type": "Feature", "properties": { "id": "14", "name_ru": "Водный Сахалин Tech", "name_en": "Aquatic Sakhalin Tech" }, "geometry": { "type": "Point", "coordinates": [ 142.778420261382706, 46.60448355224068 ] } },
 { "type": "Feature", "properties": { "id": "15", "name_ru": "Городская набережная", "name_en": "City seafront" }, "geometry": { "type": "Point", "coordinates": [ 142.786762695165891, 46.604921842234738 ] } },
 { "type": "Feature", "properties": { "id": "16", "name_ru": "Музей мирового океана", "name_en": "World ocean museum" }, "geometry": { "type": "Point", "coordinates": [ 142.790933912057454, 46.605157843070479 ] } },
 { "type": "Feature", "properties": { "id": "17", "name_ru": "Особая экономическая зона", "name_en": "Special economic zone" }, "geometry": { "type": "Point", "coordinates": [ 142.814489019209987, 46.617192522399947 ] } },
