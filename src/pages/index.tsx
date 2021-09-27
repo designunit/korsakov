@@ -113,11 +113,11 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 },
                 {
                     label: 'legend_water',
-                    color: '#0066cc',
+                    color: '#3399ff',
                 },
                 {
                     label: 'legend_roads',
-                    color: '#999966',
+                    color: '#999999',
                 },
             ]
         }
