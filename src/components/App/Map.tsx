@@ -1,6 +1,7 @@
-import { BUILDING_FILTER, createFill, createFilter, GREEN_FILTER, GREEN_LINE_FILTER, createMuseumLayer, ZONE_BORDER_FILTER, ZONE_FILTER } from "@/map"
-import { memo, useCallback } from "react"
-import { MapboxEffect, useMapboxEffect, useMapboxImage, useMapboxLayer, useMapboxSource } from "../Mapbox/lib"
+import { useThreeLayer } from "@/hooks/useThreeLayer"
+import { BUILDING_FILTER, createFill, createFilter, GREEN_FILTER, GREEN_LINE_FILTER, ZONE_BORDER_FILTER, ZONE_FILTER } from "@/map"
+import { memo } from "react"
+import { useMapboxImage, useMapboxLayer, useMapboxSource } from "../Mapbox/lib"
 
 export type MapProps = {
     phase: string
@@ -167,15 +168,7 @@ export const Map: React.FC<MapProps> = memo(({ phase }) => {
         },
     })
 
-    const effect = useCallback<MapboxEffect>(map => {
-        const layer = createMuseumLayer('museum-3d', '/static/museum.glb')
-        map.addLayer(layer)
-
-        return () => {
-            map.removeLayer('museum-3d')
-        }
-    }, [])
-    useMapboxEffect(effect)
+    useThreeLayer('museum-3d', '/static/museum.glb')
 
     useMapboxSource('korsakov-photos', {
         type: 'geojson',
