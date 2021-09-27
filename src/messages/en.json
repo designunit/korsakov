@@ -32,7 +32,7 @@
         "legend_boundary": "Boundary",
         "layer_green": "Greenery",
         "layer_buildings": "Buildings",
-        "layer_buildings_osm": "Существующие дома и строения",
+        "layer_buildings_osm": "Existing housing and buildings",
         "layer_zones": "Zones",
         "layer_photos": "Renders",
         "layer_roads": "Roads",
