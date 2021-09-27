@@ -128,14 +128,14 @@ export class ThreeLayer implements CustomLayerInterface {
 
     // onAdd(map, gl) {
     onAdd(map: mapboxgl.Map, gl: WebGLRenderingContext) {
-        // create two three.js lights to illuminate the model
-        const directionalLight = new THREE.DirectionalLight(0xffffff);
-        directionalLight.position.set(0, -70, 100).normalize();
-        this.scene.add(directionalLight);
+        // create three.js lights to illuminate the model
+        const lightDirect = new THREE.DirectionalLight(0x999999);
+        lightDirect.position.set(150, 150, 200)
+        this.scene.add(lightDirect);
 
-        const directionalLight2 = new THREE.DirectionalLight(0xffffff);
-        directionalLight2.position.set(0, 70, 100).normalize();
-        this.scene.add(directionalLight2);
+        // const lightAmbient = new THREE.AmbientLight(0x666666);
+        const lightAmbient = new THREE.AmbientLight(0xdddddd);
+        this.scene.add(lightAmbient);
 
         // use the three.js GLTF loader to add the 3D model to the three.js scene
         // const loader = new THREE.GLTFLoader();
