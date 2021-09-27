@@ -53,6 +53,24 @@ export const Map: React.FC<MapProps> = memo(({ phase }) => {
         },
     })
 
+    useMapboxSource('korsakov-boundary', {
+        type: 'geojson',
+        data: '/static/korsakov-boundary.geojson',
+    })
+    useMapboxLayer({
+        id: 'korsakov-boundary',
+        source: 'korsakov-boundary',
+        type: 'line',
+        minzoom: 10,
+        layout: {
+        },
+        paint: {
+            'line-width': 2,
+            'line-color': '#ff0000',
+            'line-dasharray': [1, 2],
+        }
+    })
+
     useMapboxSource('korsakov-zones', {
         type: 'geojson',
         data: '/static/korsakov-zones.geojson',
