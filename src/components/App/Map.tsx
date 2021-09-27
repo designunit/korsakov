@@ -168,7 +168,7 @@ export const Map: React.FC<MapProps> = memo(({ phase }) => {
     })
 
     const effect = useCallback<MapboxEffect>(map => {
-        const layer = createMuseumLayer('museum-3d')
+        const layer = createMuseumLayer('museum-3d', '/static/museum.glb')
         map.addLayer(layer)
 
         return () => {

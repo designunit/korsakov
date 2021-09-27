@@ -93,7 +93,7 @@ class ThreeLayer implements CustomLayerInterface {
     private map: mapboxgl.Map
     private modelTransform: any
 
-    constructor(public id: string) {
+    constructor(public id: string, private url: string) {
         this.map = null as any
         this.renderer = null as any
         this.camera = new THREE.Camera();
@@ -137,7 +137,7 @@ class ThreeLayer implements CustomLayerInterface {
         // use the three.js GLTF loader to add the 3D model to the three.js scene
         // const loader = new THREE.GLTFLoader();
         const loader = new GLTFLoader()
-        loader.load('/static/museum.glb', (gltf) => {
+        loader.load(this.url, (gltf) => {
             this.scene.add(gltf.scene);
         })
         this.map = map;
@@ -191,7 +191,7 @@ class ThreeLayer implements CustomLayerInterface {
     }
 }
 
-export function createMuseumLayer(layerId: string) {
+export function createMuseumLayer(layerId: string, url: string) {
     // parameters to ensure the model is georeferenced correctly on the map
     // const modelOrigin = [148.9819, -35.39847] as any
     const modelOrigin = [142.790999165027614, 46.604746813273003] as any
@@ -217,7 +217,7 @@ export function createMuseumLayer(layerId: string) {
         scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits()
     };
 
-    return new ThreeLayer(layerId)
+    return new ThreeLayer(layerId, url)
 }
 
 export function switchPhase(map: mapboxgl.Map, phase: string) {
