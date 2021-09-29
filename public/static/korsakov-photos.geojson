@@ -12,10 +12,7 @@
                 ]
             },
             "properties": {
-                "src": "/images/emb_01.jpg",
-                "dateCreated": "2021-09-17T13:23:27.441Z",
-                "lastModified": "2021-09-17T13:23:27.441Z",
-                "id": "614496d052a4df0009f96605"
+                "src": "/images/emb_01.jpg"
             }
         },
         {
@@ -29,10 +26,7 @@
                 ]
             },
             "properties": {
-                "src": "/images/emb_02.jpg",
-                "dateCreated": "2021-09-17T13:23:30.862Z",
-                "lastModified": "2021-09-17T13:23:30.862Z",
-                "id": "614496d352a4df0009f96606"
+                "src": "/images/emb_02.jpg"
             }
         },
         {
@@ -46,10 +40,7 @@
                 ]
             },
             "properties": {
-                "src": "/images/emb_03.jpg",
-                "dateCreated": "2021-09-17T13:23:32.322Z",
-                "lastModified": "2021-09-17T13:23:32.322Z",
-                "id": "614496d452a4df0009f96607"
+                "src": "/images/emb_03.jpg"
             }
         },
         {
@@ -63,10 +54,7 @@
                 ]
             },
             "properties": {
-                "src": "/images/emb_04.jpg",
-                "dateCreated": "2021-09-17T13:23:33.246Z",
-                "lastModified": "2021-09-17T13:23:33.246Z",
-                "id": "614496d552a4df0009f96608"
+                "src": "/images/emb_04.jpg"
             }
         },
         {
@@ -80,10 +68,7 @@
                 ]
             },
             "properties": {
-                "src": "/images/emb_05.jpg",
-                "dateCreated": "2021-09-17T13:23:34.656Z",
-                "lastModified": "2021-09-17T13:23:34.656Z",
-                "id": "614496d652a4df0009f96609"
+                "src": "/images/emb_05.jpg"
             }
         },
         {
@@ -97,10 +82,7 @@
                 ]
             },
             "properties": {
-                "src": "/images/emb_06.jpg",
-                "dateCreated": "2021-09-17T13:23:37.152Z",
-                "lastModified": "2021-09-17T13:23:37.152Z",
-                "id": "614496d952a4df0009f9660a"
+                "src": "/images/emb_06.jpg"
             }
         },
         {
@@ -114,10 +96,7 @@
                 ]
             },
             "properties": {
-                "src": "/images/emb_07.jpg",
-                "dateCreated": "2021-09-17T13:23:37.923Z",
-                "lastModified": "2021-09-17T13:23:37.923Z",
-                "id": "614496da52a4df0009f9660b"
+                "src": "/images/emb_07.jpg"
             }
         },
         {
@@ -131,11 +110,302 @@
                 ]
             },
             "properties": {
-                "src": "/images/emb_08.jpg",
-                "dateCreated": "2021-09-17T13:23:45.023Z",
-                "lastModified": "2021-09-17T13:23:45.023Z",
-                "id": "614496e152a4df0009f9660c"
+                "src": "/images/emb_08.jpg"
             }
-        }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.812772526966768, 
+                    46.616883034794697
+                ]
+            },
+            "properties": {
+                "src": "/images/airfield_01.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.795472444270786, 
+                    46.58936805302767
+                ]
+            },
+            "properties": {
+                "src": "/images/bird_01.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.788161755804282, 
+                    46.615640163834968
+                ]
+            },
+            "properties": {
+                "src": "/images/houses_01.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.787972970846198, 
+                    46.613921951579464
+                ]
+            },
+            "properties": {
+                "src": "/images/houses_02.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.800999132950892, 
+                    46.618233588519594
+                ]
+            },
+            "properties": {
+                "src": "/images/houses_03.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.781931852188961, 
+                    46.611522847045066
+                ]
+            },
+            "properties": {
+                "src": "/images/houses_04.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.782777413576582, 
+                    46.612469006828761
+                ]
+            },
+            "properties": {
+                "src": "/images/houses_05.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.781808863439466, 
+                    46.608670079393967
+                ]
+            },
+            "properties": {
+                "src": "/images/houses_06.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.780121711587753, 
+                    46.611653440350011
+                ]
+            },
+            "properties": {
+                "src": "/images/houses_07.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.796212141284599, 
+                    46.610666159233332
+                ]
+            },
+            "properties": {
+                "src": "/images/lighthouse_01.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.79855540774534, 
+                    46.611052488770113
+                ]
+            },
+            "properties": {
+                "src": "/images/lighthouse_02.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.78899880226416, 
+                    46.603587044052034
+                ]
+            },
+            "properties": {
+                "src": "/images/museum_01.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.790919386014878, 
+                    46.604597732129449
+                ]
+            },
+            "properties": {
+                "src": "/images/museum_02.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.790878522530818, 
+                    46.605861065710471
+                ]
+            },
+            "properties": {
+                "src": "/images/museum_06.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.782501508298964, 
+                    46.634825430593651
+                ]
+            },
+            "properties": {
+                "src": "/images/pavilion_01.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.793042844817506, 
+                    46.621373618084718
+                ]
+            },
+            "properties": {
+                "src": "/images/shtech_01.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.793345936343769, 
+                    46.618667363364644
+                ]
+            },
+            "properties": {
+                "src": "/images/shtech_02.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.793519131501654, 
+                    46.614801050548124
+                ]
+            },
+            "properties": {
+                "src": "/images/shtech_03.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.78952208596732, 
+                    46.618034555742824
+                ]
+            },
+            "properties": {
+                "src": "/images/shtech_04.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.796744612670238, 
+                    46.61774444643536
+                ]
+            },
+            "properties": {
+                "src": "/images/shtech_05.jpg"
+            }
+        },
+
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.779021688041183, 
+                    46.60503269403489
+                ]
+            },
+            "properties": {
+                "src": "/images/shtech_07.jpg"
+            }
+        },
     ]
 }
