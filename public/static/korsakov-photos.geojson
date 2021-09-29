@@ -393,7 +393,7 @@
                 "src": "/images/shtech_05.jpg"
             }
         },
-
+        {
             "id": "614496e152a4df0009f9660c",
             "type": "Feature",
             "geometry": {
@@ -406,6 +406,6 @@
             "properties": {
                 "src": "/images/shtech_07.jpg"
             }
-        },
+        }
     ]
 }
