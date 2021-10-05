@@ -3,4 +3,7 @@ module.exports = {
         locales: ['ru', 'en'],
         defaultLocale: 'ru',
     },
+    images: {
+        minimumCacheTTL: 60,
+    },
 }
