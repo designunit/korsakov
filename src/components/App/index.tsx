@@ -208,12 +208,11 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                             onChange={onChangeShowLayer}
                         />
                     </CollapseItem>
-                    {/* <CollapseItem label={'Описание'}>
+                    <CollapseItem label={t('description')}>
                         <p className="px-4">
-                            If you are unhappy with your purchase for any reason, email us
-                            within 90 days and we will refund you in full, no questions asked.
+                            {t(`description_${currentPhase}`)}
                         </p>
-                    </CollapseItem> */}
+                    </CollapseItem>
                 </Collapse>
             </Sidebar>
 
