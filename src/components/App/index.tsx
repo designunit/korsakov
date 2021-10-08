@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { useRouter } from 'next/router'
-
+import dynamic from 'next/dynamic'
 import { Sidebar } from "../Sidebar"
 import { Collapse, CollapseItem } from "../Collapse"
 import { useTranslations } from "use-intl"
@@ -16,6 +16,11 @@ import { MapboxSky } from "../AppMap/MapboxSky"
 import { MapboxFog } from "../AppMap/MapboxFog"
 import { MapMarkers } from "./MapMarkers"
 import { Radio } from "../Radio"
+import { InfographicsProps } from "./Infographics"
+
+const Infographics = dynamic<InfographicsProps>(import("./Infographics").then(m => m.Infographics), {
+    ssr: false,
+})
 
 const phases = [
     'phase1',
@@ -209,6 +214,9 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                         />
                     </CollapseItem>
                     <CollapseItem label={t('description')}>
+                        <Infographics
+                            phase={currentPhase}
+                        />
                         <p className="px-4">
                             {t(`description_${currentPhase}`)}
                         </p>
