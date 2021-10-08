@@ -18,6 +18,10 @@ export default function MyApp(props: AppProps) {
                     name={'viewport'}
                     content={'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'}
                 />
+                <meta
+                    name={'theme-color'}
+                    content={'#10b981'}
+                />
                 <title>korsakov</title>
             </Head>
 
