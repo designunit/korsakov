@@ -1,6 +1,7 @@
 import { memo } from "react"
 import useSWR from 'swr'
 import { ResponsiveSunburst } from '@nivo/sunburst'
+import { useRouter } from 'next/router'
 
 const fetcher = async (url: string) => {
     const res = await fetch(url)
@@ -15,8 +16,20 @@ export type InfographicsProps = {
     phase: string
 }
 
+const infographicsMap = new Map([
+    ['phase1', 'korsakov-infographics_01_'],
+    ['phase2', 'korsakov-infographics_02_'],
+    ['phase3', 'korsakov-infographics_03_'],
+    ['phase4', 'korsakov-infographics_04_'],
+])
+
 export const Infographics: React.FC<InfographicsProps> = memo(({ phase }) => {
-    const { data, error } = useSWR('/static/korsakov-infographics.json', fetcher)
+    const router = useRouter()
+    const phaseFilePiece = infographicsMap.get(phase)
+    const localeFilePiece = ['ru','en'].includes(router.locale as string) ? router.locale : 'ru'
+    const url = `/static/${phaseFilePiece}${localeFilePiece}.json`
+    
+    const { data, error } = useSWR(url, fetcher)
     if (!data) {
         return null
     }
