@@ -44,6 +44,7 @@
         "layer_water": "Water",
         "layer_port": "Port",
         "layer_tags": "Tags",
-        "layers": "Layers"
+        "layers": "Layers",
+        "info_name": "Building area, thousand sq. m."
     }
 }
