@@ -215,6 +215,18 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                             ]}
                         />
                     </CollapseItem>
+
+                    <CollapseItem label={t('description')}>
+                        <p className="px-4">
+                            {t(`description_${currentPhase}`)}
+                        </p>
+                        <Infographics
+                            phase={currentPhase}
+                        />
+                        <p className="px-4 text-center">
+                            {t('info_name')}
+                        </p>
+                    </CollapseItem>
                     <CollapseItem label={t('legend')}>
                         {props.legend}
                     </CollapseItem>
@@ -223,14 +235,6 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                             values={showLayers}
                             onChange={onChangeShowLayer}
                         />
-                    </CollapseItem>
-                    <CollapseItem label={t('description')}>
-                        <Infographics
-                            phase={currentPhase}
-                        />
-                        <p className="px-4">
-                            {t(`description_${currentPhase}`)}
-                        </p>
                     </CollapseItem>
                 </Collapse>
             </Sidebar>
