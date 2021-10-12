@@ -1,5 +1,9 @@
+import { InformationCircleIcon } from '@heroicons/react/solid'
+import { Dispatch, ReactNode, SetStateAction } from 'react'
+
 export type TagProps = {
     children: string
+    setContent: null | (() => void)
 }
 
 export const Tag: React.FC<TagProps> = props => {
@@ -51,6 +55,28 @@ export const Tag: React.FC<TagProps> = props => {
                 >
                     {props.children}
                 </div>
+                {props.setContent !== null && (
+                    <div
+                        onClick={e => {
+                            // @ts-ignore // already checked on line 58
+                            props.setContent()
+                            e.stopPropagation()
+                        }}
+                        className="bg-green-300 w-6 h-6 cursor-pointer"
+                        style={{
+                            position: 'absolute',
+                            right: 0,
+                            top: 0,
+                            transform: 'translateX(100%)',
+                            display: 'flex',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        <InformationCircleIcon
+                            className="w-4"
+                        />
+                    </div>
+                )}
             </div>
         </div>
     )

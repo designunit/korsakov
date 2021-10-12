@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { ReactNode, useCallback, useEffect, useMemo, useState } from "react"
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { Sidebar } from "../Sidebar"
@@ -17,6 +17,7 @@ import { MapboxFog } from "../AppMap/MapboxFog"
 import { MapMarkers } from "./MapMarkers"
 import { Radio } from "../Radio"
 import { InfographicsProps } from "./Infographics"
+import { TextDialog } from '../TextDialog'
 
 const Infographics = dynamic<InfographicsProps>(import("./Infographics").then(m => m.Infographics), {
     ssr: false,
@@ -43,6 +44,9 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
 
     const [sidebarOpen, setSidebarOpen] = useState(true)
     const [imgSrc, setImgSrc] = useState('')
+
+    const [textDialogOpen, setTextDialogOpen] = useState(false)
+    const [textDialogContent, setTextDialogContent] = useState<ReactNode>(null)
 
     const [showLayers, setShowLayers] = useState([
         {
@@ -152,6 +156,8 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
         setDialogIsOpen(false)
     }, [])
 
+    const onCloseTextDialog = useCallback(() => setTextDialogOpen(false), [])
+
     const onFeatureClick = useCallback<OnFeatureClick>(f => {
         const props = f.properties as any
         const src = props.src
@@ -160,6 +166,11 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
 
         setImgSrc(src)
         setDialogIsOpen(true)
+    }, [])
+
+    const markerSetContent = useCallback((content) => {
+        setTextDialogContent(content)
+        setTextDialogOpen(true)
     }, [])
 
     return (
@@ -243,6 +254,7 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                         <MapMarkers
                             url={'/static/korsakov-tags.geojson'}
                             phase={currentPhase}
+                            setContent={markerSetContent}
                         />
                     )}
                     <MapController
@@ -261,6 +273,13 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                 width={100}
                 height={60}
             />
+
+            <TextDialog
+                open={textDialogOpen}
+                onClose={onCloseTextDialog}
+            >
+                {textDialogContent}
+            </TextDialog>
         </>
     )
 }

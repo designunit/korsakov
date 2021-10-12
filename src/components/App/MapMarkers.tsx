@@ -1,12 +1,13 @@
 import { useFeatrues } from "@/hooks/useFeatures"
 import { useRouter } from "next/router"
-import { memo } from "react"
+import { Dispatch, memo, ReactNode, SetStateAction, useCallback } from "react"
 import { Marker } from "../Mapbox/Marker"
 import { Tag } from "./Tag"
 
 export type MapMarkersProps = {
     url: string
     phase: string
+    setContent: Dispatch<SetStateAction<ReactNode>>
 }
 
 export const MapMarkers: React.FC<MapMarkersProps> = memo(props => {
@@ -18,17 +19,30 @@ export const MapMarkers: React.FC<MapMarkersProps> = memo(props => {
         <>
             {items
                 .filter((f: any) => f.properties[props.phase] === true)
-                .map((f: any, i) => (
-                    <Marker
-                        key={f.properties.id}
-                        // key={i}
-                        center={f.geometry.coordinates}
-                    >
-                        <Tag>
+                .map((f: any, i) => {
+                    const description = f.properties[`description_${router.locale}`]
+                    const dialogContent = <>
+                        <h1 className="flex-1 font-bold text-xl pb-3">
                             {f.properties[field]}
-                        </Tag>
-                    </Marker>
-                ))}
+                        </h1>
+                        <span className="text-black">
+                            {description}
+                        </span>
+                    </>
+                    return (
+                        <Marker
+                            key={f.properties.id}
+                            // key={i}
+                            center={f.geometry.coordinates}
+                        >
+                            <Tag
+                                setContent={description === '' ? null : () => props.setContent(dialogContent)}
+                            >
+                                {f.properties[field]}
+                            </Tag>
+                        </Marker>
+                    )
+                })}
         </>
     )
 })
