@@ -23,7 +23,7 @@ export const LangButton: React.FC = props => {
     }, [router])
 
     return (
-        <div className="px-4 py-4">
+        <div className="px-4 py-4 ml-auto">
             <RadioGroup value={selected} onChange={onClick}>
                 <div className="flex">
                     {langs.map(lang => (

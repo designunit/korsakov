@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useEffect, useMemo, useState } from "react"
+import React, { ReactNode, useCallback, useContext, useEffect, useMemo, useState } from "react"
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { Sidebar } from "../Sidebar"
@@ -18,6 +18,14 @@ import { MapMarkers } from "./MapMarkers"
 import { Radio } from "../Radio"
 import { InfographicsProps } from "./Infographics"
 import { TextDialog } from '../TextDialog'
+import { FullScreen, useFullScreenHandle } from "react-full-screen"
+import Image from 'next/image'
+import unitLogo from '../../../public/logos/unit.svg'
+import ecopolisLogo from '../../../public/logos/ecopolis.svg'
+import zemlaLogo from '../../../public/logos/newzemla.svg'
+import ecopolisTitleLogo from '../../../public/logos/ecopolisTitle.svg'
+import unitBlackLogo from '../../../public/logos/unitBlack.svg'
+import ArrowsExpandIcon from '@heroicons/react/solid/ArrowsExpandIcon'
 
 const Infographics = dynamic<InfographicsProps>(import("./Infographics").then(m => m.Infographics), {
     ssr: false,
@@ -173,117 +181,170 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
         setTextDialogOpen(true)
     }, [])
 
+    const handle = useFullScreenHandle()
+
     return (
         <>
-            <Sidebar
-                open={sidebarOpen}
-                onChange={setSidebarOpen}
-                head={(
-                    <div className="flex">
-                        <h1 className="flex-1 font-bold text-xl px-2 lg:px-8 py-4">
-                            {t('title')}
-                        </h1>
-                        <LangButton />
-                    </div>
-                )}
+            <FullScreen handle={handle}
+                className="w-screen h-screen"
             >
-                <Collapse>
-                    <CollapseItem label={t('phases')}>
-                        <Radio
-                            onChange={onChangePhase}
-                            values={[
-                                {
-                                    id: 'p1',
-                                    label: t('phase1'),
-                                    value: 'phase1',
-                                },
-                                {
-                                    id: 'p2',
-                                    label: t('phase2'),
-                                    value: 'phase2',
-                                },
-                                {
-                                    id: 'p3',
-                                    label: t('phase3'),
-                                    value: 'phase3',
-                                },
-                                {
-                                    id: 'p4',
-                                    label: t('phase4'),
-                                    value: 'phase4',
-                                },
-                            ]}
-                        />
-                    </CollapseItem>
-
-                    <CollapseItem label={t('description')}>
-                        <p className="px-4">
-                            {t(`description_${currentPhase}`)}
-                        </p>
-                        <Infographics
-                            phase={currentPhase}
-                        />
-                        <p className="px-4 text-center">
-                            {t('info_name')}
-                        </p>
-                    </CollapseItem>
-                    <CollapseItem label={t('legend')}>
-                        {props.legend}
-                    </CollapseItem>
-                    <CollapseItem label={t('layers')} defaultOpen={false}>
-                        <SwitchGroup
-                            values={showLayers}
-                            onChange={onChangeShowLayer}
-                        />
-                    </CollapseItem>
-                </Collapse>
-            </Sidebar>
-
-            <main role="main" className="w-full h-full">
-                <AppMap>
-                    <MapboxTerrain
-                        exaggeration={1.5}
-                    />
-                    <MapboxSky />
-                    <MapboxFog
-                        rangeMin={0}
-                        rangeMax={20}
-                        color={'white'}
-                        horizonBlend={0.1}
-                    />
-                    <Map
-                        phase={initialPhase}
-                    />
-                    {!showTags ? null : (
-                        <MapMarkers
-                            url={'/static/korsakov-tags.geojson'}
-                            phase={currentPhase}
-                            setContent={markerSetContent}
-                        />
+                <Sidebar
+                    open={sidebarOpen}
+                    onChange={setSidebarOpen}
+                    head={(
+                        <div className="flex">
+                            <h1 className="flex-1 font-bold text-xl px-2 lg:px-8 py-4">
+                                {t('title')}
+                            </h1>
+                            <LangButton />
+                        </div>
                     )}
-                    <MapController
-                        phase={currentPhase}
-                        onClick={onFeatureClick}
-                        visibility={layerVisibility}
+                >
+                    <Collapse>
+                        <CollapseItem label={t('phases')}>
+                            <Radio
+                                onChange={onChangePhase}
+                                values={[
+                                    {
+                                        id: 'p1',
+                                        label: t('phase1'),
+                                        value: 'phase1',
+                                    },
+                                    {
+                                        id: 'p2',
+                                        label: t('phase2'),
+                                        value: 'phase2',
+                                    },
+                                    {
+                                        id: 'p3',
+                                        label: t('phase3'),
+                                        value: 'phase3',
+                                    },
+                                    {
+                                        id: 'p4',
+                                        label: t('phase4'),
+                                        value: 'phase4',
+                                    },
+                                ]}
+                            />
+                        </CollapseItem>
+
+                        <CollapseItem label={t('description')}>
+                            <p className="px-4">
+                                {t(`description_${currentPhase}`)}
+                            </p>
+                            <Infographics
+                                phase={currentPhase}
+                            />
+                            <p className="px-4 text-center">
+                                {t('info_name')}
+                            </p>
+                        </CollapseItem>
+                        <CollapseItem label={t('legend')}>
+                            {props.legend}
+                        </CollapseItem>
+                        <CollapseItem label={t('layers')} defaultOpen={false}>
+                            <SwitchGroup
+                                values={showLayers}
+                                onChange={onChangeShowLayer}
+                            />
+                        </CollapseItem>
+                        <CollapseItem label={t('about_project_title')}>
+                            <p className="px-4">
+                                {t(`about_project`)}
+                            </p>
+                        </CollapseItem>
+                    </Collapse>
+                    <div
+                        className="flex gap-8 px-4 pt-8 pb-8 sticky bottom-0 bg-gray-200"
+                    >
+                        <a
+                            className="flex-1 h-8 flex"
+                            href='https://sakhalinecopolis.ru/'
+                        >
+                            <Image src={ecopolisLogo} className="text-black" />
+                        </a>
+                        <a
+                            className="flex-1 h-8 flex"
+                            href='https://www.nzemlya.com/'
+                        >
+                            <Image src={zemlaLogo} />
+                        </a>
+                        <a
+                            className="flex-1 h-8 flex"
+                            href='https://unit4.io/'
+                        >
+                            <Image src={unitLogo} />
+                        </a>
+                    </div>
+                </Sidebar>
+                <main role="main" className="w-full h-full">
+                    <AppMap>
+                        <MapboxTerrain
+                            exaggeration={1.5}
+                        />
+                        <MapboxSky />
+                        <MapboxFog
+                            rangeMin={0}
+                            rangeMax={20}
+                            color={'white'}
+                            horizonBlend={0.1}
+                        />
+                        <Map
+                            phase={initialPhase}
+                        />
+                        {!showTags ? null : (
+                            <MapMarkers
+                                url={'/static/korsakov-tags.geojson'}
+                                phase={currentPhase}
+                                setContent={markerSetContent}
+                            />
+                        )}
+                        <MapController
+                            phase={currentPhase}
+                            onClick={onFeatureClick}
+                            visibility={layerVisibility}
+                        />
+
+                        <a
+                            style={{
+                                position: 'absolute',
+                                zIndex: 2,
+                                bottom: 38,
+                                left: 10,
+                                opacity: .75,
+                                height: 19,
+                                width: 82,
+                            }}
+                            href='https://unit4.io/'
+                        >
+                            <Image src={unitBlackLogo} />
+                        </a>
+                        <MapDebug />
+                    </AppMap>
+
+                    <ArrowsExpandIcon
+                        id='whiteStroke'
+                        onClick={handle.active ? handle.exit : handle.enter}
+                        className={`absolute top-0 right-0 z-1 w-6 m-3 cursor-pointer hidden md:block text-white`}
                     />
-                    <MapDebug />
-                </AppMap>
-            </main>
+                </main>
 
-            <ImageDialog
-                open={isDialogOpen}
-                onClose={onCloseDialog}
-                src={imgSrc}
-                width={100}
-                height={60}
-            />
+                <ImageDialog
+                    open={isDialogOpen}
+                    onClose={onCloseDialog}
+                    src={imgSrc}
+                    width={100}
+                    height={60}
+                />
 
-            <TextDialog
-                open={textDialogOpen}
-                onClose={onCloseTextDialog}
-            >
-                {textDialogContent}
-            </TextDialog>
+                <TextDialog
+                    open={textDialogOpen}
+                    onClose={onCloseTextDialog}
+                >
+                    {textDialogContent}
+                </TextDialog>
+            </FullScreen>
         </>
     )
 }
