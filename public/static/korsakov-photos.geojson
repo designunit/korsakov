@@ -180,7 +180,7 @@
                 ]
             },
             "properties": {
-                "src": "/images/houses_03.jpg"
+                "src": "/images/villas_03.jpg"
             }
         },
         {
@@ -405,6 +405,20 @@
             },
             "properties": {
                 "src": "/images/shtech_07.jpg"
+            }
+        },
+        {
+            "id": "614496e152a4df0009f9660c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 
+                    142.788355687039882, 
+                    46.605392289815939
+                ]
+            },
+            "properties": {
+                "src": "/images/seafront_01.jpg"
             }
         }
     ]
