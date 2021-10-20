@@ -27,6 +27,8 @@ import ecopolisTitleLogo from '../../../public/logos/ecopolisTitle.svg'
 import unitBlackLogo from '../../../public/logos/unitBlack.svg'
 import ArrowsExpandIcon from '@heroicons/react/solid/ArrowsExpandIcon'
 
+import { universalLanguageDetect } from '@unly/universal-language-detector';
+
 const Infographics = dynamic<InfographicsProps>(import("./Infographics").then(m => m.Infographics), {
     ssr: false,
 })
@@ -46,7 +48,10 @@ export type AppProps = {
 
 export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) => {
     const t = useTranslations('app')
-    const router = useRouter()
+    const locale = universalLanguageDetect({
+        supportedLanguages: ['ru', 'en'],
+        fallbackLanguage: 'en',
+    })
 
     const [currentPhase, setCurrentPhase] = useState(initialPhase)
 
@@ -153,7 +158,7 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
             ...x,
             label: t(x.value),
         })))
-    }, [t, router.locale])
+    }, [t, locale])
 
     const onChangePhase = useCallback(newPhase => {
         setCurrentPhase(newPhase)

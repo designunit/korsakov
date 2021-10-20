@@ -6,7 +6,7 @@
     "scripts": {
         "dev": "next",
         "build": "next build",
-        "boom": "next export",
+        "export": "next export",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -24,6 +24,7 @@
         "@headlessui/react": "^1.4.1",
         "@heroicons/react": "^1.0.4",
         "@nivo/sunburst": "^0.73.0",
+        "@unly/universal-language-detector": "^2.0.3",
         "mapbox-gl": "^2.5.1",
         "next": "^11.0.1",
         "next-intl": "^2.0.1",

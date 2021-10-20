@@ -1,4 +1,5 @@
 import { useFeatrues } from "@/hooks/useFeatures"
+import { universalLanguageDetect } from '@unly/universal-language-detector'
 import { useRouter } from "next/router"
 import { Dispatch, memo, ReactNode, SetStateAction, useCallback } from "react"
 import { Marker } from "../Mapbox/Marker"
@@ -11,16 +12,19 @@ export type MapMarkersProps = {
 }
 
 export const MapMarkers: React.FC<MapMarkersProps> = memo(props => {
-    const router = useRouter()
     const items = useFeatrues(props.url)
-    const field = `name_${router.locale}`
+    const locale = universalLanguageDetect({
+        supportedLanguages: ['ru', 'en'],
+        fallbackLanguage: 'en',
+    })
+    const field = `name_${locale}`
 
     return (
         <>
             {items
                 .filter((f: any) => f.properties[props.phase] === true)
                 .map((f: any, i) => {
-                    const description = f.properties[`description_${router.locale}`]
+                    const description = f.properties[`description_${locale}`]
                     const dialogContent = <>
                         <h1 className="flex-1 font-bold text-xl pb-3">
                             {f.properties[field]}

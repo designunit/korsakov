@@ -1,8 +1,5 @@
 module.exports = {
-    i18n: {
-        locales: ['ru', 'en'],
-        defaultLocale: 'ru',
-    },
+    basePath: '/out',
     images: {
         minimumCacheTTL: 60,
     },

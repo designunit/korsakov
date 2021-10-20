@@ -2,6 +2,7 @@ import { memo } from "react"
 import useSWR from 'swr'
 import { ResponsiveSunburst } from '@nivo/sunburst'
 import { useRouter } from 'next/router'
+import { universalLanguageDetect } from '@unly/universal-language-detector'
 
 const fetcher = async (url: string) => {
     const res = await fetch(url)
@@ -24,9 +25,12 @@ const infographicsMap = new Map([
 ])
 
 export const Infographics: React.FC<InfographicsProps> = memo(({ phase }) => {
-    const router = useRouter()
+    const locale = universalLanguageDetect({
+        supportedLanguages: ['ru', 'en'],
+        fallbackLanguage: 'en',
+    })
     const phaseFilePiece = infographicsMap.get(phase)
-    const localeFilePiece = ['ru','en'].includes(router.locale as string) ? router.locale : 'ru'
+    const localeFilePiece = locale
     const url = `/static/${phaseFilePiece}${localeFilePiece}.json`
     
     const { data, error } = useSWR(url, fetcher)

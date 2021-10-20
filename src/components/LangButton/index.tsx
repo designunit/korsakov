@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { useRouter } from 'next/dist/client/router'
+import { universalLanguageDetect } from '@unly/universal-language-detector'
 
 const langs = [
     {
@@ -15,7 +16,11 @@ const langs = [
 
 export const LangButton: React.FC = props => {
     const router = useRouter()
-    const [selected, setSelected] = useState(langs.find(x => x.value === router.locale))
+    const locale = universalLanguageDetect({
+        supportedLanguages: ['ru', 'en'],
+        fallbackLanguage: 'en',
+    })
+    const [selected, setSelected] = useState(langs.find(x => x.value === locale))
 
     const onClick = useCallback(value => {
         setSelected(value)

@@ -6,10 +6,19 @@ import Head from 'next/head'
 import { NextIntlProvider } from 'next-intl'
 import { DefaultSeo } from 'next-seo'
 import { useRouter } from 'next/router'
+import { universalLanguageDetect } from '@unly/universal-language-detector'
+import messagesRu from '../../public/messages/ru.json'
+import messagesEn from '../../public/messages/en.json'
 
 export default function MyApp(props: AppProps) {
     const { Component, pageProps } = props
-    const router = useRouter()
+    // const router = useRouter()
+
+    const locale = universalLanguageDetect({
+        supportedLanguages: ['ru', 'en'],
+        fallbackLanguage: 'en',
+    })
+    const messages = locale === 'ru' ? messagesRu : messagesEn
 
     return (
         <>
@@ -25,13 +34,13 @@ export default function MyApp(props: AppProps) {
                 <title>korsakov</title>
             </Head>
 
-            <NextIntlProvider messages={pageProps.messages}>
+            <NextIntlProvider locale={locale} messages={messages}>
                 <DefaultSeo
                     title={'Korsakov'}
                     description={'Korsakov web 3d'}
                     openGraph={{
                         type: 'website',
-                        locale: router.locale,
+                        locale: locale,
                         url: 'https://korsakov.unit4.io/',
                         site_name: 'Korsakov',
                         images: [
