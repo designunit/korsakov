@@ -1,8 +1,7 @@
-import { memo } from "react"
+import { memo, useContext } from "react"
 import useSWR from 'swr'
 import { ResponsiveSunburst } from '@nivo/sunburst'
-import { useRouter } from 'next/router'
-import { universalLanguageDetect } from '@unly/universal-language-detector'
+import { LocaleContext } from '@/context/locale'
 
 const fetcher = async (url: string) => {
     const res = await fetch(url)
@@ -25,14 +24,11 @@ const infographicsMap = new Map([
 ])
 
 export const Infographics: React.FC<InfographicsProps> = memo(({ phase }) => {
-    const locale = universalLanguageDetect({
-        supportedLanguages: ['ru', 'en'],
-        fallbackLanguage: 'en',
-    })
+    const { locale } = useContext(LocaleContext)
     const phaseFilePiece = infographicsMap.get(phase)
     const localeFilePiece = locale
-    const url = `/static/${phaseFilePiece}${localeFilePiece}.json`
-    
+    const url = `${process.env.NEXT_PUBLIC_BASE_PATH}/static/${phaseFilePiece}${localeFilePiece}.json`
+
     const { data, error } = useSWR(url, fetcher)
     if (!data) {
         return null

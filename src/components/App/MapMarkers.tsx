@@ -1,7 +1,6 @@
+import { LocaleContext } from '@/context/locale'
 import { useFeatrues } from "@/hooks/useFeatures"
-import { universalLanguageDetect } from '@unly/universal-language-detector'
-import { useRouter } from "next/router"
-import { Dispatch, memo, ReactNode, SetStateAction, useCallback } from "react"
+import { Dispatch, memo, ReactNode, SetStateAction, useCallback, useContext } from "react"
 import { Marker } from "../Mapbox/Marker"
 import { Tag } from "./Tag"
 
@@ -13,10 +12,7 @@ export type MapMarkersProps = {
 
 export const MapMarkers: React.FC<MapMarkersProps> = memo(props => {
     const items = useFeatrues(props.url)
-    const locale = universalLanguageDetect({
-        supportedLanguages: ['ru', 'en'],
-        fallbackLanguage: 'en',
-    })
+    const { locale } = useContext(LocaleContext)
     const field = `name_${locale}`
 
     return (

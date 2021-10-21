@@ -1,5 +1,5 @@
 module.exports = {
-    basePath: '/out',
+    basePath: '/new-city/novaya-zemlya',
     images: {
         minimumCacheTTL: 60,
     },

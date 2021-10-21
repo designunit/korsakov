@@ -3,7 +3,6 @@ import dynamic from 'next/dynamic'
 import { AppProps } from "@/components/App"
 import { Legend } from "@/components/Legend"
 import { Layout } from "@/components/Layout"
-import { universalLanguageDetect } from '@unly/universal-language-detector'
 
 const App = dynamic<AppProps>(() => import('@/components/App').then(m => m.App), {
     ssr: false,
@@ -23,7 +22,7 @@ const Page: NextPage<Props> = props => {
             />
         </Layout>
     )
-} 
+}
 
 export const getStaticProps: GetStaticProps = async () => {
     return {

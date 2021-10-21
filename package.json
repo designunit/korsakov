@@ -6,7 +6,8 @@
     "scripts": {
         "dev": "next",
         "build": "next build",
-        "export": "next export",
+        "export": "next export -o new-city/novaya-zemlya",
+        "boom": "next build && next export -o new-city/novaya-zemlya && npx serve",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -31,7 +32,6 @@
         "next-seo": "^4.28.1",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
-        "react-full-screen": "^1.1.0",
         "swr": "^1.0.1",
         "three": "^0.132.2"
     },

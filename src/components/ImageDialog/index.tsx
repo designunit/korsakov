@@ -57,12 +57,17 @@ export const ImageDialog: React.FC<ImageDialogProps> = props => {
                                     Payment successful
                                 </Dialog.Title> */}
 
-                                <Image
+                                <img
                                     src={props.src}
                                     alt={''}
                                     width={props.width}
                                     height={props.height}
-                                    layout={'responsive'}
+                                    // layout={'responsive'}
+                                    style={{
+                                        display: 'block',
+                                        width: '100%',
+                                        height: '100%',
+                                    }}
                                 />
 
                                 <button

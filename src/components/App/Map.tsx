@@ -8,11 +8,11 @@ export type MapProps = {
 }
 
 export const Map: React.FC<MapProps> = memo(({ phase }) => {
-    useMapboxImage('photo', '/icons/attraction.png')
+    useMapboxImage('photo', `${process.env.NEXT_PUBLIC_BASE_PATH}/icons/attraction.png`)
 
     useMapboxSource('korsakov-green', {
         type: 'geojson',
-        data: '/static/korsakov-green.geojson',
+        data: `${process.env.NEXT_PUBLIC_BASE_PATH}/static/korsakov-green.geojson`,
     })
     useMapboxLayer({
         'id': 'korsakov-green',
@@ -40,7 +40,7 @@ export const Map: React.FC<MapProps> = memo(({ phase }) => {
 
     useMapboxSource('korsakov-water', {
         type: 'geojson',
-        data: '/static/korsakov-water.geojson',
+        data: `${process.env.NEXT_PUBLIC_BASE_PATH}/static/korsakov-water.geojson`,
     })
     useMapboxLayer({
         'id': 'korsakov-water',
@@ -55,7 +55,7 @@ export const Map: React.FC<MapProps> = memo(({ phase }) => {
 
     useMapboxSource('korsakov-boundary', {
         type: 'geojson',
-        data: '/static/korsakov-boundary.geojson',
+        data: `${process.env.NEXT_PUBLIC_BASE_PATH}/static/korsakov-boundary.geojson`,
     })
     useMapboxLayer({
         id: 'korsakov-boundary',
@@ -73,7 +73,7 @@ export const Map: React.FC<MapProps> = memo(({ phase }) => {
 
     useMapboxSource('korsakov-zones', {
         type: 'geojson',
-        data: '/static/korsakov-zones.geojson',
+        data: `${process.env.NEXT_PUBLIC_BASE_PATH}/static/korsakov-zones.geojson`,
     })
     useMapboxLayer({
         'id': 'korsakov-zones',
@@ -100,7 +100,7 @@ export const Map: React.FC<MapProps> = memo(({ phase }) => {
 
     useMapboxSource('korsakov-port-zones', {
         type: 'geojson',
-        data: '/static/korsakov-port_zones.geojson',
+        data: `${process.env.NEXT_PUBLIC_BASE_PATH}/static/korsakov-port_zones.geojson`,
     })
     useMapboxLayer({
         'id': 'korsakov-port-zones',
@@ -116,7 +116,7 @@ export const Map: React.FC<MapProps> = memo(({ phase }) => {
 
     useMapboxSource('korsakov-roads', {
         type: 'geojson',
-        data: '/static/korsakov-roads.geojson',
+        data: `${process.env.NEXT_PUBLIC_BASE_PATH}/static/korsakov-roads.geojson`,
     })
     useMapboxLayer({
         'id': 'korsakov-roads',
@@ -131,7 +131,7 @@ export const Map: React.FC<MapProps> = memo(({ phase }) => {
 
     useMapboxSource('korsakov-osm', {
         type: 'geojson',
-        data: '/static/korsakov-osm.geojson'
+        data: `${process.env.NEXT_PUBLIC_BASE_PATH}/static/korsakov-osm.geojson`
     })
     useMapboxLayer({
         'id': 'korsakov-osm-3d',
@@ -149,7 +149,7 @@ export const Map: React.FC<MapProps> = memo(({ phase }) => {
 
     useMapboxSource('korsakov-buildings', {
         type: 'geojson',
-        data: '/static/korsakov-buildings.geojson',
+        data: `${process.env.NEXT_PUBLIC_BASE_PATH}/static/korsakov-buildings.geojson`,
     })
     useMapboxLayer({
         'id': 'korsakov-buildings-3d',
@@ -169,7 +169,7 @@ export const Map: React.FC<MapProps> = memo(({ phase }) => {
 
     useMapboxSource('korsakov-port-buildings', {
         type: 'geojson',
-        data: '/static/korsakov-port_buildings.geojson',
+        data: `${process.env.NEXT_PUBLIC_BASE_PATH}/static/korsakov-port_buildings.geojson`,
     })
     useMapboxLayer({
         'id': 'korsakov-port-3d',
@@ -186,13 +186,13 @@ export const Map: React.FC<MapProps> = memo(({ phase }) => {
         },
     })
 
-    useThreeLayer('museum-3d', '/static/museum.glb', [
+    useThreeLayer('museum-3d', `${process.env.NEXT_PUBLIC_BASE_PATH}/static/museum.glb`, [
         142.790999165027614, 46.604746813273003
     ])
 
     useMapboxSource('korsakov-photos', {
         type: 'geojson',
-        data: '/static/korsakov-photos.geojson',
+        data: `${process.env.NEXT_PUBLIC_BASE_PATH}/static/korsakov-photos.geojson`,
     })
     useMapboxLayer({
         'id': 'korsakov-photos-icon',

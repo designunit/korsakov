@@ -1,39 +1,26 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useContext, useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { useRouter } from 'next/dist/client/router'
-import { universalLanguageDetect } from '@unly/universal-language-detector'
+import { LocaleContext } from '@/context/locale'
 
-const langs = [
-    {
-        value: 'ru',
-        name: 'ru',
-    },
-    {
-        value: 'en',
-        name: 'en',
-    },
-]
+const langs = ['ru', 'en']
 
 export const LangButton: React.FC = props => {
     const router = useRouter()
-    const locale = universalLanguageDetect({
-        supportedLanguages: ['ru', 'en'],
-        fallbackLanguage: 'en',
-    })
-    const [selected, setSelected] = useState(langs.find(x => x.value === locale))
+    const { locale, setLocale } = useContext(LocaleContext)
 
     const onClick = useCallback(value => {
-        setSelected(value)
-        router.push('/', '/', { locale: value.name })
+        setLocale(value)
+        router.push('/', '/', { locale: value })
     }, [router])
 
     return (
         <div className="px-4 py-4 ml-auto">
-            <RadioGroup value={selected} onChange={onClick}>
+            <RadioGroup value={locale} onChange={onClick}>
                 <div className="flex">
                     {langs.map(lang => (
                         <RadioGroup.Option
-                            key={lang.name}
+                            key={lang}
                             value={lang}
                             className={({ active, checked }) =>
                                 `${active
@@ -49,7 +36,7 @@ export const LangButton: React.FC = props => {
                                     as="span"
                                     className={`font-medium  ${checked ? 'text-white' : 'text-gray-900'}`}
                                 >
-                                    {lang.name}
+                                    {lang}
                                 </RadioGroup.Label>
                             )}
                         </RadioGroup.Option>

@@ -5,19 +5,22 @@ import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { NextIntlProvider } from 'next-intl'
 import { DefaultSeo } from 'next-seo'
-import { useRouter } from 'next/router'
-import { universalLanguageDetect } from '@unly/universal-language-detector'
 import messagesRu from '../../public/messages/ru.json'
 import messagesEn from '../../public/messages/en.json'
+import universalLanguageDetect from '@unly/universal-language-detector'
+import React, { useState } from 'react'
+import { LocaleContext } from '@/context/locale'
 
 export default function MyApp(props: AppProps) {
     const { Component, pageProps } = props
     // const router = useRouter()
 
-    const locale = universalLanguageDetect({
+    const getLocale = universalLanguageDetect({
         supportedLanguages: ['ru', 'en'],
-        fallbackLanguage: 'en',
+        fallbackLanguage: 'ru',
     })
+    const [locale, setLocale] = useState(getLocale)
+
     const messages = locale === 'ru' ? messagesRu : messagesEn
 
     return (
@@ -34,27 +37,29 @@ export default function MyApp(props: AppProps) {
                 <title>korsakov</title>
             </Head>
 
-            <NextIntlProvider locale={locale} messages={messages}>
-                <DefaultSeo
-                    title={'Korsakov'}
-                    description={'Korsakov web 3d'}
-                    openGraph={{
-                        type: 'website',
-                        locale: locale,
-                        url: 'https://korsakov.unit4.io/',
-                        site_name: 'Korsakov',
-                        images: [
-                            {
-                                url: 'https://korsakov.unit4.io/static/korsakov.jpg',
-                                width: 1200,
-                                height: 628,
-                                alt: 'Korsakov',
-                            }
-                        ],
-                    }}
-                />
-                <Component {...pageProps} />
-            </NextIntlProvider>
+            <LocaleContext.Provider value={{ locale, setLocale }} >
+                <NextIntlProvider locale={locale} messages={messages}>
+                    <DefaultSeo
+                        title={'Korsakov'}
+                        description={'Korsakov web 3d'}
+                        openGraph={{
+                            type: 'website',
+                            locale: locale,
+                            url: 'https://korsakov.unit4.io/',
+                            site_name: 'Korsakov',
+                            images: [
+                                {
+                                    url: 'https://korsakov.unit4.io/static/korsakov.jpg',
+                                    width: 1200,
+                                    height: 628,
+                                    alt: 'Korsakov',
+                                }
+                            ],
+                        }}
+                    />
+                    <Component {...pageProps} />
+                </NextIntlProvider>
+            </LocaleContext.Provider>
         </>
     )
 }
