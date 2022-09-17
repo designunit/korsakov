@@ -262,19 +262,19 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                             className="flex-1 h-8 flex"
                             href='https://sakhalinecopolis.ru/'
                         >
-                            <Image src={ecopolisLogo} className="text-black" />
+                            <Image src={ecopolisLogo} className="text-black" alt="Korsakov Ecopolis"/>
                         </a>
                         <a
                             className="flex-1 h-8 flex"
                             href='https://www.nzemlya.com/'
                         >
-                            <Image src={zemlaLogo} />
+                            <Image src={zemlaLogo} alt="Novaya Zemlya" />
                         </a>
                         <a
                             className="flex-1 h-8 flex"
                             href='https://unit4.io/'
                         >
-                            <Image src={unitLogo} />
+                            <Image src={unitLogo} alt="design unit 4"/>
                         </a>
                     </div>
                 </Sidebar>
