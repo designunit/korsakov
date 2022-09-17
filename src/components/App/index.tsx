@@ -265,7 +265,7 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                         </CollapseItem>
                     </Collapse>
                     <div
-                        className="flex gap-8 px-4 pt-8 pb-8 sticky bottom-0 bg-gray-200"
+                        className="flex gap-8 px-4 pt-8 pb-8 sticky bottom-0 bg-inherit"
                     >
                         <a
                             className="flex-1 h-8 flex"

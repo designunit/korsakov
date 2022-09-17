@@ -19,11 +19,11 @@ export const Sidebar: React.FC<SidebarProps> = props => {
         <aside className={`fixed top-0 left-0 sm:w-1/3 max-w-xs sm:max-w-none md:w-1/3 p-3 ease-in-out transition-all duration-300 z-10 ${props.open
             ? ""
             : "transform -translate-x-full"}`}>
-            <div className={`${s.container} overflow-auto bg-gray-200 dark:bg-gray-800 relative`}>
+            <div className={`${s.container} overflow-auto bg-gray-200 dark:bg-gray-700 relative`}>
                 {!props.head
                     ? null
                     : (
-                        <div className="sticky top-0 w-full bg-gray-200 z-10">
+                        <div className="sticky top-0 w-full bg-inherit z-10">
                             {props.head}
                         </div>
                     )}
@@ -34,7 +34,7 @@ export const Sidebar: React.FC<SidebarProps> = props => {
                 onClick={onClick}
                 className={`absolute top-3 ${props.open
                     ? "right-3"
-                    : "-right-3"} transition-all duration-300 bg-gray-200 px-2 py-6 transform translate-x-full`}
+                    : "-right-3"} transition-all duration-300 bg-gray-200 dark:bg-gray-700 px-2 py-6 transform translate-x-full`}
             >
                 <ArrowRightIcon className={`w-4 h-4 transition-all duration-300 ${props.open
                     ? "transform rotate-180"
