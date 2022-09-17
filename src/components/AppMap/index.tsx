@@ -2,12 +2,12 @@ import { Mapbox } from "@/components/Mapbox"
 import React, { memo } from "react"
 
 export type AppMapProps = {
-    children?: React.ReactNode
+    children: React.ReactNode
 }
 
-export const AppMap: React.FC<AppMapProps> = memo(props => (
+export const AppMap: React.FC<AppMapProps> = memo(({ children }) => (
     <Mapbox>
-        {props.children}
+        {children}
     </Mapbox>
 ))
 

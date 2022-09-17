@@ -1,11 +1,10 @@
-import React, { ReactNode, useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { useRouter } from "next/router"
 import dynamic from "next/dynamic"
 import { Sidebar } from "../Sidebar"
 import { Collapse, CollapseItem } from "../Collapse"
 import { useTranslations } from "use-intl"
 import { LangButton } from "../LangButton"
-import { ImageDialog } from "../ImageDialog"
 import { SwitchGroup, SwitchGroupOnChange } from "../SwitchGroup"
 import { AppMap } from "../AppMap"
 import { Map } from "./Map"
@@ -17,7 +16,6 @@ import { MapboxFog } from "../AppMap/MapboxFog"
 import { MapMarkers, MarkerOnClick } from "./MapMarkers"
 import { Radio } from "../Radio"
 import { InfographicsProps } from "./Infographics"
-import { TextDialog } from "../TextDialog"
 import { FullScreen, useFullScreenHandle } from "react-full-screen"
 import Image from "next/image"
 import unitLogo from "../../../public/logos/unit.svg"
@@ -25,10 +23,16 @@ import ecopolisLogo from "../../../public/logos/ecopolis.svg"
 import zemlaLogo from "../../../public/logos/newzemla.svg"
 import unitBlackLogo from "../../../public/logos/unitBlack.svg"
 import ArrowsExpandIcon from "@heroicons/react/solid/ArrowsExpandIcon"
+import { Dialog } from "../Dialog"
 
 const Infographics = dynamic<InfographicsProps>(import("./Infographics").then(m => m.Infographics), {
     ssr: false,
 })
+
+type FeaturePopupContent = {
+    name: string
+    description: string
+}
 
 const phases = [
     "phase1",
@@ -52,10 +56,12 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
     const [currentPhase, setCurrentPhase] = useState(initialPhase)
 
     const [sidebarOpen, setSidebarOpen] = useState(true)
-    const [imgSrc, setImgSrc] = useState("")
+
+    const [imageSrc, setImageSrc] = useState("")
+    const [openImageDialog, setImageDialogOpen] = useState(false)
 
     const [textDialogOpen, setTextDialogOpen] = useState(false)
-    const [textDialogContent, setTextDialogContent] = useState<ReactNode>(null)
+    const [textDialogContent, setTextDialogContent] = useState<FeaturePopupContent | null>(null)
 
     const [showLayers, setShowLayers] = useState([
         {
@@ -158,9 +164,8 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
         })))
     }, [t, router.locale])
 
-    let [isDialogOpen, setDialogIsOpen] = useState(false)
-    const onCloseDialog = useCallback(() => {
-        setDialogIsOpen(false)
+    const onCloseImageDialog = useCallback(() => {
+        setImageDialogOpen(false)
     }, [])
 
     const onCloseTextDialog = useCallback(() => setTextDialogOpen(false), [])
@@ -172,21 +177,16 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
         // eslint-disable-next-line no-console
         console.log("click on ", src)
 
-        setImgSrc(src)
-        setDialogIsOpen(true)
+        setImageSrc(src)
+        setImageDialogOpen(true)
     }, [])
 
     const markerSetContent = useCallback<MarkerOnClick>((feature) => {
         const p = feature.properties!
-        const dialogContent = <>
-            <h1 className="flex-1 font-bold text-xl pb-3">
-                {p[markerNameField]}
-            </h1>
-            <span className="text-black">
-                {p[markerDescriptionField]}
-            </span>
-        </>
-        setTextDialogContent(dialogContent)
+        setTextDialogContent({
+            name: p[markerNameField],
+            description: p[markerDescriptionField],
+        })
         setTextDialogOpen(true)
     }, [markerDescriptionField, markerNameField])
 
@@ -345,20 +345,28 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                     />
                 </main>
 
-                <ImageDialog
-                    open={isDialogOpen}
-                    onClose={onCloseDialog}
-                    src={imgSrc}
-                    width={100}
-                    height={60}
-                />
-
-                <TextDialog
-                    open={textDialogOpen}
-                    onClose={onCloseTextDialog}
+                <Dialog fullWidth
+                    show={openImageDialog}
+                    onClose={onCloseImageDialog}
                 >
-                    {textDialogContent}
-                </TextDialog>
+                    <Image
+                        src={imageSrc}
+                        alt={""}
+                        width={100}
+                        height={60}
+                        layout={"responsive"}
+                    />
+                </Dialog>
+
+                <Dialog
+                    show={textDialogOpen}
+                    onClose={onCloseTextDialog}
+                    title={textDialogContent?.name}
+                >
+                    {/* <span className="text-black"> */}
+                    {textDialogContent?.description}
+                    {/* </span> */}
+                </Dialog>
             </FullScreen>
         </>
     )
