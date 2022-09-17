@@ -1,6 +1,6 @@
 import { useFeatrues } from "@/hooks/useFeatures"
 import { useRouter } from "next/router"
-import { Dispatch, memo, ReactNode, SetStateAction, useCallback } from "react"
+import { Dispatch, memo, ReactNode, SetStateAction } from "react"
 import { Marker } from "../Mapbox/Marker"
 import { Tag } from "./Tag"
 
@@ -32,7 +32,6 @@ export const MapMarkers: React.FC<MapMarkersProps> = memo(props => {
                     return (
                         <Marker
                             key={f.properties.id}
-                            // key={i}
                             center={f.geometry.coordinates}
                         >
                             <Tag
@@ -48,4 +47,5 @@ export const MapMarkers: React.FC<MapMarkersProps> = memo(props => {
         </>
     )
 })
+
 MapMarkers.displayName = "MapMarkers"

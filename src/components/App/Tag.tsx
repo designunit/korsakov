@@ -1,5 +1,4 @@
 import { InformationCircleIcon } from "@heroicons/react/solid"
-import { Dispatch, ReactNode, SetStateAction } from "react"
 
 export type TagProps = {
     children: string

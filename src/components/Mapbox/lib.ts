@@ -1,4 +1,4 @@
-import { createContext, DependencyList, useCallback, useContext, useEffect } from "react"
+import { createContext, useCallback, useContext, useEffect } from "react"
 import mapboxgl, { AnyLayer, AnySourceData, EventData, MapEventType } from "mapbox-gl"
 
 export const MapboxContext = createContext<mapboxgl.Map>({} as mapboxgl.Map)
@@ -35,8 +35,6 @@ export function useMapboxSource(id: string, source: AnySourceData) {
         }
 
         return () => {
-            // map.removeSource(id)
-
             if (map.getSource(id)) {
                 const { layers } = map.getStyle()
                 if (layers) {
@@ -49,11 +47,6 @@ export function useMapboxSource(id: string, source: AnySourceData) {
 
                 map.removeSource(id)
             }
-            // setTimeout((map) => {
-            //     if (map.getSource(id)) {
-            //         map.removeSource(id)
-            //     }
-            // }, 0, map)
         }
     }, [id, source])
     useMapboxEffect(effect)

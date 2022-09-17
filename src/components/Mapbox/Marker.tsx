@@ -28,7 +28,7 @@ export const Marker: React.FC<MarkerProps> = memo(({ children, center, onDrag, o
             m.remove()
             r.remove()
         }
-    }, [map, options])
+    }, [center, map, options])
 
     useEffect(() => {
         marker.current!.setLngLat(center)

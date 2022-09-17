@@ -1,4 +1,4 @@
-import React, { ReactNode, useCallback, useContext, useEffect, useMemo, useState } from "react"
+import React, { ReactNode, useCallback, useEffect, useMemo, useState } from "react"
 import { useRouter } from "next/router"
 import dynamic from "next/dynamic"
 import { Sidebar } from "../Sidebar"
@@ -23,7 +23,6 @@ import Image from "next/image"
 import unitLogo from "../../../public/logos/unit.svg"
 import ecopolisLogo from "../../../public/logos/ecopolis.svg"
 import zemlaLogo from "../../../public/logos/newzemla.svg"
-import ecopolisTitleLogo from "../../../public/logos/ecopolisTitle.svg"
 import unitBlackLogo from "../../../public/logos/unitBlack.svg"
 import ArrowsExpandIcon from "@heroicons/react/solid/ArrowsExpandIcon"
 
@@ -172,6 +171,7 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
         const props = f.properties as any
         const src = props.src
 
+        // eslint-disable-next-line no-console
         console.log("click on ", src)
 
         setImgSrc(src)
@@ -322,7 +322,7 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                             }}
                             href='https://unit4.io/'
                         >
-                            <Image src={unitBlackLogo} />
+                            <Image src={unitBlackLogo} alt="design unit 4" />
                         </a>
                         <MapDebug />
                     </AppMap>

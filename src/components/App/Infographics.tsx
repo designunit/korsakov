@@ -30,8 +30,8 @@ export const Infographics: React.FC<InfographicsProps> = memo(({ phase }) => {
         ? router.locale
         : "ru"
     const url = `/static/${phaseFilePiece}${localeFilePiece}.json`
-    
-    const { data, error } = useSWR(url, fetcher)
+
+    const { data } = useSWR(url, fetcher)
     if (!data) {
         return null
     }
@@ -45,18 +45,14 @@ export const Infographics: React.FC<InfographicsProps> = memo(({ phase }) => {
                 value="loc"
                 valueFormat={x => x.toFixed()}
                 cornerRadius={4}
-                // tooltip={null}
-                // borderColor={{ theme: 'background' }}
                 borderColor={"rgb(229, 231, 235)"}
                 borderWidth={1}
-                // colors={{ scheme: 'nivo' }}
                 colors={(node: any) => {
                     return node.data.color
                 }}
                 childColor={(parent: any, node: any) => {
                     return node.data.color
                 }}
-                // childColor={{ from: 'color', modifiers: [['brighter', 0.1]] }}
                 enableArcLabels={true}
                 arcLabelsSkipAngle={10}
                 arcLabelsTextColor={{ from: "color", modifiers: [["darker", 1.4]] }}
@@ -64,4 +60,5 @@ export const Infographics: React.FC<InfographicsProps> = memo(({ phase }) => {
         </div>
     )
 })
+
 Infographics.displayName = "Infographics"
