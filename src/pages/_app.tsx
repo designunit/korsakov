@@ -7,7 +7,15 @@ import { NextIntlProvider } from 'next-intl'
 import { DefaultSeo } from 'next-seo'
 import { useRouter } from 'next/router'
 
-export default function MyApp(props: AppProps) {
+type TranslationDict = {
+    [key: string]: Record<string, string>
+}
+
+type ExtraProps = {
+    messages: TranslationDict
+}
+
+export default function MyApp(props: AppProps<ExtraProps>) {
     const { Component, pageProps } = props
     const router = useRouter()
 
