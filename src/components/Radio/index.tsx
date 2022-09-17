@@ -35,17 +35,9 @@ export const Radio: React.FC<RadioProps<any>> = props => {
                             key={x.id}
                             value={x.value}
                             className={({ active, checked }) =>
-                                `${active
-                                    // ? 'ring-2 ring-offset-2 ring-offset-sky-300 ring-white ring-opacity-60'
-                                    ? ""
-                                    : ""
-                                }
-                                ${checked
-                            ? "bg-green-300"
-                            : ""}
-                                ${checked
-                            ? "text-black"
-                            : "text-gray-400"}
+                                `${checked
+                                    ? "bg-green-300 dark:bg-green-600"
+                                    : ""}
                                 flex relative px-4 py-2 cursor-pointer focus:outline-none hover:bg-green-300 hover:text-black`
                             }
                         >

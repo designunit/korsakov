@@ -41,7 +41,7 @@ export const LangButton: React.FC = props => {
                                     : ""
                                 }
                                 ${checked
-                            ? "bg-green-500 bg-opacity-75 text-white"
+                            ? "bg-green-600 bg-opacity-75 text-white"
                             : "bg-white"}
                                 relative px-4 py-1 cursor-pointer focus:outline-none`
                             }

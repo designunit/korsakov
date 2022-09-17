@@ -195,7 +195,7 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
     return (
         <>
             <FullScreen handle={handle}
-                className="w-screen h-screen"
+                className="w-screen h-screen text-black dark:text-white"
             >
                 <Sidebar
                     open={sidebarOpen}

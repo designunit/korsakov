@@ -14,7 +14,7 @@ const Btn: React.FC<BtnProps> = ({ open, children }) => (
         <ChevronUpIcon
             className={`${open
                 ? "transform rotate-180"
-                : ""} w-5 h-5 text-black`}
+                : ""} w-5 h-5`}
         />
     </Disclosure.Button>
 )

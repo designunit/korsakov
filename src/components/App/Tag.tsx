@@ -33,23 +33,24 @@ export const Tag: React.FC<TagProps> = ({ children, onClick }) => {
                     backgroundColor: "white",
                 }}
             />
-            <div style={{
-                left: 2,
-                position: "relative",
-                display: "flex",
-                flexFlow: "column",
-            }}>
+            <div
+                className="bg-white dark:bg-gray-800 dark:text-gray-300"
+                style={{
+                    left: 2,
+                    position: "relative",
+                    display: "flex",
+                    flexFlow: "column",
+                    height: 24,
+                }}
+            >
                 <div
                     style={{
                         maxWidth: 250,
                         overflow: "hidden",
                         whiteSpace: "nowrap",
                         textOverflow: "ellipsis",
-                        // borderRadius: '2px',
                         padding: "2px 6px",
                         marginBottom: 2,
-                        backgroundColor: "white",
-                        boxShadow: "0px 0px 8px rgba(0,0,48, .25)",
                     }}
                 >
                     {children}
@@ -74,7 +75,7 @@ export const Tag: React.FC<TagProps> = ({ children, onClick }) => {
                             }}
                         >
                             <InformationCircleIcon
-                                className="w-4"
+                                className="w-4 dark:text-black"
                             />
                         </div>
                     )}
