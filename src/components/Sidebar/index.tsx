@@ -25,7 +25,6 @@ export const Sidebar: React.FC<SidebarProps> = props => {
                     : (
                         <div className="sticky top-0 w-full bg-gray-200 z-10">
                             {props.head}
-                            <hr className="bg-gray-300" />
                         </div>
                     )}
                 {props.children}
