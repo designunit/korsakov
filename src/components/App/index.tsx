@@ -14,7 +14,7 @@ import { MapController, OnFeatureClick } from "./MapController"
 import { MapDebug } from "./MapDebug"
 import { MapboxSky } from "../AppMap/MapboxSky"
 import { MapboxFog } from "../AppMap/MapboxFog"
-import { MapMarkers } from "./MapMarkers"
+import { MapMarkers, MarkerOnClick } from "./MapMarkers"
 import { Radio } from "../Radio"
 import { InfographicsProps } from "./Infographics"
 import { TextDialog } from "../TextDialog"
@@ -46,6 +46,8 @@ export type AppProps = {
 export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) => {
     const t = useTranslations("app")
     const router = useRouter()
+    const markerNameField = `name_${router.locale}`
+    const markerDescriptionField = `description_${router.locale}`
 
     const [currentPhase, setCurrentPhase] = useState(initialPhase)
 
@@ -174,10 +176,19 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
         setDialogIsOpen(true)
     }, [])
 
-    const markerSetContent = useCallback((content) => {
-        setTextDialogContent(content)
+    const markerSetContent = useCallback<MarkerOnClick>((feature) => {
+        const p = feature.properties!
+        const dialogContent = <>
+            <h1 className="flex-1 font-bold text-xl pb-3">
+                {p[markerNameField]}
+            </h1>
+            <span className="text-black">
+                {p[markerDescriptionField]}
+            </span>
+        </>
+        setTextDialogContent(dialogContent)
         setTextDialogOpen(true)
-    }, [])
+    }, [markerDescriptionField, markerNameField])
 
     const handle = useFullScreenHandle()
 
@@ -296,8 +307,10 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                             : (
                                 <MapMarkers
                                     url={"/static/korsakov-tags.geojson"}
-                                    phase={currentPhase}
-                                    setContent={markerSetContent}
+                                    phaseField={currentPhase}
+                                    nameField={markerNameField}
+                                    descriptionField={markerDescriptionField}
+                                    onClick={markerSetContent}
                                 />
                             )}
                         <MapController

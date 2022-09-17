@@ -2,6 +2,11 @@ import { useCallback, useState } from "react"
 import { RadioGroup } from "@headlessui/react"
 import { useRouter } from "next/dist/client/router"
 
+type Lang = {
+    value: string
+    name: string
+}
+
 const langs = [
     {
         value: "ru",
@@ -17,14 +22,14 @@ export const LangButton: React.FC = props => {
     const router = useRouter()
     const [selected, setSelected] = useState(langs.find(x => x.value === router.locale))
 
-    const onClick = useCallback(value => {
+    const onClick = useCallback((value: Lang) => {
         setSelected(value)
         router.push("/", "/", { locale: value.name })
     }, [router])
 
     return (
         <div className="px-4 py-4 ml-auto">
-            <RadioGroup value={selected} onChange={onClick}>
+            <RadioGroup<"div", Lang> value={selected} onChange={onClick}>
                 <div className="flex">
                     {langs.map(lang => (
                         <RadioGroup.Option

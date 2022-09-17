@@ -2,10 +2,10 @@ import { InformationCircleIcon } from "@heroicons/react/solid"
 
 export type TagProps = {
     children: string
-    setContent: null | (() => void)
+    onClick?: () => void
 }
 
-export const Tag: React.FC<TagProps> = props => {
+export const Tag: React.FC<TagProps> = ({ children, onClick }) => {
 
     return (
         <div style={{
@@ -52,30 +52,32 @@ export const Tag: React.FC<TagProps> = props => {
                         boxShadow: "0px 0px 8px rgba(0,0,48, .25)",
                     }}
                 >
-                    {props.children}
+                    {children}
                 </div>
-                {props.setContent !== null && (
-                    <div
-                        onClick={e => {
-                            // @ts-ignore // already checked on line 58
-                            props.setContent()
-                            e.stopPropagation()
-                        }}
-                        className="bg-green-300 w-6 h-6 cursor-pointer"
-                        style={{
-                            position: "absolute",
-                            right: 0,
-                            top: 0,
-                            transform: "translateX(100%)",
-                            display: "flex",
-                            justifyContent: "center",
-                        }}
-                    >
-                        <InformationCircleIcon
-                            className="w-4"
-                        />
-                    </div>
-                )}
+
+                {typeof onClick !== "function"
+                    ? null
+                    : (
+                        <div
+                            onClick={e => {
+                                onClick()
+                                e.stopPropagation()
+                            }}
+                            className="bg-green-300 w-6 h-6 cursor-pointer"
+                            style={{
+                                position: "absolute",
+                                right: 0,
+                                top: 0,
+                                transform: "translateX(100%)",
+                                display: "flex",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <InformationCircleIcon
+                                className="w-4"
+                            />
+                        </div>
+                    )}
             </div>
         </div>
     )

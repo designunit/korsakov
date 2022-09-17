@@ -17,7 +17,7 @@ export type RadioProps<T> = {
 export const Radio: React.FC<RadioProps<any>> = props => {
     const [selected, setSelected] = useState(props.values[0].value)
 
-    const onChange = useCallback(item => {
+    const onChange = useCallback((item: any) => {
         setSelected(item)
 
         if (typeof props.onChange === "function") {

@@ -1,45 +1,40 @@
 import { useFeatrues } from "@/hooks/useFeatures"
-import { useRouter } from "next/router"
-import { Dispatch, memo, ReactNode, SetStateAction } from "react"
+import { memo } from "react"
 import { Marker } from "../Mapbox/Marker"
 import { Tag } from "./Tag"
 
+type MarkerFeature = GeoJSON.Feature<GeoJSON.Point, Record<string, any>>
+export type MarkerOnClick = (feature: GeoJSON.Feature) => void
+
 export type MapMarkersProps = {
     url: string
-    phase: string
-    setContent: Dispatch<SetStateAction<ReactNode>>
+    phaseField: string
+    nameField: string
+    descriptionField: string
+    onClick: MarkerOnClick
 }
 
-export const MapMarkers: React.FC<MapMarkersProps> = memo(props => {
-    const router = useRouter()
-    const items = useFeatrues(props.url)
-    const field = `name_${router.locale}`
+export const MapMarkers: React.FC<MapMarkersProps> = memo(({ nameField, descriptionField, url, phaseField, onClick }) => {
+    const items = useFeatrues<MarkerFeature>(url)
 
     return (
         <>
             {items
-                .filter((f: any) => f.properties[props.phase] === true)
-                .map((f: any, i) => {
-                    const description = f.properties[`description_${router.locale}`]
-                    const dialogContent = <>
-                        <h1 className="flex-1 font-bold text-xl pb-3">
-                            {f.properties[field]}
-                        </h1>
-                        <span className="text-black">
-                            {description}
-                        </span>
-                    </>
+                .filter((f) => f.properties[phaseField] === true)
+                .map((f, i) => {
+                    const p = f.properties
+                    const description = p[descriptionField]
                     return (
                         <Marker
-                            key={f.properties.id}
-                            center={f.geometry.coordinates}
+                            key={p.id}
+                            center={f.geometry.coordinates as [number, number]}
                         >
                             <Tag
-                                setContent={description === ""
-                                    ? null
-                                    : () => props.setContent(dialogContent)}
+                                onClick={description === ""
+                                    ? undefined
+                                    : () => onClick(f)}
                             >
-                                {f.properties[field]}
+                                {f.properties[nameField]}
                             </Tag>
                         </Marker>
                     )

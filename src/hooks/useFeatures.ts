@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
-export function useFeatrues(url: string) {
-    const [data, setData] = useState([])
+export function useFeatrues<F>(url: string) {
+    const [data, setData] = useState<F[]>([])
 
     useEffect(() => {
         let mounted = true
