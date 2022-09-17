@@ -7,6 +7,7 @@ export type SidebarProps = {
     head?: React.ReactElement
     open: boolean
     onChange: (open: boolean) => void
+    children?: React.ReactNode
 }
 
 export const Sidebar: React.FC<SidebarProps> = props => {

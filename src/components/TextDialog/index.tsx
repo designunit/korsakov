@@ -5,6 +5,7 @@ import { XIcon } from "@heroicons/react/solid"
 export type TextDialogProps = {
     open: boolean
     onClose: () => void
+    children?: React.ReactNode
 }
 
 export const TextDialog: React.FC<TextDialogProps> = props => {

@@ -1,11 +1,13 @@
 import { Switch } from "@headlessui/react"
 
+export type SwitchGroupOnChange = (value: boolean, index: number) => void
+
 export type SwitchGroupProps = {
     values: Array<{
         label: string,
         checked: boolean,
     }>,
-    onChange?: (value: any, index: number) => void
+    onChange?: SwitchGroupOnChange
 }
 
 export const SwitchGroup: React.FC<SwitchGroupProps> = props => {
@@ -19,8 +21,7 @@ export const SwitchGroup: React.FC<SwitchGroupProps> = props => {
                     >
                         <Switch.Label className="mr-4 flex-1">{item.label}</Switch.Label>
                         <Switch checked={item.checked}
-                            // onChange={(checked) => setEnabled(enableds.map((x, ii) => ii === i ? checked : x))}
-                            onChange={(checked) => {
+                            onChange={(checked: boolean) => {
                                 if (typeof props.onChange === "function") {
                                     props.onChange(checked, i)
                                 }

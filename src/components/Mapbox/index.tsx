@@ -4,6 +4,7 @@ import { createMap } from "./mapbox"
 import { MapboxContext } from "./lib"
 
 export type MapboxProps = {
+    children?: React.ReactNode
 }
 
 export const Mapbox: React.FC<MapboxProps> = props => {

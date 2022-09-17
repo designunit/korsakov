@@ -6,7 +6,7 @@ import { Collapse, CollapseItem } from "../Collapse"
 import { useTranslations } from "use-intl"
 import { LangButton } from "../LangButton"
 import { ImageDialog } from "../ImageDialog"
-import { SwitchGroup } from "../SwitchGroup"
+import { SwitchGroup, SwitchGroupOnChange } from "../SwitchGroup"
 import { AppMap } from "../AppMap"
 import { Map } from "./Map"
 import { MapboxTerrain } from "../AppMap/MapboxTerrain"
@@ -141,7 +141,7 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
         const x = showLayers.find(item => item.value === "layer_tags")
         return x?.checked ?? true
     }, [showLayers])
-    const onChangeShowLayer = useCallback((checked, i) => {
+    const onChangeShowLayer = useCallback<SwitchGroupOnChange>((checked, i) => {
         setShowLayers(xs => xs.map((x, ii) => i !== ii
             ? x
             : {
@@ -155,10 +155,6 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
             label: t(x.value),
         })))
     }, [t, router.locale])
-
-    const onChangePhase = useCallback(newPhase => {
-        setCurrentPhase(newPhase)
-    }, [])
 
     let [isDialogOpen, setDialogIsOpen] = useState(false)
     const onCloseDialog = useCallback(() => {
@@ -205,7 +201,7 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                     <Collapse>
                         <CollapseItem label={t("phases")}>
                             <Radio
-                                onChange={onChangePhase}
+                                onChange={setCurrentPhase}
                                 values={[
                                     {
                                         id: "p1",
@@ -264,7 +260,7 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                             className="flex-1 h-8 flex"
                             href='https://sakhalinecopolis.ru/'
                         >
-                            <Image src={ecopolisLogo} className="text-black" alt="Korsakov Ecopolis"/>
+                            <Image src={ecopolisLogo} className="text-black" alt="Korsakov Ecopolis" />
                         </a>
                         <a
                             className="flex-1 h-8 flex"
@@ -276,7 +272,7 @@ export const App: React.FC<AppProps> = ({ initialPhase = phases[0], ...props }) 
                             className="flex-1 h-8 flex"
                             href='https://unit4.io/'
                         >
-                            <Image src={unitLogo} alt="design unit 4"/>
+                            <Image src={unitLogo} alt="design unit 4" />
                         </a>
                     </div>
                 </Sidebar>

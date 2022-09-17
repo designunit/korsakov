@@ -9,6 +9,7 @@ export type MarkerProps = Omit<mapboxgl.MarkerOptions, "element"> & {
     onDrag?: OnMarkerDrag
     onDragStart?: OnMarkerDrag
     onDragEnd?: OnMarkerDrag
+    children?: React.ReactNode
 }
 
 export const Marker: React.FC<MarkerProps> = memo(({ children, center, onDrag, onDragStart, onDragEnd, ...options }) => {
