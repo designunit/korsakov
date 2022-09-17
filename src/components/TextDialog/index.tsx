@@ -1,7 +1,7 @@
-import Image from 'next/image'
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
-import { XIcon } from '@heroicons/react/solid'
+import Image from "next/image"
+import { Dialog, Transition } from "@headlessui/react"
+import { Fragment } from "react"
+import { XIcon } from "@heroicons/react/solid"
 
 export type TextDialogProps = {
     open: boolean

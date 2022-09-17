@@ -4,7 +4,7 @@ export type MapDebugProps = {
 }
 
 export const MapDebug: React.FC<MapDebugProps> = props => {
-    useMapboxEvent('moveend', event => {
+    useMapboxEvent("moveend", event => {
         const map = event.target
         console.log({
             center: map.getCenter(),

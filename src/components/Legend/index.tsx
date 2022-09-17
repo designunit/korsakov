@@ -1,24 +1,24 @@
 import { useTranslations } from "use-intl"
 
 function getStyle(d: Display, color: string): React.CSSProperties {
-    if (d === 'dash') {
+    if (d === "dash") {
         return {
-            border: `2px dashed ${color}`
+            border: `2px dashed ${color}`,
         }
     }
 
-    if (d === 'stroke') {
+    if (d === "stroke") {
         return {
-            border: `2px solid ${color}`
+            border: `2px solid ${color}`,
         }
     }
 
     return {
-        backgroundColor: color
+        backgroundColor: color,
     }
 }
 
-type Display = 'fill' | 'dash' | 'stroke'
+type Display = "fill" | "dash" | "stroke"
 export type LegendProps = {
     values: Array<{
         label: string,
@@ -27,13 +27,13 @@ export type LegendProps = {
     }>
 }
 export const Legend: React.FC<LegendProps> = props => {
-    const t = useTranslations('app')
+    const t = useTranslations("app")
 
     return (
         <ul className="px-4">
             {props.values.map((x, i) => (
                 <li key={i} className="flex">
-                    <i className={`inline-block w-4 h-4 mr-2`} style={getStyle(x.display ?? 'fill', x.color)} />
+                    <i className={"inline-block w-4 h-4 mr-2"} style={getStyle(x.display ?? "fill", x.color)} />
                     {t(x.label)}
                 </li>
             ))}

@@ -1,15 +1,15 @@
-import { useCallback, useState } from 'react'
-import { RadioGroup } from '@headlessui/react'
-import { useRouter } from 'next/dist/client/router'
+import { useCallback, useState } from "react"
+import { RadioGroup } from "@headlessui/react"
+import { useRouter } from "next/dist/client/router"
 
 const langs = [
     {
-        value: 'ru',
-        name: 'ru',
+        value: "ru",
+        name: "ru",
     },
     {
-        value: 'en',
-        name: 'en',
+        value: "en",
+        name: "en",
     },
 ]
 
@@ -19,7 +19,7 @@ export const LangButton: React.FC = props => {
 
     const onClick = useCallback(value => {
         setSelected(value)
-        router.push('/', '/', { locale: value.name })
+        router.push("/", "/", { locale: value.name })
     }, [router])
 
     return (
@@ -32,17 +32,21 @@ export const LangButton: React.FC = props => {
                             value={lang}
                             className={({ active, checked }) =>
                                 `${active
-                                    ? 'ring-2 ring-offset-2 ring-offset-sky-300 ring-white ring-opacity-60'
-                                    : ''
+                                    ? "ring-2 ring-offset-2 ring-offset-sky-300 ring-white ring-opacity-60"
+                                    : ""
                                 }
-                                ${checked ? 'bg-green-500 bg-opacity-75 text-white' : 'bg-white'}
+                                ${checked
+                            ? "bg-green-500 bg-opacity-75 text-white"
+                            : "bg-white"}
                                 relative px-4 py-1 cursor-pointer focus:outline-none`
                             }
                         >
                             {({ active, checked }) => (
                                 <RadioGroup.Label
                                     as="span"
-                                    className={`font-medium  ${checked ? 'text-white' : 'text-gray-900'}`}
+                                    className={`font-medium  ${checked
+                                        ? "text-white"
+                                        : "text-gray-900"}`}
                                 >
                                     {lang.name}
                                 </RadioGroup.Label>

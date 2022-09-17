@@ -36,7 +36,9 @@ export const MapMarkers: React.FC<MapMarkersProps> = memo(props => {
                             center={f.geometry.coordinates}
                         >
                             <Tag
-                                setContent={description === '' ? null : () => props.setContent(dialogContent)}
+                                setContent={description === ""
+                                    ? null
+                                    : () => props.setContent(dialogContent)}
                             >
                                 {f.properties[field]}
                             </Tag>
@@ -46,4 +48,4 @@ export const MapMarkers: React.FC<MapMarkersProps> = memo(props => {
         </>
     )
 })
-MapMarkers.displayName = 'MapMarkers'
+MapMarkers.displayName = "MapMarkers"

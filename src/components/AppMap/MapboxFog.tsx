@@ -11,9 +11,9 @@ export type MapboxFogProps = {
 export const MapboxFog: React.FC<MapboxFogProps> = memo(({ color, horizonBlend, rangeMin, rangeMax }) => {
     const effect = useCallback<MapboxEffect>(map => {
         map.setFog({
-            'range': [rangeMin, rangeMax],
-            'color': color,
-            'horizon-blend': horizonBlend,
+            "range": [rangeMin, rangeMax],
+            "color": color,
+            "horizon-blend": horizonBlend,
         })
 
         return () => {
@@ -25,4 +25,4 @@ export const MapboxFog: React.FC<MapboxFogProps> = memo(({ color, horizonBlend, 
     return null
 })
 
-MapboxFog.displayName = 'MapboxFog'
+MapboxFog.displayName = "MapboxFog"

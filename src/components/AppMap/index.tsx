@@ -6,10 +6,10 @@ export type AppMapProps = {
 }
 
 export const AppMap: React.FC<AppMapProps> = memo(props => (
-        <Mapbox>
-            {props.children}
-        </Mapbox>
-    )
+    <Mapbox>
+        {props.children}
+    </Mapbox>
+)
 )
 
-AppMap.displayName = 'AppMap'
+AppMap.displayName = "AppMap"

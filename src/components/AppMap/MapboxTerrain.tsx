@@ -8,8 +8,8 @@ export type MapboxTerrainProps = {
 export const MapboxTerrain: React.FC<MapboxTerrainProps> = memo(({ exaggeration }) => {
     const effect = useCallback<MapboxEffect>(map => {
         map.setTerrain({
-            source: 'mapbox-dem',
-            exaggeration: exaggeration
+            source: "mapbox-dem",
+            exaggeration: exaggeration,
         })
 
         return () => {
@@ -17,9 +17,9 @@ export const MapboxTerrain: React.FC<MapboxTerrainProps> = memo(({ exaggeration 
         }
     }, [exaggeration])
 
-    useMapboxSource('mapbox-dem', {
-        type: 'raster-dem',
-        url: 'mapbox://mapbox.terrain-rgb',
+    useMapboxSource("mapbox-dem", {
+        type: "raster-dem",
+        url: "mapbox://mapbox.terrain-rgb",
         tileSize: 512,
         maxzoom: 14,
     })
@@ -29,4 +29,4 @@ export const MapboxTerrain: React.FC<MapboxTerrainProps> = memo(({ exaggeration 
     return null
 })
 
-MapboxTerrain.displayName = 'MapboxTerrain'
+MapboxTerrain.displayName = "MapboxTerrain"

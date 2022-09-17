@@ -1,7 +1,7 @@
 import { memo } from "react"
-import useSWR from 'swr'
-import { ResponsiveSunburst } from '@nivo/sunburst'
-import { useRouter } from 'next/router'
+import useSWR from "swr"
+import { ResponsiveSunburst } from "@nivo/sunburst"
+import { useRouter } from "next/router"
 
 const fetcher = async (url: string) => {
     const res = await fetch(url)
@@ -17,16 +17,18 @@ export type InfographicsProps = {
 }
 
 const infographicsMap = new Map([
-    ['phase1', 'korsakov-infographics_01_'],
-    ['phase2', 'korsakov-infographics_02_'],
-    ['phase3', 'korsakov-infographics_03_'],
-    ['phase4', 'korsakov-infographics_04_'],
+    ["phase1", "korsakov-infographics_01_"],
+    ["phase2", "korsakov-infographics_02_"],
+    ["phase3", "korsakov-infographics_03_"],
+    ["phase4", "korsakov-infographics_04_"],
 ])
 
 export const Infographics: React.FC<InfographicsProps> = memo(({ phase }) => {
     const router = useRouter()
     const phaseFilePiece = infographicsMap.get(phase)
-    const localeFilePiece = ['ru','en'].includes(router.locale as string) ? router.locale : 'ru'
+    const localeFilePiece = ["ru","en"].includes(router.locale as string)
+        ? router.locale
+        : "ru"
     const url = `/static/${phaseFilePiece}${localeFilePiece}.json`
     
     const { data, error } = useSWR(url, fetcher)
@@ -45,7 +47,7 @@ export const Infographics: React.FC<InfographicsProps> = memo(({ phase }) => {
                 cornerRadius={4}
                 // tooltip={null}
                 // borderColor={{ theme: 'background' }}
-                borderColor={'rgb(229, 231, 235)'}
+                borderColor={"rgb(229, 231, 235)"}
                 borderWidth={1}
                 // colors={{ scheme: 'nivo' }}
                 colors={(node: any) => {
@@ -57,9 +59,9 @@ export const Infographics: React.FC<InfographicsProps> = memo(({ phase }) => {
                 // childColor={{ from: 'color', modifiers: [['brighter', 0.1]] }}
                 enableArcLabels={true}
                 arcLabelsSkipAngle={10}
-                arcLabelsTextColor={{ from: 'color', modifiers: [['darker', 1.4]] }}
+                arcLabelsTextColor={{ from: "color", modifiers: [["darker", 1.4]] }}
             />
         </div>
     )
 })
-Infographics.displayName = 'Infographics'
+Infographics.displayName = "Infographics"

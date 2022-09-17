@@ -1,7 +1,7 @@
-import Image from 'next/image'
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
-import { XIcon } from '@heroicons/react/solid'
+import Image from "next/image"
+import { Dialog, Transition } from "@headlessui/react"
+import { Fragment } from "react"
+import { XIcon } from "@heroicons/react/solid"
 
 export type ImageDialogProps = {
     open: boolean
@@ -59,10 +59,10 @@ export const ImageDialog: React.FC<ImageDialogProps> = props => {
 
                                 <Image
                                     src={props.src}
-                                    alt={''}
+                                    alt={""}
                                     width={props.width}
                                     height={props.height}
-                                    layout={'responsive'}
+                                    layout={"responsive"}
                                 />
 
                                 <button

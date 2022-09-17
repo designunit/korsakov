@@ -1,5 +1,5 @@
-import { Disclosure } from '@headlessui/react'
-import { ChevronUpIcon } from '@heroicons/react/solid'
+import { Disclosure } from "@headlessui/react"
+import { ChevronUpIcon } from "@heroicons/react/solid"
 
 type BtnProps = {
     open: boolean
@@ -11,7 +11,9 @@ const Btn: React.FC<BtnProps> = props => (
             {props.children}
         </span>
         <ChevronUpIcon
-            className={`${props.open ? 'transform rotate-180' : ''} w-5 h-5 text-black`}
+            className={`${props.open
+                ? "transform rotate-180"
+                : ""} w-5 h-5 text-black`}
         />
     </Disclosure.Button>
 )
