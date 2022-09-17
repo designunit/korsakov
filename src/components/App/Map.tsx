@@ -8,203 +8,204 @@ export type MapProps = {
 }
 
 export const Map: React.FC<MapProps> = memo(({ phase }) => {
-    useMapboxImage('photo', '/icons/attraction.png')
+    useMapboxImage("photo", "/icons/attraction.png")
 
-    useMapboxSource('korsakov-green', {
-        type: 'geojson',
-        data: '/static/korsakov-green.geojson',
+    useMapboxSource("korsakov-green", {
+        type: "geojson",
+        data: "/static/korsakov-green.geojson",
     })
     useMapboxLayer({
-        'id': 'korsakov-green',
-        'source': 'korsakov-green',
-        'type': 'fill',
-        'minzoom': 10,
-        'paint': {
-            'fill-color': createFill(phase),
-            'fill-opacity': 0.3,
+        "id": "korsakov-green",
+        "source": "korsakov-green",
+        "type": "fill",
+        "minzoom": 10,
+        "paint": {
+            "fill-color": createFill(phase),
+            "fill-opacity": 0.3,
         },
         filter: createFilter(phase, GREEN_FILTER),
     })
     useMapboxLayer({
-        'id': 'korsakov-green-border',
-        'source': 'korsakov-green',
-        'type': 'line',
-        'minzoom': 10,
-        'paint': {
-            'line-color': createFill(phase),
-            'line-width': 2,
-            'line-dasharray': [3, 2],
+        "id": "korsakov-green-border",
+        "source": "korsakov-green",
+        "type": "line",
+        "minzoom": 10,
+        "paint": {
+            "line-color": createFill(phase),
+            "line-width": 2,
+            "line-dasharray": [3, 2],
         },
         filter: createFilter(phase, GREEN_LINE_FILTER),
     })
 
-    useMapboxSource('korsakov-water', {
-        type: 'geojson',
-        data: '/static/korsakov-water.geojson',
+    useMapboxSource("korsakov-water", {
+        type: "geojson",
+        data: "/static/korsakov-water.geojson",
     })
     useMapboxLayer({
-        'id': 'korsakov-water',
-        'source': 'korsakov-water',
-        'type': 'fill',
-        'minzoom': 10,
-        'paint': {
-            'fill-color': '#256cb5',
-            'fill-opacity': 0.9,
+        "id": "korsakov-water",
+        "source": "korsakov-water",
+        "type": "fill",
+        "minzoom": 10,
+        "paint": {
+            "fill-color": "#256cb5",
+            "fill-opacity": 0.9,
         },
     })
 
-    useMapboxSource('korsakov-boundary', {
-        type: 'geojson',
-        data: '/static/korsakov-boundary.geojson',
+    useMapboxSource("korsakov-boundary", {
+        type: "geojson",
+        data: "/static/korsakov-boundary.geojson",
     })
     useMapboxLayer({
-        id: 'korsakov-boundary',
-        source: 'korsakov-boundary',
-        type: 'line',
+        id: "korsakov-boundary",
+        source: "korsakov-boundary",
+        type: "line",
         minzoom: 10,
         layout: {
         },
         paint: {
-            'line-width': 2,
-            'line-color': '#ff0000',
-            'line-dasharray': [1, 2],
-        }
+            "line-width": 2,
+            "line-color": "#ff0000",
+            "line-dasharray": [1, 2],
+        },
     })
 
-    useMapboxSource('korsakov-zones', {
-        type: 'geojson',
-        data: '/static/korsakov-zones.geojson',
+    useMapboxSource("korsakov-zones", {
+        type: "geojson",
+        data: "/static/korsakov-zones.geojson",
     })
     useMapboxLayer({
-        'id': 'korsakov-zones',
-        'source': 'korsakov-zones',
-        'type': 'fill',
-        'minzoom': 10,
-        'paint': {
-            'fill-color': createFill(phase),
-            'fill-opacity': 0.4,
+        "id": "korsakov-zones",
+        "source": "korsakov-zones",
+        "type": "fill",
+        "minzoom": 10,
+        "paint": {
+            "fill-color": createFill(phase),
+            "fill-opacity": 0.4,
         },
         filter: createFilter(phase, ZONE_FILTER),
     })
     useMapboxLayer({
-        'id': 'korsakov-zones-border',
-        'source': 'korsakov-zones',
-        'type': 'line',
-        'minzoom': 10,
-        'paint': {
-            'line-color': createFill(phase),
-            'line-width': 2,
+        "id": "korsakov-zones-border",
+        "source": "korsakov-zones",
+        "type": "line",
+        "minzoom": 10,
+        "paint": {
+            "line-color": createFill(phase),
+            "line-width": 2,
         },
         filter: createFilter(phase, ZONE_BORDER_FILTER),
     })
 
-    useMapboxSource('korsakov-port-zones', {
-        type: 'geojson',
-        data: '/static/korsakov-port_zones.geojson',
+    useMapboxSource("korsakov-port-zones", {
+        type: "geojson",
+        data: "/static/korsakov-port_zones.geojson",
     })
     useMapboxLayer({
-        'id': 'korsakov-port-zones',
-        'source': 'korsakov-port-zones',
-        'type': 'fill',
-        'minzoom': 10,
-        'paint': {
+        "id": "korsakov-port-zones",
+        "source": "korsakov-port-zones",
+        "type": "fill",
+        "minzoom": 10,
+        "paint": {
             // 'fill-color': createFill(initPhase),
-            'fill-color': '#fffff0',
-            'fill-opacity': 1,
+            "fill-color": "#fffff0",
+            "fill-opacity": 1,
         },
     })
 
-    useMapboxSource('korsakov-roads', {
-        type: 'geojson',
-        data: '/static/korsakov-roads.geojson',
+    useMapboxSource("korsakov-roads", {
+        type: "geojson",
+        data: "/static/korsakov-roads.geojson",
     })
     useMapboxLayer({
-        'id': 'korsakov-roads',
-        'source': 'korsakov-roads',
-        'type': 'fill',
-        'minzoom': 10,
-        'paint': {
-            'fill-color': '#86837E',
-            'fill-opacity': 1,
+        "id": "korsakov-roads",
+        "source": "korsakov-roads",
+        "type": "fill",
+        "minzoom": 10,
+        "paint": {
+            "fill-color": "#86837E",
+            "fill-opacity": 1,
         },
     })
 
-    useMapboxSource('korsakov-osm', {
-        type: 'geojson',
-        data: '/static/korsakov-osm.geojson'
+    useMapboxSource("korsakov-osm", {
+        type: "geojson",
+        data: "/static/korsakov-osm.geojson",
     })
     useMapboxLayer({
-        'id': 'korsakov-osm-3d',
-        'source': 'korsakov-osm',
-        'type': 'fill-extrusion',
-        'minzoom': 10,
-        'paint': {
-            'fill-extrusion-color': '#fffff0',
-            'fill-extrusion-height': ['*',
+        "id": "korsakov-osm-3d",
+        "source": "korsakov-osm",
+        "type": "fill-extrusion",
+        "minzoom": 10,
+        "paint": {
+            "fill-extrusion-color": "#fffff0",
+            "fill-extrusion-height": ["*",
                 0.75,
-                ['get', 'height'],
+                ["get", "height"],
             ],
-        }
+        },
     })
 
-    useMapboxSource('korsakov-buildings', {
-        type: 'geojson',
-        data: '/static/korsakov-buildings.geojson',
+    useMapboxSource("korsakov-buildings", {
+        type: "geojson",
+        data: "/static/korsakov-buildings.geojson",
     })
     useMapboxLayer({
-        'id': 'korsakov-buildings-3d',
-        'source': 'korsakov-buildings',
-        'type': 'fill-extrusion',
-        'minzoom': 10,
-        'paint': {
-            'fill-extrusion-color': createFill(phase),
-            'fill-extrusion-height': ['*',
+        "id": "korsakov-buildings-3d",
+        "source": "korsakov-buildings",
+        "type": "fill-extrusion",
+        "minzoom": 10,
+        "paint": {
+            "fill-extrusion-color": createFill(phase),
+            "fill-extrusion-height": ["*",
                 0.75,
-                ['get', 'height'],
+                ["get", "height"],
             ],
-            'fill-extrusion-base': ['get', 'offset'],
+            "fill-extrusion-base": ["get", "offset"],
         },
         filter: createFilter(phase, BUILDING_FILTER),
     })
 
-    useMapboxSource('korsakov-port-buildings', {
-        type: 'geojson',
-        data: '/static/korsakov-port_buildings.geojson',
+    useMapboxSource("korsakov-port-buildings", {
+        type: "geojson",
+        data: "/static/korsakov-port_buildings.geojson",
     })
     useMapboxLayer({
-        'id': 'korsakov-port-3d',
-        'source': 'korsakov-port-buildings',
-        'type': 'fill-extrusion',
-        'minzoom': 10,
-        'paint': {
-            'fill-extrusion-color': createFill(phase),
-            'fill-extrusion-height': ['*',
+        "id": "korsakov-port-3d",
+        "source": "korsakov-port-buildings",
+        "type": "fill-extrusion",
+        "minzoom": 10,
+        "paint": {
+            "fill-extrusion-color": createFill(phase),
+            "fill-extrusion-height": ["*",
                 0.75,
-                ['get', 'height'],
+                ["get", "height"],
             ],
-            'fill-extrusion-base': ['get', 'offset'],
+            "fill-extrusion-base": ["get", "offset"],
         },
     })
 
-    useThreeLayer('museum-3d', '/static/museum.glb', [
-        142.790999165027614, 46.604746813273003
+    useThreeLayer("museum-3d", "/static/museum.glb", [
+        142.790999165027614, 46.604746813273003,
     ])
 
-    useMapboxSource('korsakov-photos', {
-        type: 'geojson',
-        data: '/static/korsakov-photos.geojson',
+    useMapboxSource("korsakov-photos", {
+        type: "geojson",
+        data: "/static/korsakov-photos.geojson",
     })
     useMapboxLayer({
-        'id': 'korsakov-photos-icon',
-        'source': 'korsakov-photos',
-        'type': 'symbol',
-        'minzoom': 10,
-        'layout': {
-            'icon-size': 0.5,
-            'icon-image': 'photo',
+        "id": "korsakov-photos-icon",
+        "source": "korsakov-photos",
+        "type": "symbol",
+        "minzoom": 10,
+        "layout": {
+            "icon-size": 0.5,
+            "icon-image": "photo",
         },
     })
 
     return null
 })
-Map.displayName = 'Map'
+
+Map.displayName = "Map"

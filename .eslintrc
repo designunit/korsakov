@@ -1,3 +1,53 @@
 {
-  "extends": "next"
+    "extends": "next",
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "warn",
+            "double",
+            {
+                "avoidEscape": true
+            }
+        ],
+        "no-console": "warn",
+        "no-alert": "error",
+        "no-debugger": "error",
+        "no-var": "error",
+        "no-unused-vars": "off",
+        "no-nested-ternary": "error",
+        "multiline-ternary": "warn",
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+                "args": "none",
+                "ignoreRestSiblings": true,
+                "destructuredArrayIgnorePattern": "^_"
+            }
+        ],
+        "eol-last": [
+            "error",
+            "always"
+        ],
+        "comma-dangle": [
+            "warn",
+            "always-multiline"
+        ],
+        "semi": [
+            "warn",
+            "never"
+        ]
+    }
 }

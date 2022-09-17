@@ -23,20 +23,20 @@ export const MapController: React.FC<MapControllerProps> = memo(({ phase, visibi
     useMapboxEffect(swithPhaseEffect)
 
     // SHOW IMAGE ON ICON CLICK
-    useMapboxEvent('click', event => {
-        const f = queryFeatureInPoint(event.target, event.point, ['korsakov-photos-icon'])
+    useMapboxEvent("click", event => {
+        const f = queryFeatureInPoint(event.target, event.point, ["korsakov-photos-icon"])
         if (f) {
             props.onClick(f)
         }
     })
 
     // HOVER ICONS
-    useMapboxEvent('mousemove', event => {
+    useMapboxEvent("mousemove", event => {
         const map = event.target
-        const f = queryFeatureInPoint(map, event.point, ['korsakov-photos-icon'])
+        const f = queryFeatureInPoint(map, event.point, ["korsakov-photos-icon"])
         const cursor = f
-            ? 'pointer'
-            : 'default'
+            ? "pointer"
+            : "default"
 
         map.getCanvas().style.cursor = cursor
     })
@@ -55,4 +55,4 @@ export const MapController: React.FC<MapControllerProps> = memo(({ phase, visibi
     return null
 })
 
-MapController.displayName = 'MapController'
+MapController.displayName = "MapController"

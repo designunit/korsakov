@@ -4,6 +4,7 @@ import { createMap } from "./mapbox"
 import { MapboxContext } from "./lib"
 
 export type MapboxProps = {
+    children?: React.ReactNode
 }
 
 export const Mapbox: React.FC<MapboxProps> = props => {
@@ -12,7 +13,7 @@ export const Mapbox: React.FC<MapboxProps> = props => {
 
     useEffect(() => {
         // skip on server side rendering
-        if (!ref.current || typeof window === 'undefined') {
+        if (!ref.current || typeof window === "undefined") {
             return
         }
 
@@ -23,7 +24,7 @@ export const Mapbox: React.FC<MapboxProps> = props => {
                 142.79405865469897,
                 46.6188040383542,
             ],
-            style: 'mapbox://styles/mapbox/satellite-v9', // style URL
+            style: "mapbox://styles/mapbox/satellite-v9", // style URL
             zoom: 14.11258863317506,
             pitch: 57.99999999999994,
             bearing: -8.799999999999962,
@@ -33,10 +34,10 @@ export const Mapbox: React.FC<MapboxProps> = props => {
             setMap(map)
         }
 
-        map.once('load', onLoad)
+        map.once("load", onLoad)
 
         return () => {
-            map.off('load', onLoad)
+            map.off("load", onLoad)
 
             setTimeout(() => {
                 map.remove()
@@ -48,15 +49,17 @@ export const Mapbox: React.FC<MapboxProps> = props => {
         <div
             ref={ref}
             style={{
-                width: '100%',
-                height: '100%',
+                width: "100%",
+                height: "100%",
             }}
         >
-            {!map ? null : (
-                <MapboxContext.Provider value={map}>
-                    {props.children}
-                </MapboxContext.Provider>
-            )}
+            {!map
+                ? null
+                : (
+                    <MapboxContext.Provider value={map}>
+                        {props.children}
+                    </MapboxContext.Provider>
+                )}
         </div>
     )
 }

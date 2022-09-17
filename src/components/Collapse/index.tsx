@@ -1,17 +1,20 @@
-import { Disclosure } from '@headlessui/react'
-import { ChevronUpIcon } from '@heroicons/react/solid'
+import { Disclosure } from "@headlessui/react"
+import { ChevronUpIcon } from "@heroicons/react/solid"
 
 type BtnProps = {
     open: boolean
+    children?: React.ReactNode
 }
 
-const Btn: React.FC<BtnProps> = props => (
+const Btn: React.FC<BtnProps> = ({ open, children }) => (
     <Disclosure.Button className="flex items-center w-full px-2 py-2 text-sm font-medium text-left hover:bg-green-300 focus:outline-none focus-visible:ring focus-visible:ring-green-500 focus-visible:ring-opacity-75">
         <span className="flex-1 text-lg">
-            {props.children}
+            {children}
         </span>
         <ChevronUpIcon
-            className={`${props.open ? 'transform rotate-180' : ''} w-5 h-5 text-black`}
+            className={`${open
+                ? "transform rotate-180"
+                : ""} w-5 h-5`}
         />
     </Disclosure.Button>
 )
@@ -19,17 +22,18 @@ const Btn: React.FC<BtnProps> = props => (
 export type CollapseItemProps = {
     label: string
     defaultOpen?: boolean
+    children?: React.ReactNode
 }
 
-export const CollapseItem: React.FC<CollapseItemProps> = ({ defaultOpen = true, ...props }) => (
+export const CollapseItem: React.FC<CollapseItemProps> = ({ defaultOpen = true, label, children }) => (
     <Disclosure defaultOpen={defaultOpen}>
         {({ open }) => (
             <>
                 <Btn open={open}>
-                    {props.label}
+                    {label}
                 </Btn>
                 <Disclosure.Panel className="py-4 text-sm">
-                    {props.children}
+                    {children}
                 </Disclosure.Panel>
             </>
         )}
@@ -37,13 +41,13 @@ export const CollapseItem: React.FC<CollapseItemProps> = ({ defaultOpen = true, 
 )
 
 export type CollapseProps = {
-
+    children?: React.ReactNode
 }
 
-export const Collapse: React.FC<CollapseProps> = props => {
+export const Collapse: React.FC<CollapseProps> = ({ children }) => {
     return (
         <div className="w-full max-w-md py-2 px-2 lg:px-8 mx-auto">
-            {props.children}
+            {children}
         </div>
     )
 }
