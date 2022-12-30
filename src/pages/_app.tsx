@@ -30,6 +30,8 @@ export default function MyApp(props: AppProps<ExtraProps>) {
                     name={"theme-color"}
                     content={"#10b981"}
                 />
+                <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+
                 <title>korsakov</title>
             </Head>
 
