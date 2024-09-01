@@ -1,9 +1,10 @@
 module.exports = {
+    output: "standalone",
     i18n: {
         locales: ["ru", "en"],
         defaultLocale: "ru",
     },
     images: {
-        minimumCacheTTL: 60,
+        unoptimized: true,
     },
 }
