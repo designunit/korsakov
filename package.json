@@ -7,7 +7,6 @@
         "dev": "next",
         "build": "next build",
         "lint": "next lint",
-        "boom": "next export",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
